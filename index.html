@@ -16,13 +16,23 @@
       id="modal"
       class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
     >
-      <div class="modal-content bg-white p-8 rounded">
-        <span
-          id="closeModalBtn"
-          class="close absolute top-4 right-4 cursor-pointer text-2xl"
-          >&times;</span
-        >
-        <p>This is a modal!</p>
+      <div class="modal-content bg-white p-8 rounded flex flex-col gap-4">
+        <div class="flex flex-row gap-4">
+          <label for="title">Title:</label>
+          <input type="text" name="title" id="modalTitle" />
+        </div>
+        <div class="flex flex-row gap-4">
+          <label for="initialdate">initial date:</label>
+          <input type="date" name="initialdate" id="modalInitialDate" />
+        </div>
+        <div class="flex flex-row gap-4">
+          <input type="checkbox" name="endateCheck" id="modalEndateCheck" />
+          <label for="endateCheck">End date</label>
+        </div>
+        <div class="flex flex-row gap-4">
+          <label for="endate">End date: </label>
+          <input type="date" name="endate" id="modalEndate" />
+        </div>
       </div>
     </div>
   </body>
