@@ -17,12 +17,58 @@
       class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
     >
       <div class="modal-content bg-white p-8 rounded">
-        <span
-          id="closeModalBtn"
-          class="close absolute top-4 right-4 cursor-pointer text-2xl"
-          >&times;</span
-        >
-        <p>This is a modal!</p>
+        <p><input type="checkbox" />Remind me when this event expires</p>
+        <label for="emails">Time:</label>
+        <input
+          type="email"
+          multiple
+          id="Time"
+          class="border-2 border-black"
+          list="drawfemails"
+          size="34"
+          placeholder="Time:"
+        />
+
+        <datalist id="drawfemails">
+          <option value="5min">5min</option>
+          <option value="10min">10min</option>
+          <option value="15min">15min</option>
+          <option value="30min">30min</option>
+          <option value="1H">1H</option>
+        </datalist>
+
+        <form>
+          <label
+            for="comentario"
+            class="block text-sm font-medium text-gray-600 mb-1"
+            >Description:</label
+          >
+          <textarea
+            id="comentario"
+            name="Description"
+            rows="4"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+            placeholder=""
+          ></textarea>
+        </form>
+
+        <label for="emails">Event type:</label>
+        <input
+          type="email"
+          multiple
+          id="Event"
+          class="border-2 border-black"
+          list="drawfemails"
+          size="34"
+          placeholder="Event:"
+        />
+
+        <datalist id="drawfemails">
+          <option value="Meeting">Meeting</option>
+          <option value="Personal">Personal</option>
+          <option value="Study">Study</option>
+          <option value="etc">etc</option>
+        </datalist>
       </div>
     </div>
   </body>
