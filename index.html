@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar App</title>
-</head>
-<body>
-    Hello lovelace
-</body>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script module src="dist/app.js"></script>
+  </head>
+  <body>
+    <header class="bg-blue-400 p-4">
+      <h2>Calendar</h2>
+      <button id="domButton">modal</button>
+    </header>
+
+    <div
+      id="modal"
+      class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+    >
+      <div class="modal-content bg-white p-8 rounded">
+        <span
+          id="closeModalBtn"
+          class="close absolute top-4 right-4 cursor-pointer text-2xl"
+          >&times;</span
+        >
+        <p>This is a modal!</p>
+      </div>
+    </div>
+  </body>
 </html>
