@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./style/general.css">
     <title>Calendar App</title>
 </head>
-<body>
-    Hello lovelace
+<body class="grid grid-row-3 justify-items-center h-full">
+    <header>
+        JS Calendar
+        <label>
+            Choose a language:
+            <select name="language" id="language">
+                <option value="en">English</option>
+                <option value="es" selected>Spanish</option>
+                <option value="ca">Catalan</option>
+            </select>
+        </label>
+    </header>
+    
+    <main id="calendar" class="flex flex-col items-center jusitfy-self-center">
+
+    </main>
+
+    <script type="module" src="./dist/app.js"></script>
+
 </body>
 </html>
