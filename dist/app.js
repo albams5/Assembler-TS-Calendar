@@ -36,10 +36,8 @@ function getMonth() {
 }
 function printMonth(numberMonth) {
     const month = getMonth()[numberMonth];
-    const { calendarContainer } = elements;
-    calendarContainer.innerHTML = '';
-    const btnStyle = 'border-solid border-2 border-red-300 px-2';
-    const htmlHeaderMonth = `<section class="flex flex-row space-x-40"><button class="${btnStyle}">prev</button><h2>${month.name} ${actualYear}</h2><button class="${btnStyle}">next</button></section>`;
+    const { monthTitle, monthDays } = elements;
+    monthTitle.innerHTML = `${month.name} ${actualYear}`;
     const htmlDaysName = getWeekDays()
         .map((dayName) => `<li class='list-none'>${dayName}</li>`)
         .join('');
@@ -51,9 +49,12 @@ function printMonth(numberMonth) {
     const htmlDays = days
         .map((day, index) => `<li ${index === 0 ? firstDayAttributes : dayAttributes}>${day}</li>`)
         .join('');
-    const listStyle = 'list-none grid grid-cols-7 gap-1 text-center';
-    const htmlElements = `${htmlHeaderMonth} <ol class="${listStyle}">${htmlDaysName}${htmlDays}</ol>`;
-    calendarContainer.insertAdjacentHTML('beforeend', htmlElements);
+    monthDays.innerHTML = `${htmlDaysName}${htmlDays}`;
     return month;
 }
 console.log('mes: ', printMonth(3));
+const { btnPrev } = elements;
+btnPrev.addEventListener("click", showPrevMonth);
+function showPrevMonth() {
+    console.log("dentro de showprevmonth");
+}

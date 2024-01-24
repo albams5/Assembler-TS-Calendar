@@ -15,11 +15,11 @@ function changeLocale(e: Event) {
 }
 
 
-function getWeekDays() {
+function getWeekDays():string[] {
     const formatWeekday = new Intl.DateTimeFormat(locale, { weekday: 'long' });
-    const weekdayName = Array.from({length: 7}, (_, weekdayIndex) => {
-        const date = new Date(2021, 10, weekdayIndex + 1);
-        const formatedDate = formatWeekday.format(date);
+    const weekdayName:string[] = Array.from({length: 7}, (_, weekdayIndex) => {
+        const date:Date = new Date(2021, 10, weekdayIndex + 1);
+        const formatedDate:string = formatWeekday.format(date);
         formatedDate[0].toUpperCase();
         return formatedDate;
     });
@@ -32,9 +32,9 @@ function getWeekDays() {
 function getMonth (): type.Month[]{
     const formatMonth = new Intl.DateTimeFormat(locale, { month: 'long' });
     const monthName = Array.from({length: 12}, (_, monthIndex) => {
-        const date = new Date(actualYear, monthIndex);
-        const daysOfMonth = new Date(actualYear, monthIndex + 1, 0).getDate();
-        const startsOn =  new Date(actualYear, monthIndex, 1).getDay();
+        const date: Date = new Date(actualYear, monthIndex);
+        const daysOfMonth: number = new Date(actualYear, monthIndex + 1, 0).getDate();
+        const startsOn: number =  new Date(actualYear, monthIndex, 1).getDay();
 
         const month: type.Month = {
             name: formatMonth.format(date),
@@ -47,35 +47,40 @@ function getMonth (): type.Month[]{
     return monthName;
 }
 
-function printMonth (numberMonth:number) {
-    const month = getMonth()[numberMonth];
-    const { calendarContainer } = elements;
-    calendarContainer.innerHTML = '';
-    const btnStyle = 'border-solid border-2 border-red-300 px-2'
-    const htmlHeaderMonth = `<section class="flex flex-row space-x-40"><button class="${btnStyle}">prev</button><h2>${month.name} ${actualYear}</h2><button class="${btnStyle}">next</button></section>`;
+function printMonth (numberMonth:number):type.Month {
+    const month:type.Month = getMonth()[numberMonth];
+    const { monthTitle, monthDays } = elements;
+
+    monthTitle.innerHTML = `${month.name} ${actualYear}`;
     
     const htmlDaysName = getWeekDays()
         .map((dayName) => `<li class='list-none'>${dayName}</li>`)
         .join('');
-
-    const days = Array.from({length: month.days}, (_, index) => {
+        
+    const days:number[] = Array.from({length: month.days}, (_, index) => {
         return index + 1;
     });
-    const firstDayAttributes = `class='col-start-${month.start} text-right pr-2 border-solid border-2 border-grey-400 h-16 w-24'`
+    const firstDayAttributes: string = `class='col-start-${month.start} text-right pr-2 border-solid border-2 border-grey-400 h-16 w-24'`
     const dayAttributes = `class='text-right pr-2 border-solid border-2 border-grey-400 h-16 w-24'`
-    const htmlDays = days
+    const htmlDays: string = days
         .map(
           (day, index) =>
             `<li ${index === 0 ? firstDayAttributes : dayAttributes}>${day}</li>`
         )
         .join('');
-
-    const listStyle = 'list-none grid grid-cols-7 gap-1 text-center';
-    const htmlElements = `${htmlHeaderMonth} <ol class="${listStyle}">${htmlDaysName}${htmlDays}</ol>`
-    calendarContainer.insertAdjacentHTML('beforeend', htmlElements);
+            monthDays.innerHTML = `${htmlDaysName}${htmlDays}`
     return month;
 }
 
 
     console.log('mes: ', printMonth(3));
+
+    const {btnPrev} = elements;
+    btnPrev.addEventListener("click", showPrevMonth)
+    
+
+    function showPrevMonth(){
+        console.log("dentro de showprevmonth")
+    }
+
 

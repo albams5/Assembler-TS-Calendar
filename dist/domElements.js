@@ -1,4 +1,7 @@
 export const elements = {
     languageSelect: document.getElementById('language'),
-    calendarContainer: document.getElementById('calendar')
+    monthDays: document.getElementById("month-days"),
+    monthTitle: document.getElementById("month-title"),
+    btnPrev: document.getElementById("btn-prev"),
+    btnNext: document.getElementById("btn-next"),
 };
