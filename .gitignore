@@ -1,0 +1,14 @@
+# Archivos temporales o de sistema
+.DS_Store
+Thumbs.db
+
+# Carpeta de dependencias
+node_modules/
+
+
+
+# Carpeta de archivos generados por IDEs o editores
+.idea/
+.vscode/
+
+
