@@ -7,5 +7,11 @@ const paintDom = () => {
 };
 document.addEventListener("DOMContentLoaded", () => {
     const modalButton = document.getElementById("domButton");
+    const modal = document.getElementById("modal");
     modalButton.addEventListener("click", paintDom);
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" || event.key === "Esc") {
+            modal.classList.add("hidden");
+        }
+    });
 });
