@@ -44,15 +44,24 @@ function printMonth(numberMonth) {
     const days = Array.from({ length: month.days }, (_, index) => {
         return index + 1;
     });
-    const firstDayAttributes = `class='col-start-${month.start} text-right pr-2 border-solid border-2 border-grey-400 h-16 w-24'`;
-    const dayAttributes = `class='text-right pr-2 border-solid border-2 border-grey-400 h-16 w-24'`;
+    const firstDayAttributes = `class='col-start-${(month.start === 0) ? 7 : month.start} text-right pr-2 border-solid border-2 border-grey-400 h-16 w-24 group relative'`;
+    const dayAttributes = `class='text-right pr-2 border-solid border-2 border-grey-400 h-16 w-24 group relative'`;
     const htmlDays = days
-        .map((day, index) => `<li ${index === 0 ? firstDayAttributes : dayAttributes}>${day}</li>`)
+        .map((day, index) => `<li ${index === 0 ? firstDayAttributes : dayAttributes}><button class="add invisible group-hover:visible border-solid border-2 border-violet-300 absolute left-0 px-1 bg-violet-100 text-violet-300" id="${day} ${month.name}" class="add">add</button>${day}</li>`)
         .join('');
     monthDays.innerHTML = `${htmlDaysName}${htmlDays}`;
+    const btnAddArray = document.querySelectorAll('.add');
+    btnAddArray.forEach(btn => {
+        btn.addEventListener('click', addEvent);
+    });
     return month;
 }
-console.log('mes: ', printMonth(3));
+function addEvent(e) {
+    const target = e.target;
+    const value = target === null || target === void 0 ? void 0 : target.id;
+    console.log('aquí se debería abrir la modal para añadir un evento en el día seleccionado: ', value);
+}
+console.log('mes: ', printMonth(11));
 const { btnPrev } = elements;
 btnPrev.addEventListener("click", showPrevMonth);
 function showPrevMonth() {

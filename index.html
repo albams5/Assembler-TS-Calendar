@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./style/general.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="./style/general.css">
+        <link rel="icon" href="./assets/calendario-32.png">
     <title>Calendar App</title>
 </head>
 <body class="grid grid-row-3 justify-items-center h-full">
@@ -20,18 +21,19 @@
         </label>
     </header>
     
-    <main class="flex flex-col items-center justify-self-center">
-        <section class="flex flex-row space-x-40">
-            <button id="btn-prev" class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold border-solid border-2 border-indigo-900 px-4 rounded">prev</button>
-            <h2 id="month-title" class ="font-bold text-xl"></h2>
-            <button id="btn-next" class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold border-solid border-2 border-indigo-900 px-4 rounded">next</button>
-        </section>
-        <section>
-            <ol id="month-days" class="list-none grid grid-cols-7 gap-1 text-center"></ol>
-        </section> 
+    <main id="calendar" class="flex flex-col items-center jusitfy-self-center">
+        <main class="flex flex-col items-center justify-self-center">
+            <section class="flex flex-row space-x-40">
+                <button id="btn-prev" class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold border-solid border-2 border-indigo-900 px-4 rounded">prev</button>
+                <h2 id="month-title" class ="font-bold text-xl"></h2>
+                <button id="btn-next" class="bg-indigo-400 hover:bg-indigo-600 text-white font-bold border-solid border-2 border-indigo-900 px-4 rounded">next</button>
+            </section>
+            <section>
+                <ol id="month-days" class="list-none grid grid-cols-7 gap-1 text-center"></ol>
+            </section> 
     </main>
 
     <script type="module" src="./dist/app.js"></script>
-
+    
 </body>
 </html>
