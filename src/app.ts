@@ -83,8 +83,8 @@ function printMonth (year: number, numberMonth:number):type.Month {
     const days:number[] = Array.from({length: month.days}, (_, index) => {
         return index + 1;
     });
-    const firstDayAttributes: string = `class='col-start-${(month.start === 0) ? 7 : month.start} text-right pr-2 border-solid border-2 border-grey-400 h-16 w-24 group relative'`
-    const dayAttributes = `class='text-right pr-2 border-solid border-2 border-grey-400 h-16 w-24 group relative'`
+    const firstDayAttributes: string = `class='col-start-${(month.start === 0) ? 7 : month.start} text-right pr-2 border-solid border-2 border-grey-400 h-20 w-32 group relative'`
+    const dayAttributes = `class='text-right pr-2 border-solid border-2 border-grey-400 h-20 w-32 group relative'`
     const htmlDays: string = days
         .map(
             (day, index) =>

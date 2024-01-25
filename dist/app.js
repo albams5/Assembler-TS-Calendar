@@ -64,8 +64,8 @@ function printMonth(year, numberMonth) {
     const days = Array.from({ length: month.days }, (_, index) => {
         return index + 1;
     });
-    const firstDayAttributes = `class='col-start-${(month.start === 0) ? 7 : month.start} text-right pr-2 border-solid border-2 border-grey-400 h-16 w-24 group relative'`;
-    const dayAttributes = `class='text-right pr-2 border-solid border-2 border-grey-400 h-16 w-24 group relative'`;
+    const firstDayAttributes = `class='col-start-${(month.start === 0) ? 7 : month.start} text-right pr-2 border-solid border-2 border-grey-400 h-20 w-32 group relative'`;
+    const dayAttributes = `class='text-right pr-2 border-solid border-2 border-grey-400 h-20 w-32 group relative'`;
     const htmlDays = days
         .map((day, index) => `<li ${index === 0 ? firstDayAttributes : dayAttributes}><button class="add invisible group-hover:visible border-solid border-2 border-violet-300 absolute left-0 px-1 bg-violet-100 text-violet-300" id="${day} ${month.name}" class="add">add</button>${day}</li>`)
         .join('');
