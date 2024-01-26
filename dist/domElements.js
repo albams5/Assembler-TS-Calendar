@@ -4,4 +4,5 @@ export const elements = {
     monthTitle: document.getElementById("month-title"),
     btnPrev: document.getElementById("btn-prev"),
     btnNext: document.getElementById("btn-next"),
+    btnToday: document.getElementById("today-btn"),
 };
