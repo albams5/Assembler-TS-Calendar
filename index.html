@@ -7,11 +7,10 @@
         <link rel="icon" href="./assets/calendario-32.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap" rel="stylesheet">
-
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <title>Calendar App</title>
 </head>
-<body class="justify-items-center bg-gray-200 max-h-full">
+<body class="justify-items-center bg-gray-200 max-h-full font-['Montserrat']">
     <header class="w-full border-double border-4 bg-red-600 py-2 px-4 grid grid-cols-[1fr,3fr,1fr] grid-rows-1 items-center">
         <section>
             <h1 class="font-bold text-3xl text-left text-white">JS Calendar</h1>
@@ -36,7 +35,7 @@
     </header>
     
     <main class="flex flex-col items-center justify-self-center relative gap-4">
-        <ol id="month-days" class="list-none grid grid-cols-7 max-h-96 gap-1 text-center mt-5"></ol>
+        <ol id="month-days" class="transition-transform list-none grid grid-cols-7 max-h-96 gap-1 text-center mt-5"></ol>
     </main>
 
     <script type="module" src="./dist/app.js"></script>

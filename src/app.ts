@@ -104,12 +104,12 @@ function printMonth (year: number, numberMonth:number):type.Month {
     const days:number[] = Array.from({length: month.days}, (_, index) => {
         return index + 1;
     });
-    const firstDayAttributes: string = `class='col-start-${(month.start === 0) ? 7 : month.start} text-right bg-white pr-2 border-solid border-2 rounded border-grey-400 h-20 w-32 group relative cursor-pointer'`
-    const dayAttributes = `class='text-right bg-white pr-2 border-solid border-2 rounded border-grey-400 h-20 w-32 group relative cursor-pointer'`
+    const firstDayAttributes: string = `class='col-start-${(month.start === 0) ? 7 : month.start} text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group relative cursor-pointer'`
+    const dayAttributes = `class='text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group relative cursor-pointer'`
     const htmlDays: string = days
         .map(
             (day, index) =>
-            `<li ${index === 0 ? firstDayAttributes : dayAttributes}><button class="add invisible group-hover:visible border-solid border-2 border-violet-300 absolute left-0 px-1 bg-violet-100 text-violet-300" id="${day} ${month.name}" class="add">add</button><span>${day}</span></li>`
+            `<li ${index === 0 ? firstDayAttributes : dayAttributes}><button class="add invisible group-hover:visible border-solid border-2 border-violet-300 absolute left-0 px-1 bg-violet-100 text-violet-300" id="${day} ${month.name}" class="add">add</button><span>${day}</span><article class="text-xs text-left truncate"><div class="rounded-full inline-block w-2 h-2 bg-lime-300 mr-1"></div>Evento:frase larga para ver si cabe bien el evento</article></li>`
             )
         .join('');
     monthDays.innerHTML = `${htmlDaysName}${htmlDays}`
@@ -128,3 +128,4 @@ function addEvent (e: Event) {
     const value = target?.id;
     console.log('aquí se debería abrir la modal para añadir un evento en el día seleccionado: ', value);
 }
+
