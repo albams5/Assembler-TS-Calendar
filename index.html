@@ -7,7 +7,7 @@
     <script module src="dist/app.js"></script>
   </head>
   <body>
-    <header class="bg-blue-400 p-4 flex flex-row gap-10">
+    <header class="bg-blue-400 p-4 flex flex-row gap-10 f">
       <h2>Calendar</h2>
       <button id="domButton" class="border border-black rounded-md">
         modal
@@ -19,27 +19,36 @@
       class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
     >
    
-    <form>
+    <form id="myForm">
       <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
-        <button class="absolute right-0 mr-10 mt-0">x</button>
-        <div class="flex flex-row gap-4">
-          <label for="title">Title:</label>
-          <input type="text" name="title" id="modalTitle" />
+        <button class="absolute right-0 mr-5 mb-5 top-3" id="closeModalButton">x</button>
+        <div class="flex flex-row gap-4 relative mb-2">
+          <label class="relative">
+            Title:
+            <input type="text" name="title" id="modalTitle" class="border p-1" />
+            <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalTitleError">The title is too long</small>
+            <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalTitleErrorFill">The title is not filled</small>
+
+          </label>
         </div>
+        
         <div class="flex flex-row gap-4">
-          <label for="initialdate">initial date:</label>
-          <input type="date" name="initialdate" id="modalInitialDate" />
+          <label class="relative">initial date:
+            <input type="datetime-local" name="initialdate" id="modalInitialDate" />
+            <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalInitialDateError">
+              Initial date has to be filled</small>
+          </label>
         </div>
+
         <div class="flex flex-row gap-4">
           <input type="checkbox" name="endateCheck" id="modalEndateCheck" />
           <label for="endateCheck">End date</label>
         </div>
         <div class="flex flex-row gap-4">
-          <label for="endate">End date: </label>
-          <input type="date" name="endate" id="modalEndate" />
-
-          
+          <label for="endate" class="hidden" id="modalEndateLabel">End date: </label>
+          <input type="datetime-local" name="endate" id="modalEndate" class="hidden"/>
         </div>
+
         <p><input type="checkbox" />Remind me when this event expires</p>
         <label for="emails">Time:</label>
         <input
@@ -96,7 +105,7 @@
         <button>
           Cancel
         </button>
-        <button>
+        <button type="submit">
           Accept
         </button>
 
