@@ -1,6 +1,4 @@
-"use strict";
 const paintDom = () => {
-    console.log("hola dom piant");
     const modal = document.getElementById("modal");
     modal.classList.remove("hidden");
 };
@@ -64,7 +62,48 @@ const closeModal = () => {
     const modal = document.getElementById("modal");
     modal.classList.add("hidden");
 };
+const handleFormSub = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+    const modalTitle = document.getElementById("modalTitle");
+    const modalInitialDate = document.getElementById("modalInitialDate");
+    const modalEndate = document.getElementById("modalEndate");
+    const modalTitleValue = modalTitle.value;
+    const modalInitialDateValue = modalInitialDate.value;
+    const modalEndateValue = modalEndate.value;
+    const eventsArray = [
+        {
+            title: modalTitleValue,
+            initialDate: modalInitialDateValue,
+            endDate: modalEndateValue,
+            time: null,
+            description: null,
+            eventype: null,
+        },
+    ];
+    const formData = {
+        eventList: eventsArray,
+        currentMonth: 1,
+    };
+    // Convert the object to a JSON string
+    const formDataJSON = JSON.stringify(formData);
+    // Save the JSON string to localStorage
+    localStorage.setItem("formData", formDataJSON);
+    // Optionally, you can display a success message or redirect the user
+    console.log("Form submitted successfully!: ", formDataJSON);
+    // Close the modal if needed
+    closeModal();
+};
 document.addEventListener("DOMContentLoaded", () => {
+    // Show localStorage content at the beginning
+    const testDiv = document.getElementById("testDiv");
+    const test = document.createElement("p");
+    const formDataJSON = localStorage.getItem("formData");
+    if (formDataJSON) {
+        const formData = JSON.parse(formDataJSON);
+        console.log("localStorage content on page load:", formData);
+        test.textContent = `VIEJO: titulo: ${formData.title}, Initial date: ${formData.initialDate}, Endate: ${formData.endate} `;
+    }
+    testDiv.appendChild(test);
     const modal = document.getElementById("modal");
     //show modal with header button
     const modalButton = document.getElementById("domButton");
@@ -87,11 +126,11 @@ document.addEventListener("DOMContentLoaded", () => {
     //validate the form is filled:
     const form = document.getElementById("myForm");
     form.addEventListener("submit", function (event) {
-        if (!validateTitleFill()) {
-            event.preventDefault(); // Prevent the form from being submitted
+        if (!validateTitleFill() || !validateInitialDateFill()) {
+            event.preventDefault(); // Prevent the form from being submitted if validation fails
         }
-        else if (!validateInitialDateFill()) {
-            event.preventDefault(); // Prevent the form from being submitted
+        else {
+            handleFormSub(event);
         }
     });
     //close modal with x button:
@@ -101,3 +140,4 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalInitialDate = document.getElementById("modalInitialDate");
     modalInitialDate.addEventListener("input", () => hideInitialDateError());
 });
+export {};
