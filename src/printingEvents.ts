@@ -101,6 +101,7 @@ export const printEvents = ():void => {
             const ulHtml = document.getElementById(`day-${initialDateString}`) as HTMLElement
             if( !ulHtml ) return
             const newLi = document.createElement('li')
+            newLi.classList.add('px-1', 'rounded-sm','mb-1')
             newLi.setAttribute('event-id', id.toString() )
             const circleDiv = document.createElement('div')
             circleDiv.classList.add('rounded-full', 'inline-block', 'w-2', 'h-2', 'mr-1', circleColor)
@@ -122,6 +123,7 @@ export const printEvents = ():void => {
                 const ulHtml = document.getElementById(`day-${day}`) as HTMLElement
                 if( !ulHtml ) return
                 const newLi = document.createElement('li')
+                newLi.classList.add('px-1', 'rounded-sm','mb-1')
                 newLi.setAttribute('event-id', id.toString() )
                 const circleDiv = document.createElement('div')
                 circleDiv.classList.add('rounded-full', 'inline-block', 'w-2', 'h-2', 'mr-1', circleColor)

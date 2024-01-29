@@ -1,5 +1,6 @@
 import { elements } from './domElements.js';
 import * as type from './interfaces/module.js';
+import { printEvents } from './printingEvents.js';
 
 export function setPage(): void {
     const { languageSelect, btnPrev, btnNext, btnToday } = elements;
@@ -109,7 +110,11 @@ function printMonth (year: number, numberMonth:number): void {
     const htmlDays: string = days
         .map(
             (day, index) =>
-            `<li ${index === 0 ? firstDayAttributes : dayAttributes}><button class="add invisible group-hover:visible border-solid border-2 border-violet-300 absolute left-0 px-1 bg-violet-100 text-violet-300" id="${day} ${month.name}" class="add">add</button><span>${day}</span><article class="text-xs text-left truncate"><div class="rounded-full inline-block w-2 h-2 bg-lime-300 mr-1"></div>Evento:frase larga para ver si cabe bien el evento</article></li>`
+            `<li ${index === 0 ? firstDayAttributes : dayAttributes}>
+                <button class="add invisible group-hover:visible border-solid border-2 border-violet-300 absolute left-0 px-1 bg-violet-100 text-violet-300" id="${day} ${month.name}" class="add">add</button>
+                <span>${day}</span>
+                <ul class="text-xs text-left truncate" id="day-${month.id+1}-${day}-${month.year}"></ul>
+            </li>`
             )
         .join('');
     monthDays.innerHTML = `${htmlDaysName}${htmlDays}`
@@ -120,6 +125,7 @@ function printMonth (year: number, numberMonth:number): void {
         btn.addEventListener('click', addEvent);
     });
     setToday();
+    printEvents()
 }
     
 function addEvent (e: Event): void {
