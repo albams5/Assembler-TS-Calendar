@@ -104,8 +104,8 @@ function printMonth (year: number, numberMonth:number): void {
     const days:number[] = Array.from({length: month.days}, (_, index) => {
         return index + 1;
     });
-    const firstDayAttributes: string = `class='col-start-${(month.start === 0) ? 7 : month.start} text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group relative cursor-pointer'`
-    const dayAttributes = `class='text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group relative cursor-pointer'`
+    const firstDayAttributes: string = `class='col-start-${(month.start === 0) ? 7 : month.start} text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group relative cursor-pointer bounce-in-bottom'`
+    const dayAttributes = `class='text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group relative cursor-pointer bounce-in-bottom'`
     const htmlDays: string = days
         .map(
             (day, index) =>
@@ -120,6 +120,10 @@ function printMonth (year: number, numberMonth:number): void {
         btn.addEventListener('click', addEvent);
     });
     setToday();
+}
+
+function showAnimations(){
+
 }
     
 function addEvent (e: Event): void {
