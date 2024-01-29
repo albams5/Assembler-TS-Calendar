@@ -1,4 +1,46 @@
 <!DOCTYPE html>
+<html lang="en" class="h-full">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="icon" href="./assets/calendario-32.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Calendar App</title>
+</head>
+<body class="justify-items-center bg-gray-200 max-h-full font-['Montserrat']">
+    <header class="w-full border-double border-4 bg-red-600 py-2 px-4 grid grid-cols-[1fr,3fr,1fr] grid-rows-1 items-center">
+        <section>
+            <h1 class="font-bold text-3xl text-left text-white">JS Calendar</h1>
+            <label class="text-white">
+            Choose a language:
+            <select class="text-red-900 cursor-pointer" name="language" id="language">
+                <option value="en">English</option>
+                <option value="es" selected>Spanish</option>
+                <option value="ca">Catalan</option>
+            </select>
+        </label>
+        </section>
+        <section class="flex flex-row justify-center relative items-center">
+            <button id="btn-prev" class="absolute left-0 bg-red-400 hover:bg-white hover:text-red-500 text-white font-bold border-solid border-2 border-red-900 px-4 rounded"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M5 12l4 4" /><path d="M5 12l4 -4" /></svg></button>
+            <h2 id="month-title" class ="font-bold text-white text-3xl font-custom"></h2>
+            <button id="btn-next" class="absolute right-0 bg-red-400 hover:bg-white hover:text-red-500 text-white font-bold border-solid border-2 border-red-900 px-4 rounded"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg></button>
+        </section>
+        <section class="flex justify-center gap-2">
+            <button class="flex-initial rounded text-white bg-red-950 px-3 border-2 border-white hover:text-red-950 hover:bg-white hover:border-red-950">Add Event</button>
+            <button id="today-btn" class="flex-initial rounded text-white bg-red-950 px-3 border-2 border-white hover:text-red-950 hover:bg-white hover:border-red-950">Today</button>
+        </section>
+    </header>
+    
+    <main class="flex flex-col items-center justify-self-center relative gap-4">
+        <ol id="month-days" class="transition-transform list-none grid grid-cols-7 max-h-96 gap-1 text-center mt-5"></ol>
+    </main>
+
+    <script type="module" src="./dist/calendar.js"></script>
+    
+</body>
 <html>
   <head>
     <meta charset="UTF-8" />
