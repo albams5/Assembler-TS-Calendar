@@ -1,6 +1,5 @@
 import { elements } from './domElements.js';
-document.addEventListener('DOMContentLoaded', setPage);
-function setPage() {
+export function setPage() {
     const { languageSelect, btnPrev, btnNext, btnToday } = elements;
     languageSelect.addEventListener('change', changeLocale);
     btnPrev.addEventListener("click", showPrevMonth);
@@ -18,6 +17,8 @@ function setToday() {
     const actualMonth = new Date(Date.now()).getMonth();
     const actualDay = new Date(Date.now()).getDate();
     const monthNumber = localStorage.getItem("month") || "Error";
+    const calendar = localStorage.getItem("calendar") || "Error";
+    console.log("🚀 ~ setToday ~ calendar:", calendar);
     const jsonMonthNumber = JSON.parse(monthNumber);
     if (actualYear === jsonMonthNumber.year && actualMonth === jsonMonthNumber.id) {
         const days = Array.from(document.querySelectorAll(".group"));
@@ -94,7 +95,6 @@ function printMonth(year, numberMonth) {
         btn.addEventListener('click', addEvent);
     });
     setToday();
-    return month;
 }
 function addEvent(e) {
     const target = e.target;

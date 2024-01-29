@@ -11,7 +11,8 @@
     <title>Calendar App</title>
 </head>
 <body class="justify-items-center bg-gray-200 max-h-full font-['Montserrat']">
-    <header class="w-full border-double border-4 bg-red-600 py-2 px-4 grid grid-cols-[1fr,3fr,1fr] grid-rows-1 items-center">
+  <main>  
+  <header class="w-full border-double border-4 bg-red-600 py-2 px-4 grid grid-cols-[1fr,3fr,1fr] grid-rows-1 items-center">
         <section>
             <h1 class="font-bold text-3xl text-left text-white">JS Calendar</h1>
             <label class="text-white">
@@ -29,37 +30,17 @@
             <button id="btn-next" class="absolute right-0 bg-red-400 hover:bg-white hover:text-red-500 text-white font-bold border-solid border-2 border-red-900 px-4 rounded"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg></button>
         </section>
         <section class="flex justify-center gap-2">
-            <button class="flex-initial rounded text-white bg-red-950 px-3 border-2 border-white hover:text-red-950 hover:bg-white hover:border-red-950">Add Event</button>
+            <button id="domButton" class="flex-initial rounded text-white bg-red-950 px-3 border-2 border-white hover:text-red-950 hover:bg-white hover:border-red-950">Add Event</button>
             <button id="today-btn" class="flex-initial rounded text-white bg-red-950 px-3 border-2 border-white hover:text-red-950 hover:bg-white hover:border-red-950">Today</button>
         </section>
     </header>
     
-    <main class="flex flex-col items-center justify-self-center relative gap-4">
+    <section class="flex flex-col items-center justify-self-center relative gap-4">
         <ol id="month-days" class="transition-transform list-none grid grid-cols-7 max-h-96 gap-1 text-center mt-5"></ol>
-    </main>
+    </section>
+  </main>
 
-    <script type="module" src="./dist/calendar.js"></script>
-    
-</body>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" src="dist/modal.js"></script>
-  </head>
-  <body>
-    <header class="bg-blue-400 p-4 flex flex-row gap-10 f">
-      <h2>Calendar</h2>
-      <button id="domButton" class="border border-black rounded-md">
-        modal
-      </button>
-    </header>
-
-    <div id="testDiv">
-      
-    </div>
-
+  <div>
     <div
       id="modal"
       class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
@@ -127,14 +108,15 @@
         
       <div>
         <label for="emails">Event type:</label>
-        <input type="text" multiple id="modalEvent" class="border-2 border-black" list="drawfemailss" size="34" placeholder="Event:" />
+        <select type="text" id="modalEvent" class="border-2 border-black" list="drawfemailss" placeholder="Event:">
         <small class=" hidden inset-x-0 top-full text-red-500" id="modalEventError">Event has to be filled</small>
         <datalist id="drawfemailss">
           <option value="Meeting">Meeting</option>
           <option value="Personal">Personal</option>
           <option value="Study">Study</option>
-          <option value="etc">etc</option>
+          <option value="Other">Other</option>
         </datalist>
+      </select>
       </div>
 
         <button>
@@ -146,6 +128,10 @@
 
       </form>
 
-    </div>
-  </body>
+    </div>   
+  
+  </div>
+  <script type="module" src="./dist/app.js"></script>
+    
+</body>
 </html>
