@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" src="dist/app.js"></script>
+    <script type="module" src="dist/modal.js"></script>
   </head>
   <body>
     <header class="bg-blue-400 p-4 flex flex-row gap-10 f">
@@ -43,7 +43,7 @@
               Initial date has to be filled</small>
           </label>
         </div>
-
+        <!-- //////////////////////////////////////////////// -->
         <div class="flex flex-row gap-4">
           <input type="checkbox" name="endateCheck" id="modalEndateCheck" />
           <label for="endateCheck">End date</label>
@@ -52,20 +52,16 @@
           <label for="endate" class="hidden" id="modalEndateLabel">End date: </label>
           <input type="datetime-local" name="endate" id="modalEndate" class="hidden"/>
         </div>
-
-        <p><input type="checkbox" />Remind me when this event expires</p>
-        <label for="emails">Time:</label>
-        <input
-          type="text"
-          multiple
-          id="Time"
-          class="border-2 border-black"
-          list="drawfemails"
-          size="34"
-          placeholder="Time:"
-        />
-
-        <datalist id="drawfemails">
+        <!-- /////////////////////////////////////////////// -->
+        <div>
+          <input type="checkbox" name="TimeCheck" id="modalTimeCheck"/>
+          <label for="TimeCheck">Remind me when this event expires</label>
+        </div>
+        
+        <label for="emails" class="hidden" id="modalTimeLabel">Time:</label>
+        <input type="text" multiple class="border-2 border-black hidden" id="TimeInput" list="drawfemails" size="34" placeholder="Time:" />
+        
+        <datalist>
           <option value="5min">5min</option>
           <option value="10min">10min</option>
           <option value="15min">15min</option>
@@ -75,36 +71,29 @@
 
         
           <label
-            for="comentario"
+            for="comment"
             class="block text-sm font-medium text-gray-600 mb-1"
             >Description:</label
           >
           <textarea
-            id="comentario"
+            id="comment"
             name="Description"
             rows="4"
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
             placeholder=""
           ></textarea>
         
-
+      <div>
         <label for="emails">Event type:</label>
-        <input
-          type="text"
-          multiple
-          id="Event"
-          class="border-2 border-black"
-          list="drawfemailss"
-          size="34"
-          placeholder="Event:"
-        />
-
+        <input type="text" multiple id="modalEvent" class="border-2 border-black" list="drawfemailss" size="34" placeholder="Event:" />
+        <small class=" hidden inset-x-0 top-full text-red-500" id="modalEventError">Event has to be filled</small>
         <datalist id="drawfemailss">
           <option value="Meeting">Meeting</option>
           <option value="Personal">Personal</option>
           <option value="Study">Study</option>
           <option value="etc">etc</option>
         </datalist>
+      </div>
 
         <button>
           Cancel

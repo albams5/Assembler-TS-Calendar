@@ -6,10 +6,10 @@ export interface Calendar {
 export interface FormData {
   title: string;
   initialDate: string;
-  endDate: string | null;
-  time: number | null;
+  endDate: string | number;
+  time: number | string;
   description: string | null;
-  eventype: Category | null;
+  eventype: Category | string;
 }
 
 enum Category {
