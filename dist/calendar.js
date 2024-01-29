@@ -16,7 +16,7 @@ function setToday() {
     const actualYear = new Date(Date.now()).getFullYear();
     const actualMonth = new Date(Date.now()).getMonth();
     const actualDay = new Date(Date.now()).getDate();
-    const calendar = localStorage.getItem("calendar") || "Error";
+    let calendar = localStorage.getItem("calendar") || '{"eventList":[], "currentMonth":{}}';
     const month = JSON.parse(calendar).currentMonth;
     if (actualYear === month.year && actualMonth === month.id) {
         const days = Array.from(document.querySelectorAll(".group"));
@@ -33,12 +33,12 @@ function changeLocale() {
     printToday();
 }
 function showPrevMonth() {
-    const calendar = localStorage.getItem("calendar") || 'error';
+    let calendar = localStorage.getItem("calendar") || '{"eventList":[], "currentMonth":{}}';
     const month = JSON.parse(calendar).currentMonth;
     printMonth(month.id === 0 ? month.year - 1 : month.year, (month.id - 1) % 12);
 }
 function showNextMonth() {
-    const calendar = localStorage.getItem("calendar") || 'error';
+    let calendar = localStorage.getItem("calendar") || '{"eventList":[], "currentMonth":{}}';
     const month = JSON.parse(calendar).currentMonth;
     printMonth(month.id === 11 || month.id % 11 === -1 ? month.year + 1 : month.year, (month.id + 1) % 12);
 }
@@ -68,7 +68,7 @@ function getMonth(year, monthIndex) {
         start: startsOn,
         year: year
     };
-    let calendar = localStorage.getItem("calendar") || "Error";
+    let calendar = localStorage.getItem("calendar") || '{"eventList":[], "currentMonth":{}}';
     let JSONcalendar = JSON.parse(calendar);
     JSONcalendar.currentMonth = month;
     localStorage.setItem('calendar', JSON.stringify(JSONcalendar));

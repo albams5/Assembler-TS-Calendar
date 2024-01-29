@@ -4,7 +4,7 @@ import * as type from './interfaces/module.js';
 export function setPage(): void {
     const { languageSelect, btnPrev, btnNext, btnToday } = elements;
     languageSelect.addEventListener('change', changeLocale);
-    btnPrev.addEventListener("click", showPrevMonth)
+    btnPrev.addEventListener("click", showPrevMonth);
     btnNext.addEventListener("click", showNextMonth);
     btnToday.addEventListener("click", showToday);
     printToday();
@@ -20,7 +20,7 @@ function setToday(): void {
     const actualYear = new Date(Date.now()).getFullYear();
     const actualMonth = new Date(Date.now()).getMonth();
     const actualDay = new Date(Date.now()).getDate();
-    const calendar = localStorage.getItem("calendar") || "Error";
+    let calendar = localStorage.getItem("calendar") || '{"eventList":[], "currentMonth":{}}';
     const month = JSON.parse(calendar).currentMonth;
     if(actualYear === month.year && actualMonth === month.id){
         const days = Array.from(document.querySelectorAll(".group"));
@@ -40,13 +40,13 @@ function changeLocale(): void {
 }
 
 function showPrevMonth(): void{
-    const calendar = localStorage.getItem("calendar") || 'error';
+    let calendar = localStorage.getItem("calendar") || '{"eventList":[], "currentMonth":{}}';
     const month = JSON.parse(calendar).currentMonth;
     printMonth(month.id === 0?month.year-1:month.year, (month.id - 1)%12);
 }
 
 function showNextMonth(): void{
-    const calendar = localStorage.getItem("calendar") || 'error';
+    let calendar = localStorage.getItem("calendar") || '{"eventList":[], "currentMonth":{}}';
     const month = JSON.parse(calendar).currentMonth;
     printMonth(month.id === 11 || month.id%11 === -1?month.year+1:month.year, (month.id + 1)%12);
 }
@@ -69,7 +69,7 @@ function getWeekDays(): string[] {
     return weekdayName;
 }
 
-function getMonth (year: number, monthIndex: number): type.Month{
+function getMonth (year: number, monthIndex: number): type.Month {
     const formatMonth = new Intl.DateTimeFormat(getLocale(), { month: 'long' });
     const date: Date = new Date(year, monthIndex);
     const daysOfMonth: number = new Date(year, monthIndex + 1, 0).getDate();
@@ -83,7 +83,7 @@ function getMonth (year: number, monthIndex: number): type.Month{
         year: year
     }
     
-    let calendar = localStorage.getItem("calendar") || "Error";
+    let calendar = localStorage.getItem("calendar") || '{"eventList":[], "currentMonth":{}}';
     let JSONcalendar = JSON.parse(calendar);
     JSONcalendar.currentMonth = month;
     localStorage.setItem('calendar', JSON.stringify(JSONcalendar));

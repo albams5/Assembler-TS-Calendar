@@ -97,20 +97,20 @@ const hideInitialDateError = () => {
   modalInitialDateError.classList.add("hidden");
 };
 
-const validateEventFill = () => {
-  const modalEvent = document.getElementById("modalEvent") as HTMLInputElement;
-  const modalEventError = document.getElementById(
-    "modalEventError"
-  ) as HTMLInputElement;
+// const validateEventFill = () => {
+//   const modalEvent = document.getElementById("modalEvent") as HTMLInputElement;
+//   const modalEventError = document.getElementById(
+//     "modalEventError"
+//   ) as HTMLInputElement;
 
-  if (modalEvent.value.trim() === "") {
-    modalEventError.classList.remove("hidden");
-    return false;
-  } else {
-    modalEventError.classList.add("hidden");
-    return true;
-  }
-};
+//   if (modalEvent.value.trim() === "") {
+//     modalEventError.classList.remove("hidden");
+//     return false;
+//   } else {
+//     modalEventError.classList.add("hidden");
+//     return true;
+//   }
+// };
 
 const hideEventError = () => {
   const modalEventError = document.getElementById("modalEventError")!;
@@ -142,24 +142,20 @@ const handleFormSub = (event: Event) => {
   const commentValue = comment.value;
   const modalEventValue = modalEvent.value;
 
-  const eventsArray: type.FormData[] = [
-    {
-      title: modalTitleValue,
-      initialDate: modalInitialDateValue,
-      endDate: modalEndateValue,
-      time: modalTimeValue,
-      description: commentValue,
-      eventype: modalEventValue,
-    },
-  ];
-  const formData: type.Calendar = {
-    eventList: eventsArray,
-    currentMonth: { id: 0, name: "enero", days: 31, start: 1, year: 2024 },
+  
+  const calendar = localStorage.getItem("calendar") || "{'eventList':[], 'currentMonth':{}}";
+  const JSONcalendar = JSON.parse(calendar);
+  let eventArray = JSONcalendar.eventList;
+  const newEvent: type.FormData = {
+    title: modalTitleValue,
+    initialDate: modalInitialDateValue,
+    endDate: modalEndateValue,
+    time: modalTimeValue,
+    description: commentValue,
+    eventype: modalEventValue,
   };
-
-  const formDataJSON = JSON.stringify(formData);
-  localStorage.setItem("calendar", formDataJSON);
-  console.log("Form submitted successfully!: ", formDataJSON);
+  eventArray.push(newEvent);
+  localStorage.setItem("calendar", JSON.stringify(JSONcalendar));
   closeModal();
 };
 
