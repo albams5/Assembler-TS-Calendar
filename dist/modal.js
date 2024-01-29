@@ -99,7 +99,7 @@ const handleFormSub = (event) => {
     const modalEndate = document.getElementById("modalEndate");
     const comment = document.getElementById("comment");
     const modalTime = document.getElementById("TimeInput");
-    const modalEvent = document.getElementById("drawfemailss");
+    const modalEvent = document.getElementById("modalEvent");
     const modalTitleValue = modalTitle.value;
     const modalInitialDateValue = modalInitialDate.value;
     const modalEndateValue = modalEndate.value;
@@ -118,7 +118,7 @@ const handleFormSub = (event) => {
     ];
     const formData = {
         eventList: eventsArray,
-        currentMonth: { "id": 0, "name": "enero", "days": 31, "start": 1, "year": 2024 },
+        currentMonth: { id: 0, name: "enero", days: 31, start: 1, year: 2024 },
     };
     const formDataJSON = JSON.stringify(formData);
     localStorage.setItem("calendar", formDataJSON);
@@ -126,47 +126,47 @@ const handleFormSub = (event) => {
     closeModal();
 };
 export function setModal() {
-    console.log('hola setModal');
+    const testDiv = document.getElementById("testDiv");
     const test = document.createElement("p");
     const formDataJSON = localStorage.getItem("formData");
     if (formDataJSON) {
         const formData = JSON.parse(formDataJSON);
         console.log("localStorage content on page load:", formData);
-        test.textContent = `VIEJO: titulo: ${formData.title}, Initial date: ${formData.initialDate}, Endate: ${formData.endate}, Time: ${formData.time}, description: ${formData.description}, Event: ${formData.eventype} `;
+        test.textContent = `VIEJO: titulo: ${formData.title}, Initial date: ${formData.initialDate}, Endate: ${formData.endate} `;
     }
     const modal = document.getElementById("modal");
+    //show modal with header button
     const modalButton = document.getElementById("domButton");
     modalButton.addEventListener("click", paintDom);
+    //press key scape to close modal:
     document.addEventListener("keydown", function (event) {
         if (event.key === "Escape" || event.key === "Esc") {
             modal.classList.add("hidden");
         }
     });
+    //modal title error control:
     const modalTitle = document.getElementById("modalTitle");
     modalTitle.addEventListener("blur", () => showTitleError(modalTitle.value.length));
+    //clear title errors when input is been writen:
     modalTitle.addEventListener("input", () => hideTitleError());
     modalTitle.addEventListener("input", () => hideTitleFillError());
+    //modal endate show/hide with checkbox:
     const modalEndateCheck = document.getElementById("modalEndateCheck");
     modalEndateCheck.addEventListener("change", () => showRemoveEndate());
-    const modalTimeCheck = document.getElementById("modalTimeCheck");
-    modalTimeCheck.addEventListener("change", () => showRemoveTime());
+    //validate the form is filled:
     const form = document.getElementById("myForm");
-    console.log("🚀 ~ setModal ~ form:", form);
     form.addEventListener("submit", function (event) {
-        console.log('event listener form');
-        if (!validateTitleFill() || !validateInitialDateFill() || validateEventFill()) {
-            console.log('en el if');
+        if (!validateTitleFill() || !validateInitialDateFill()) {
             event.preventDefault(); // Prevent the form from being submitted if validation fails
         }
         else {
-            console.log('else');
             handleFormSub(event);
         }
     });
+    //close modal with x button:
     const closeModalButton = document.getElementById("closeModalButton");
     closeModalButton.addEventListener("click", () => closeModal());
+    //clear inital date errors when input is been writen:
     const modalInitialDate = document.getElementById("modalInitialDate");
     modalInitialDate.addEventListener("input", () => hideInitialDateError());
-    const modalEvent = document.getElementById("modalEvent");
-    modalEvent.addEventListener("input", () => hideEventError());
 }
