@@ -1,7 +1,7 @@
 import { elements } from './domElements.js';
 import * as type from './interfaces/module.js';
 
-export function setPage() {
+export function setPage(): void {
     const { languageSelect, btnPrev, btnNext, btnToday } = elements;
     languageSelect.addEventListener('change', changeLocale);
     btnPrev.addEventListener("click", showPrevMonth)
@@ -10,21 +10,19 @@ export function setPage() {
     printToday();
 }
 
-function printToday() {
+function printToday(): void {
     const actualYear = new Date(Date.now()).getFullYear();
     const actualMonth = new Date(Date.now()).getMonth();
     printMonth(actualYear, actualMonth);
 }
 
-function setToday(){
+function setToday(): void {
     const actualYear = new Date(Date.now()).getFullYear();
     const actualMonth = new Date(Date.now()).getMonth();
     const actualDay = new Date(Date.now()).getDate();
-    const monthNumber = localStorage.getItem("month") || "Error";
     const calendar = localStorage.getItem("calendar") || "Error";
-    console.log("🚀 ~ setToday ~ calendar:", calendar)
-    const jsonMonthNumber = JSON.parse(monthNumber);
-    if(actualYear === jsonMonthNumber.year && actualMonth === jsonMonthNumber.id){
+    const month = JSON.parse(calendar).currentMonth;
+    if(actualYear === month.year && actualMonth === month.id){
         const days = Array.from(document.querySelectorAll(".group"));
         const today = days.find((day)=>day.childNodes[1].textContent === actualDay.toString());
         today?.classList.add("border-2", "border-red-500", "border-solid");
@@ -32,35 +30,34 @@ function setToday(){
     }
 }
 
-function getLocale() {
+function getLocale(): string {
     const { languageSelect } = elements;
     return languageSelect.value; 
 }
 
-function changeLocale() {
+function changeLocale(): void {
     printToday();
 }
 
-function showPrevMonth(){
-    const month = localStorage.getItem("month") || 'error';
-    const JSONmonth = JSON.parse(month);
-    printMonth(JSONmonth.id === 0?JSONmonth.year-1:JSONmonth.year, (JSONmonth.id - 1)%12);
+function showPrevMonth(): void{
+    const calendar = localStorage.getItem("calendar") || 'error';
+    const month = JSON.parse(calendar).currentMonth;
+    printMonth(month.id === 0?month.year-1:month.year, (month.id - 1)%12);
 }
 
-function showNextMonth(){
-    const month = localStorage.getItem("month") || 'error';
-    const JSONmonth = JSON.parse(month);
-    printMonth(JSONmonth.id === 11 || JSONmonth.id%11 === -1?JSONmonth.year+1:JSONmonth.year, (JSONmonth.id + 1)%12);
-    console.log(JSONmonth.id, JSONmonth.year)
+function showNextMonth(): void{
+    const calendar = localStorage.getItem("calendar") || 'error';
+    const month = JSON.parse(calendar).currentMonth;
+    printMonth(month.id === 11 || month.id%11 === -1?month.year+1:month.year, (month.id + 1)%12);
 }
 
-function showToday(){
+function showToday(): void{
     const actualYear = new Date(Date.now()).getFullYear();
     const actualMonth = new Date(Date.now()).getMonth();
     printMonth(actualYear, actualMonth);
 }
 
-function getWeekDays():string[] {
+function getWeekDays(): string[] {
     
     const formatWeekday = new Intl.DateTimeFormat(getLocale(), { weekday: 'long' });
     const weekdayName:string[] = Array.from({length: 7}, (_, weekdayIndex) => {
@@ -86,12 +83,15 @@ function getMonth (year: number, monthIndex: number): type.Month{
         year: year
     }
     
-    localStorage.setItem('month', JSON.stringify(month));
+    let calendar = localStorage.getItem("calendar") || "Error";
+    let JSONcalendar = JSON.parse(calendar);
+    JSONcalendar.currentMonth = month;
+    localStorage.setItem('calendar', JSON.stringify(JSONcalendar));
 
     return month;
 }
 
-function printMonth (year: number, numberMonth:number):void {
+function printMonth (year: number, numberMonth:number): void {
     const month:type.Month = getMonth(year, numberMonth);
     const { monthTitle, monthDays } = elements;
 
@@ -122,7 +122,7 @@ function printMonth (year: number, numberMonth:number):void {
     setToday();
 }
     
-function addEvent (e: Event) {
+function addEvent (e: Event): void {
     const target = e.target as HTMLButtonElement;
     const value = target?.id;
     console.log('aquí se debería abrir la modal para añadir un evento en el día seleccionado: ', value);

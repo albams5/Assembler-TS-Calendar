@@ -126,7 +126,6 @@ const handleFormSub = (event) => {
     closeModal();
 };
 export function setModal() {
-    const testDiv = document.getElementById("testDiv");
     const test = document.createElement("p");
     const formDataJSON = localStorage.getItem("formData");
     if (formDataJSON) {
@@ -147,7 +146,7 @@ export function setModal() {
     //modal title error control:
     const modalTitle = document.getElementById("modalTitle");
     modalTitle.addEventListener("blur", () => showTitleError(modalTitle.value.length));
-    //clear title errors when input is been writen:
+    //clear title errors when input is been written:
     modalTitle.addEventListener("input", () => hideTitleError());
     modalTitle.addEventListener("input", () => hideTitleFillError());
     //modal endate show/hide with checkbox:
@@ -166,7 +165,7 @@ export function setModal() {
     //close modal with x button:
     const closeModalButton = document.getElementById("closeModalButton");
     closeModalButton.addEventListener("click", () => closeModal());
-    //clear inital date errors when input is been writen:
+    //clear initial date errors when input is been written:
     const modalInitialDate = document.getElementById("modalInitialDate");
     modalInitialDate.addEventListener("input", () => hideInitialDateError());
 }

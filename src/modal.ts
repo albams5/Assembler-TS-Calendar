@@ -164,7 +164,6 @@ const handleFormSub = (event: Event) => {
 };
 
 export function setModal() {
-  const testDiv = document.getElementById("testDiv")!;
   const test = document.createElement("p")!;
 
   const formDataJSON = localStorage.getItem("formData");
@@ -192,7 +191,7 @@ export function setModal() {
   modalTitle.addEventListener("blur", () =>
     showTitleError(modalTitle.value.length)
   );
-  //clear title errors when input is been writen:
+  //clear title errors when input is been written:
   modalTitle.addEventListener("input", () => hideTitleError());
   modalTitle.addEventListener("input", () => hideTitleFillError());
 
@@ -216,7 +215,7 @@ export function setModal() {
   const closeModalButton = document.getElementById("closeModalButton")!;
   closeModalButton.addEventListener("click", () => closeModal());
 
-  //clear inital date errors when input is been writen:
+  //clear initial date errors when input is been written:
   const modalInitialDate = document.getElementById(
     "modalInitialDate"
   ) as HTMLInputElement;
