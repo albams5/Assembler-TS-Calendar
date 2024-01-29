@@ -53,6 +53,33 @@ const events = [
         description: null,
         eventype: 'Study',
     },
+    {
+        id: 7,
+        title: ' Evento 7',
+        initialDate: '2-25-2024',
+        endDate: '2-26-2024',
+        time: '18:30',
+        description: null,
+        eventype: 'Study',
+    },
+    {
+        id: 8,
+        title: ' Evento 8',
+        initialDate: '2-25-2024',
+        endDate: '2-26-2024',
+        time: '18:30',
+        description: null,
+        eventype: 'Study',
+    },
+    {
+        id: 9,
+        title: ' Evento 9',
+        initialDate: '2-25-2024',
+        endDate: '2-26-2024',
+        time: '18:30',
+        description: null,
+        eventype: 'Study',
+    },
 ];
 const getListOfDaysBetweenTwoDates = (startDate, endDate) => {
     const firstDate = new Date(startDate);
