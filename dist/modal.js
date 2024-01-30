@@ -1,18 +1,7 @@
-const paintDom = () => {
+export const paintDom = () => {
     const modal = document.getElementById("modal");
     modal.classList.remove("hidden");
     modal.classList.add("flex");
-};
-export const paintDomDay = (e) => {
-    const target = e.target;
-    console.log("🚀 ~ paintDomDay ~ target:", target);
-    const btnDate = target.getAttribute("date") || "";
-    const date = new Date(Date.UTC(parseInt(btnDate.split('-')[0]), parseInt(btnDate.split('-')[1]), parseInt(btnDate.split('-')[2])));
-    const dateString = date.toJSON().split('.')[0];
-    const modal = document.getElementById("modal");
-    const modalInitialDate = document.getElementById("modalInitialDate");
-    modalInitialDate.value = dateString;
-    modal.classList.remove("hidden");
 };
 const showTitleError = (valueLength) => {
     const modalTitleError = document.getElementById("modalTitleError");
@@ -84,10 +73,6 @@ const hideInitialDateError = () => {
     const modalInitialDateError = document.getElementById("modalInitialDateError");
     modalInitialDateError.classList.add("hidden");
 };
-const closeModal = () => {
-    const modal = document.getElementById("modal");
-    modal.classList.add("hidden");
-};
 const handleFormSub = (event) => {
     event.preventDefault();
     const modalTitle = document.getElementById("modalTitle");
@@ -106,13 +91,13 @@ const handleFormSub = (event) => {
     const JSONcalendar = JSON.parse(calendar);
     let eventArray = JSONcalendar.eventList;
     const newEvent = {
-        id: Date.now(),
         title: modalTitleValue,
         initialDate: modalInitialDateValue,
         endDate: modalEndateValue,
         time: modalTimeValue,
         description: commentValue,
         eventype: modalEventValue,
+        id: 0
     };
     eventArray.push(newEvent);
     localStorage.setItem("calendar", JSON.stringify(JSONcalendar));
@@ -157,32 +142,7 @@ export function setModal() {
             handleFormSub(event);
         }
     });
-    //close modal with x button:
-    const closeModalButton = document.getElementById("closeModalButton");
-    closeModalButton.addEventListener("click", () => closeModal());
     //clear initial date errors when input is been written:
     const modalInitialDate = document.getElementById("modalInitialDate");
     modalInitialDate.addEventListener("input", () => hideInitialDateError());
 }
-// interface hdhdhd {
-//   name: string;
-//   reminderTime: number; // Time in minutes before event expiration
-// }
-// const events: hdhdhd[] = [
-//   { name: "Event 1", reminderTime: 60 },
-//   { name: "Event 2", reminderTime: 30 },
-// ];
-// function checkEventReminder() {
-//   setInterval(() => {
-//     const now = new Date();
-//     console.log(now)
-//     events.forEach((event) => {
-//       const expirationTime = new Date(event.reminderTime);
-//       const reminderTime = new Date(expirationTime.getTime() - event.reminderTime * 60000); // Convert minutes to milliseconds
-//       if (now >= reminderTime && now < expirationTime) {
-//         alert(`${event.name} will expire in ${event.reminderTime} minutes.`);
-//       }
-//     });
-//   }, 10000); // Check every 10 seconds
-// }
-// checkEventReminder()

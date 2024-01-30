@@ -1,6 +1,6 @@
 import { elements } from "./domElements.js";
 import { printEvents } from "./printingEvents.js";
-import { paintDomDay } from './modal.js';
+import { paintDom } from './modal.js';
 export function setPage() {
     const { languageSelect, btnPrev, btnNext, btnToday } = elements;
     languageSelect.addEventListener("change", changeLocale);
@@ -100,7 +100,7 @@ function printMonth(year, numberMonth) {
     monthDays.innerHTML = `${htmlDaysName}${htmlDays}`;
     const btnAddArray = document.querySelectorAll(".add");
     btnAddArray.forEach((btn) => {
-        btn.addEventListener("click", paintDomDay);
+        btn.addEventListener("click", paintDom);
     });
     setToday();
     printEvents();

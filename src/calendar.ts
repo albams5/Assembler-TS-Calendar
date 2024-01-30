@@ -1,7 +1,7 @@
 import { elements } from "./domElements.js";
 import * as type from "./interfaces/module.js";
 import { printEvents } from "./printingEvents.js";
-import { paintDomDay } from './modal.js';
+import {paintDom} from './modal.js';
 
 export function setPage(): void {
   const { languageSelect, btnPrev, btnNext, btnToday } = elements;
@@ -142,7 +142,7 @@ function printMonth(year: number, numberMonth: number): void {
   const btnAddArray = document.querySelectorAll(".add");
 
   btnAddArray.forEach((btn) => {
-    btn.addEventListener("click", paintDomDay);
+    btn.addEventListener("click", paintDom);
   });
   setToday();
   printEvents();
