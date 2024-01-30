@@ -2,7 +2,7 @@ import { showInfoModal } from "./infoModal.js";
 import { showInfoModalHover, closeModalHover } from "./hoverModal.js";
 const events = [
   {
-    id: 1,
+    id: 1706620859565,
     title: " Evento 1",
     initialDate: "1-2-2024",
     endDate: "1-5-2024",
@@ -12,7 +12,7 @@ const events = [
   },
   {
     id: 1706615147588,
-    title: " Evento 2",
+    title: " Evento 2 muy largo que",
     initialDate: "1-10-2024",
     endDate: "1-15-2024",
     time: "18:30",
@@ -156,7 +156,6 @@ export const printEvents = (): void => {
       const ulHtml = document.getElementById(
         `day-${initialDateString}`
       ) as HTMLElement;
-      const ulFather = ulHtml.parentElement!;
       if (!ulHtml) return;
       const newLi = document.createElement("li");
       newLi.classList.add("px-1", "rounded-sm", "mb-1");
@@ -175,7 +174,7 @@ export const printEvents = (): void => {
       newLi.appendChild(circleDiv);
       newLi.appendChild(newSpan);
       if (new Date(initialDate).getTime() - Date.now() < 0)
-        newLi.classList.add("bg-gray-400");
+        newLi.classList.add("line-through", "text-gray-400", 'truncate');
 
       newLi.addEventListener("click", () => {
         const eventId = newLi.getAttribute("event-id")!;
@@ -192,7 +191,6 @@ export const printEvents = (): void => {
       newLi.addEventListener(
         "mouseleave",
         debounce(() => {
-          const eventId = newLi.getAttribute("event-id")!;
           closeModalHover();
         }, 200)
       ); // Adjust the delay as needed
@@ -223,7 +221,7 @@ export const printEvents = (): void => {
         newLi.appendChild(circleDiv);
         newLi.appendChild(newSpan);
         if (new Date(initialDate).getTime() - Date.now() < 0)
-          newLi.classList.add("bg-gray-400");
+          newLi.classList.add("line-through", "text-gray-400", 'truncate');
 
         newLi.addEventListener("click", () => {
           const eventId = newLi.getAttribute("event-id")!;
@@ -240,7 +238,6 @@ export const printEvents = (): void => {
         newLi.addEventListener(
           "mouseleave",
           debounce(() => {
-            const eventId = newLi.getAttribute("event-id")!;
             closeModalHover();
           }, 200)
         ); // Adjust the delay as needed
