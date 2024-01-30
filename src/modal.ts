@@ -4,11 +4,12 @@ const paintDom = () => {
   const modal = document.getElementById("modal")!;
 
   modal.classList.remove("hidden");
+  modal.classList.add("flex")
 };
 
 const showTitleError = (valueLength: number) => {
   const modalTitleError = document.getElementById("modalTitleError")!;
-  if (valueLength > 5) {
+  if (valueLength > 60) {
     console.log("modal title to long");
     modalTitleError.classList.remove("hidden");
   }
@@ -97,26 +98,6 @@ const hideInitialDateError = () => {
   modalInitialDateError.classList.add("hidden");
 };
 
-// const validateEventFill = () => {
-//   const modalEvent = document.getElementById("modalEvent") as HTMLInputElement;
-//   const modalEventError = document.getElementById(
-//     "modalEventError"
-//   ) as HTMLInputElement;
-
-//   if (modalEvent.value.trim() === "") {
-//     modalEventError.classList.remove("hidden");
-//     return false;
-//   } else {
-//     modalEventError.classList.add("hidden");
-//     return true;
-//   }
-// };
-
-const hideEventError = () => {
-  const modalEventError = document.getElementById("modalEventError")!;
-  modalEventError.classList.add("hidden");
-};
-
 const closeModal = () => {
   const modal = document.getElementById("modal")!;
   modal.classList.add("hidden");
@@ -197,6 +178,14 @@ export function setModal() {
   ) as HTMLInputElement;
   modalEndateCheck.addEventListener("change", () => showRemoveEndate());
 
+  const showRemoveTimee = document.getElementById(
+    "modalTimeCheck"
+  ) as HTMLInputElement;
+  showRemoveTimee.addEventListener("change", () => showRemoveTime());
+
+
+
+
   //validate the form is filled:
   const form = document.getElementById("myForm")!;
   form.addEventListener("submit", function (event) {
@@ -217,3 +206,29 @@ export function setModal() {
   ) as HTMLInputElement;
   modalInitialDate.addEventListener("input", () => hideInitialDateError());
 }
+
+// interface hdhdhd {
+//   name: string;
+//   reminderTime: number; // Time in minutes before event expiration
+// }
+
+// const events: hdhdhd[] = [
+//   { name: "Event 1", reminderTime: 60 },
+//   { name: "Event 2", reminderTime: 30 },
+// ];
+
+// function checkEventReminder() {
+//   setInterval(() => {
+//     const now = new Date();
+//     console.log(now)
+//     events.forEach((event) => {
+//       const expirationTime = new Date(event.reminderTime);
+//       const reminderTime = new Date(expirationTime.getTime() - event.reminderTime * 60000); // Convert minutes to milliseconds
+//       if (now >= reminderTime && now < expirationTime) {
+//         alert(`${event.name} will expire in ${event.reminderTime} minutes.`);
+//       }
+//     });
+//   }, 10000); // Check every 10 seconds
+// }
+
+// checkEventReminder()

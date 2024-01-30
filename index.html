@@ -43,12 +43,13 @@
   <div>
     <div
       id="modal"
-      class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+      class="modal hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center"
     >
    
     <form id="myForm">
       <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
         <button class="absolute right-0 mr-5 mb-5 top-3" id="closeModalButton">x</button>
+        <h2 class="text-2xl text-center text-blue-500">NEW EVENT</h2>
         <div class="flex flex-row gap-4 relative mb-2">
           <label class="relative">
             Title:
@@ -82,15 +83,15 @@
         </div>
         
         <label for="emails" class="hidden" id="modalTimeLabel">Time:</label>
-        <input type="text" multiple class="border-2 border-black hidden" id="TimeInput" list="drawfemails" size="34" placeholder="Time:" />
+        <!-- <input type="text" multiple class="border-2 border-black hidden" id="TimeInput" list="drawfemails" placeholder="Time:" /> -->
         
-        <datalist>
+        <select id="TimeInput" class="border-2 border-black hidden">
           <option value="5min">5min</option>
           <option value="10min">10min</option>
           <option value="15min">15min</option>
           <option value="30min">30min</option>
           <option value="1H">1H</option>
-        </datalist>
+        </select>
 
         
           <label
