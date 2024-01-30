@@ -111,6 +111,7 @@ const handleFormSub = (event) => {
     const JSONcalendar = JSON.parse(calendar);
     let eventArray = JSONcalendar.eventList;
     const newEvent = {
+        id: Date.now(),
         title: modalTitleValue,
         initialDate: modalInitialDateValue,
         endDate: modalEndateValue,

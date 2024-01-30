@@ -142,11 +142,12 @@ const handleFormSub = (event: Event) => {
   const commentValue = comment.value;
   const modalEventValue = modalEvent.value;
 
-  
-  const calendar = localStorage.getItem("calendar") || "{'eventList':[], 'currentMonth':{}}";
+  const calendar =
+    localStorage.getItem("calendar") || "{'eventList':[], 'currentMonth':{}}";
   const JSONcalendar = JSON.parse(calendar);
   let eventArray = JSONcalendar.eventList;
   const newEvent: type.FormData = {
+    id: Date.now(),
     title: modalTitleValue,
     initialDate: modalInitialDateValue,
     endDate: modalEndateValue,
