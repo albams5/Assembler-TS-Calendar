@@ -20,6 +20,15 @@ const events = [
         eventype: 'Personal',
     },
     {   
+        id: 2,
+        title:' Evento 96',
+        initialDate: '1-12-2024',
+        endDate: '1-12-2024',
+        time: '12:30',
+        description: null,
+        eventype: 'Meeting',
+    },
+    {   
         id: 3,
         title:' Evento 3',
         initialDate: '1-11-2024',
@@ -82,9 +91,19 @@ const events = [
         description: null,
         eventype: 'Study',
     },
+    {   
+        id: 10,
+        title:' Evento 10',
+        initialDate: '1-31-2024',
+        endDate: '1-31-2024',
+        time: '18:30',
+        description: null,
+        eventype: 'Study',
+    },
 ]
 
-
+// TODO: hay que ordenar el array de evento por fecha de inicio, en caso de ser igual la fecha de inicio ordenar por duración, de esta manera
+// los evento que duran más de un día quedarán en el top del día
 
 const getListOfDaysBetweenTwoDates = (startDate:string, endDate:string):string[] => {
 
@@ -128,15 +147,26 @@ export const printEvents = ():void => {
             const ulHtml = document.getElementById(`day-${initialDateString}`) as HTMLElement
             if( !ulHtml ) return
             const newLi = document.createElement('li')
-            newLi.classList.add('px-1', 'rounded-sm','mb-1')
+            newLi.classList.add('px-1', 'rounded-sm','mb-1', 'event', 'z-10')
             newLi.setAttribute('event-id', id.toString() )
             const circleDiv = document.createElement('div')
             circleDiv.classList.add('rounded-full', 'inline-block', 'w-2', 'h-2', 'mr-1', circleColor)
             const newSpan = document.createElement('span')
             newSpan.textContent = title
+            newSpan.classList.add('z-0')
             newLi.appendChild(circleDiv)
             newLi.appendChild(newSpan)
-            if( new Date(initialDate).getTime() - Date.now() < 0 ) newLi.classList.add('bg-gray-400')
+            const miniModal = document.createElement('article');
+            miniModal.classList.add('absolute', 'hidden', 'bg-red-200', 'left-24', 'w-52');
+            const titleP = document.createElement('p');
+            titleP.textContent = `title: ${title}`;
+            miniModal.appendChild(titleP);
+            newLi.addEventListener('mouseover', showMiniModal);
+            newSpan.addEventListener('mouseover', showMiniModal);
+            newLi.addEventListener('mouseout', hideMiniModal);
+            newSpan.addEventListener('mouseout', hideMiniModal);
+            newLi.insertAdjacentElement('beforeend', miniModal);
+            if( new Date(initialDate).getTime() - Date.now() < 0 ) newLi.classList.add('line-through', 'text-gray-400')
             ulHtml.appendChild(newLi)
             
         }
@@ -158,11 +188,37 @@ export const printEvents = ():void => {
                 newSpan.textContent = title
                 newLi.appendChild(circleDiv)
                 newLi.appendChild(newSpan)
-                if( new Date(initialDate).getTime() - Date.now() < 0 ) newLi.classList.add('bg-gray-400')
+                if( new Date(initialDate).getTime() - Date.now() < 0 ) newLi.classList.add('line-through', 'text-gray-400')
                 ulHtml.appendChild(newLi)
             })
         }
 
     })
 
+}
+
+function showMiniModal(e: MouseEvent) {
+    const target = e.target;
+    if(target instanceof HTMLLIElement){
+        const child = target.lastChild as HTMLDivElement;
+        child?.classList.remove('hidden');
+    } else if (target instanceof HTMLSpanElement) {
+        const next = target.nextElementSibling;
+        next?.classList.remove('hidden');
+    } else {
+        return;
+    }
+}
+
+function hideMiniModal (e: MouseEvent) {
+    const target = e.target;
+    if(target instanceof HTMLLIElement){
+        const child = target.lastChild as HTMLDivElement;
+        child?.classList.add('hidden');
+    } else if (target instanceof HTMLSpanElement) {
+        const next = target.nextElementSibling;
+        next?.classList.add('hidden');
+    } else {
+        return;
+    }
 }

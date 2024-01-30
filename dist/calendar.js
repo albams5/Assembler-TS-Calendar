@@ -1,5 +1,6 @@
 import { elements } from './domElements.js';
 import { printEvents } from './printingEvents.js';
+import { paintDomDay } from './modal.js';
 export function setPage() {
     const { languageSelect, btnPrev, btnNext, btnToday } = elements;
     languageSelect.addEventListener('change', changeLocale);
@@ -85,11 +86,11 @@ function printMonth(year, numberMonth) {
     const days = Array.from({ length: month.days }, (_, index) => {
         return index + 1;
     });
-    const firstDayAttributes = `class='col-start-${(month.start === 0) ? 7 : month.start} text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group relative cursor-pointer hover:scale-110 overflow-auto'`;
-    const dayAttributes = `class='text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group relative cursor-pointer hover:scale-110 overflow-auto'`;
+    const firstDayAttributes = `class='col-start-${(month.start === 0) ? 7 : month.start} text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group cursor-pointer hover:scale-110 overflow-auto relative overflow-visible'`;
+    const dayAttributes = `class='text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group cursor-pointer overflow-y-auto hover:scale-110 relative overflow-x-visible'`;
     const htmlDays = days
         .map((day, index) => `<li ${index === 0 ? firstDayAttributes : dayAttributes}>
-                <button class="add invisible group-hover:visible border-solid border-2 border-violet-300 absolute left-0 px-1 bg-violet-100 text-violet-300" id="${day} ${month.name}" class="add">add</button>
+                <button class="add absolute invisible group-hover:visible border-solid border-2 border-violet-300 left-0 px-1 bg-violet-100 text-violet-300" date="${month.year}-${month.id}-${day}" class="add">add</button>
                 <span>${day}</span>
                 <ul class="text-xs text-left truncate" id="day-${month.id + 1}-${day}-${month.year}"></ul>
             </li>`)
@@ -97,13 +98,8 @@ function printMonth(year, numberMonth) {
     monthDays.innerHTML = `${htmlDaysName}${htmlDays}`;
     const btnAddArray = document.querySelectorAll('.add');
     btnAddArray.forEach(btn => {
-        btn.addEventListener('click', addEvent);
+        btn.addEventListener('click', paintDomDay);
     });
     setToday();
     printEvents();
-}
-function addEvent(e) {
-    const target = e.target;
-    const value = target === null || target === void 0 ? void 0 : target.id;
-    console.log('aquí se debería abrir la modal para añadir un evento en el día seleccionado: ', value);
 }

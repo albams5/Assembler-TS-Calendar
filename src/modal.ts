@@ -1,7 +1,22 @@
 import * as type from "./interfaces/module.js";
 
-const paintDom = () => {
+const paintDom = (e: Event) => {
   const modal = document.getElementById("modal")!;
+
+  modal.classList.remove("hidden");
+};
+
+export const paintDomDay = (e: Event) => {
+  const target = e.target as HTMLButtonElement;
+  const btnDate = target.getAttribute("date") || "";
+  const date = new Date(Date.UTC(parseInt(btnDate.split('-')[0]), parseInt(btnDate.split('-')[1]), parseInt(btnDate.split('-')[2])));
+  const dateString = date.toJSON().split('.')[0]; 
+  
+  const modal = document.getElementById("modal")!;
+  const modalInitialDate = document.getElementById(
+    "modalInitialDate"
+  ) as HTMLInputElement;
+  modalInitialDate.value = dateString;
 
   modal.classList.remove("hidden");
 };
@@ -96,21 +111,6 @@ const hideInitialDateError = () => {
   )!;
   modalInitialDateError.classList.add("hidden");
 };
-
-// const validateEventFill = () => {
-//   const modalEvent = document.getElementById("modalEvent") as HTMLInputElement;
-//   const modalEventError = document.getElementById(
-//     "modalEventError"
-//   ) as HTMLInputElement;
-
-//   if (modalEvent.value.trim() === "") {
-//     modalEventError.classList.remove("hidden");
-//     return false;
-//   } else {
-//     modalEventError.classList.add("hidden");
-//     return true;
-//   }
-// };
 
 const hideEventError = () => {
   const modalEventError = document.getElementById("modalEventError")!;
