@@ -1,8 +1,8 @@
-import { elements } from './domElements.js';
-import { printEvents } from './printingEvents.js';
+import { elements } from "./domElements.js";
+import { printEvents } from "./printingEvents.js";
 export function setPage() {
     const { languageSelect, btnPrev, btnNext, btnToday } = elements;
-    languageSelect.addEventListener('change', changeLocale);
+    languageSelect.addEventListener("change", changeLocale);
     btnPrev.addEventListener("click", showPrevMonth);
     btnNext.addEventListener("click", showNextMonth);
     btnToday.addEventListener("click", showToday);
@@ -49,7 +49,9 @@ function showToday() {
     printMonth(actualYear, actualMonth);
 }
 function getWeekDays() {
-    const formatWeekday = new Intl.DateTimeFormat(getLocale(), { weekday: 'long' });
+    const formatWeekday = new Intl.DateTimeFormat(getLocale(), {
+        weekday: "long",
+    });
     const weekdayName = Array.from({ length: 7 }, (_, weekdayIndex) => {
         const date = new Date(2021, 10, weekdayIndex + 1);
         const formatedDate = formatWeekday.format(date);
@@ -58,7 +60,7 @@ function getWeekDays() {
     return weekdayName;
 }
 function getMonth(year, monthIndex) {
-    const formatMonth = new Intl.DateTimeFormat(getLocale(), { month: 'long' });
+    const formatMonth = new Intl.DateTimeFormat(getLocale(), { month: "long" });
     const date = new Date(year, monthIndex);
     const daysOfMonth = new Date(year, monthIndex + 1, 0).getDate();
     const startsOn = new Date(year, monthIndex, 1).getDay();
@@ -67,12 +69,12 @@ function getMonth(year, monthIndex) {
         name: formatMonth.format(date),
         days: daysOfMonth,
         start: startsOn,
-        year: year
+        year: year,
     };
     let calendar = localStorage.getItem("calendar") || '{"eventList":[], "currentMonth":{}}';
     let JSONcalendar = JSON.parse(calendar);
     JSONcalendar.currentMonth = month;
-    localStorage.setItem('calendar', JSON.stringify(JSONcalendar));
+    localStorage.setItem("calendar", JSON.stringify(JSONcalendar));
     return month;
 }
 function printMonth(year, numberMonth) {
@@ -81,11 +83,11 @@ function printMonth(year, numberMonth) {
     monthTitle.innerHTML = `${month.name.toUpperCase()} ${month.year}`;
     const htmlDaysName = getWeekDays()
         .map((dayName) => `<li class='list-none'>${dayName}</li>`)
-        .join('');
+        .join("");
     const days = Array.from({ length: month.days }, (_, index) => {
         return index + 1;
     });
-    const firstDayAttributes = `class='col-start-${(month.start === 0) ? 7 : month.start} text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group relative cursor-pointer hover:scale-110 overflow-auto'`;
+    const firstDayAttributes = `class='col-start-${month.start === 0 ? 7 : month.start} text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group relative cursor-pointer hover:scale-110 overflow-auto'`;
     const dayAttributes = `class='text-right bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group relative cursor-pointer hover:scale-110 overflow-auto'`;
     const htmlDays = days
         .map((day, index) => `<li ${index === 0 ? firstDayAttributes : dayAttributes}>
@@ -93,11 +95,11 @@ function printMonth(year, numberMonth) {
                 <span>${day}</span>
                 <ul class="text-xs text-left truncate" id="day-${month.id + 1}-${day}-${month.year}"></ul>
             </li>`)
-        .join('');
+        .join("");
     monthDays.innerHTML = `${htmlDaysName}${htmlDays}`;
-    const btnAddArray = document.querySelectorAll('.add');
-    btnAddArray.forEach(btn => {
-        btn.addEventListener('click', addEvent);
+    const btnAddArray = document.querySelectorAll(".add");
+    btnAddArray.forEach((btn) => {
+        btn.addEventListener("click", addEvent);
     });
     setToday();
     printEvents();
@@ -105,5 +107,5 @@ function printMonth(year, numberMonth) {
 function addEvent(e) {
     const target = e.target;
     const value = target === null || target === void 0 ? void 0 : target.id;
-    console.log('aquí se debería abrir la modal para añadir un evento en el día seleccionado: ', value);
+    console.log("aquí se debería abrir la modal para añadir un evento en el día seleccionado: ", value);
 }
