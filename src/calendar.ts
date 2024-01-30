@@ -25,7 +25,7 @@ function setToday(): void {
     const month = JSON.parse(calendar).currentMonth;
     if(actualYear === month.year && actualMonth === month.id){
         const days = Array.from(document.querySelectorAll(".group"));
-        const today = days.find((day)=>day.childNodes[1].textContent === actualDay.toString());
+        const today = days.find((day)=>day.children[1].textContent === actualDay.toString());
         today?.classList.add("border-2", "border-red-500", "border-solid");
         today?.children[1].classList.add("text-white", "rounded-full", "bg-red-500", "px-2")
     }
