@@ -1,4 +1,5 @@
 import { showInfoModal } from "./infoModal.js";
+import { showInfoModalHover, closeModalHover } from "./hoverModal.js";
 const events = [
     {
         id: 1,
@@ -10,7 +11,7 @@ const events = [
         eventype: "Meeting",
     },
     {
-        id: 1706613189700,
+        id: 1706615147588,
         title: " Evento 2",
         initialDate: "1-10-2024",
         endDate: "1-15-2024",
@@ -105,6 +106,15 @@ const getCircleColor = (eventType) => {
         return "";
     }
 };
+const debounce = (func, delay) => {
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
+};
 export const printEvents = () => {
     //pendiente:
     //gestionar bien formato fechas,
@@ -117,6 +127,7 @@ export const printEvents = () => {
         if (initialDate === endDate) {
             const initialDateString = `${new Date(initialDate).getMonth() + 1}-${new Date(initialDate).getDate()}-${new Date(initialDate).getFullYear()}`;
             const ulHtml = document.getElementById(`day-${initialDateString}`);
+            const ulFather = ulHtml.parentElement;
             if (!ulHtml)
                 return;
             const newLi = document.createElement("li");
@@ -134,6 +145,14 @@ export const printEvents = () => {
                 const eventId = newLi.getAttribute("event-id");
                 showInfoModal(eventId);
             });
+            newLi.addEventListener("mouseenter", debounce((event) => {
+                const eventId = newLi.getAttribute("event-id");
+                showInfoModalHover(eventId, event);
+            }, 200)); // Adjust the delay as needed
+            newLi.addEventListener("mouseleave", debounce(() => {
+                const eventId = newLi.getAttribute("event-id");
+                closeModalHover();
+            }, 200)); // Adjust the delay as needed
             ulHtml.appendChild(newLi);
         }
         if (initialDate !== endDate) {
@@ -157,6 +176,14 @@ export const printEvents = () => {
                     const eventId = newLi.getAttribute("event-id");
                     showInfoModal(eventId);
                 });
+                newLi.addEventListener("mouseenter", debounce((event) => {
+                    const eventId = newLi.getAttribute("event-id");
+                    showInfoModalHover(eventId, event);
+                }, 200)); // Adjust the delay as needed
+                newLi.addEventListener("mouseleave", debounce(() => {
+                    const eventId = newLi.getAttribute("event-id");
+                    closeModalHover();
+                }, 200)); // Adjust the delay as needed
                 ulHtml.appendChild(newLi);
             });
         }

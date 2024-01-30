@@ -1,5 +1,5 @@
 import { showInfoModal } from "./infoModal.js";
-
+import { showInfoModalHover, closeModalHover } from "./hoverModal.js";
 const events = [
   {
     id: 1,
@@ -11,7 +11,7 @@ const events = [
     eventype: "Meeting",
   },
   {
-    id: 1706613189700,
+    id: 1706615147588,
     title: " Evento 2",
     initialDate: "1-10-2024",
     endDate: "1-15-2024",
@@ -120,6 +120,21 @@ const getCircleColor = (eventType: string): string => {
   }
 };
 
+const debounce = <F extends (...args: any[]) => void>(
+  func: F,
+  delay: number
+) => {
+  let timer: number;
+
+  return function (this: ThisParameterType<F>, ...args: Parameters<F>) {
+    clearTimeout(timer);
+
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+};
+
 export const printEvents = (): void => {
   //pendiente:
   //gestionar bien formato fechas,
@@ -141,6 +156,7 @@ export const printEvents = (): void => {
       const ulHtml = document.getElementById(
         `day-${initialDateString}`
       ) as HTMLElement;
+      const ulFather = ulHtml.parentElement!;
       if (!ulHtml) return;
       const newLi = document.createElement("li");
       newLi.classList.add("px-1", "rounded-sm", "mb-1");
@@ -165,6 +181,22 @@ export const printEvents = (): void => {
         const eventId = newLi.getAttribute("event-id")!;
         showInfoModal(eventId);
       });
+      newLi.addEventListener(
+        "mouseenter",
+        debounce((event) => {
+          const eventId = newLi.getAttribute("event-id")!;
+          showInfoModalHover(eventId, event);
+        }, 200)
+      ); // Adjust the delay as needed
+
+      newLi.addEventListener(
+        "mouseleave",
+        debounce(() => {
+          const eventId = newLi.getAttribute("event-id")!;
+          closeModalHover();
+        }, 200)
+      ); // Adjust the delay as needed
+
       ulHtml.appendChild(newLi);
     }
 
@@ -197,6 +229,22 @@ export const printEvents = (): void => {
           const eventId = newLi.getAttribute("event-id")!;
           showInfoModal(eventId);
         });
+        newLi.addEventListener(
+          "mouseenter",
+          debounce((event) => {
+            const eventId = newLi.getAttribute("event-id")!;
+            showInfoModalHover(eventId, event);
+          }, 200)
+        ); // Adjust the delay as needed
+
+        newLi.addEventListener(
+          "mouseleave",
+          debounce(() => {
+            const eventId = newLi.getAttribute("event-id")!;
+            closeModalHover();
+          }, 200)
+        ); // Adjust the delay as needed
+
         ulHtml.appendChild(newLi);
       });
     }
