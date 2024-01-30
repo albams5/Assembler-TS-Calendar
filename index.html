@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="style/general.css">
         <link rel="icon" href="./assets/calendario-32.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,6 +133,48 @@
     </div>   
   
   </div>
+
+  <div
+  id="infoModal"
+  class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+>
+<form id="myForm">
+  <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
+    <p>Title: </p>
+    <p id="infoModalTitle"></p>
+    <p>Initial date: </p>
+    <p id="infoModalInitialDate"></p>
+    <p>End date: </p>
+    <p id="infoModalEndDate"></p>
+    <p>Time: </p>
+    <p id="infoModalTime"></p>
+    <p>Description: </p>
+    <p id="infoModalDescription"></p>
+    <p>Event type: </p>
+    <p id="infoModalEventType"></p>
+
+  <button id="deleteButton">Borrar</button>
+
+  </div>
+
+  </form>
+
+
+</div>
+
+<div
+  id="infoModalHover"
+  class="modal hidden fixed bg-opacity-50 flex items-center justify-center"
+>
+<form id="myForm">
+  <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
+    <p id="infoModalTitleHover"></p>
+    <p id="infoModalInitialDateHover"></p>
+  </div>
+  </form>
+</div>
+
+
   <script type="module" src="./dist/app.js"></script>
     
 </body>

@@ -1,8 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./src/**/*.{html,js,tsc}"],
-  theme: {
-    
-  },
-  plugins: [],
-};
+export const content = ["./src/**/*.{html,js,tsc}"];
+export const theme = {};
+export const plugins = [require('tailwindcss-animated')];

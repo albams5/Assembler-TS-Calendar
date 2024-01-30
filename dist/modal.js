@@ -3,6 +3,17 @@ const paintDom = () => {
     modal.classList.remove("hidden");
     modal.classList.add("flex");
 };
+export const paintDomDay = (e) => {
+    const target = e.target;
+    console.log("🚀 ~ paintDomDay ~ target:", target);
+    const btnDate = target.getAttribute("date") || "";
+    const date = new Date(Date.UTC(parseInt(btnDate.split('-')[0]), parseInt(btnDate.split('-')[1]), parseInt(btnDate.split('-')[2])));
+    const dateString = date.toJSON().split('.')[0];
+    const modal = document.getElementById("modal");
+    const modalInitialDate = document.getElementById("modalInitialDate");
+    modalInitialDate.value = dateString;
+    modal.classList.remove("hidden");
+};
 const showTitleError = (valueLength) => {
     const modalTitleError = document.getElementById("modalTitleError");
     if (valueLength > 60) {
@@ -95,6 +106,7 @@ const handleFormSub = (event) => {
     const JSONcalendar = JSON.parse(calendar);
     let eventArray = JSONcalendar.eventList;
     const newEvent = {
+        id: Date.now(),
         title: modalTitleValue,
         initialDate: modalInitialDateValue,
         endDate: modalEndateValue,

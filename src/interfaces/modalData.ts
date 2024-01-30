@@ -6,6 +6,7 @@ export interface Calendar {
 }
 
 export interface FormData {
+  id: number;
   title: string;
   initialDate: string;
   endDate: string | number;

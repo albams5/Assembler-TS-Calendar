@@ -7,6 +7,22 @@ const paintDom = () => {
   modal.classList.add("flex")
 };
 
+export const paintDomDay = (e: Event) => {
+  const target = e.target as HTMLButtonElement;
+  console.log("🚀 ~ paintDomDay ~ target:", target)
+  const btnDate = target.getAttribute("date") || "";
+  const date = new Date(Date.UTC(parseInt(btnDate.split('-')[0]), parseInt(btnDate.split('-')[1]), parseInt(btnDate.split('-')[2])));
+  const dateString = date.toJSON().split('.')[0]; 
+
+  const modal = document.getElementById("modal")!;
+  const modalInitialDate = document.getElementById(
+    "modalInitialDate"
+  ) as HTMLInputElement;
+  modalInitialDate.value = dateString;
+
+  modal.classList.remove("hidden");
+};
+
 const showTitleError = (valueLength: number) => {
   const modalTitleError = document.getElementById("modalTitleError")!;
   if (valueLength > 60) {
@@ -123,11 +139,12 @@ const handleFormSub = (event: Event) => {
   const commentValue = comment.value;
   const modalEventValue = modalEvent.value;
 
-  
-  const calendar = localStorage.getItem("calendar") || "{'eventList':[], 'currentMonth':{}}";
+  const calendar =
+    localStorage.getItem("calendar") || "{'eventList':[], 'currentMonth':{}}";
   const JSONcalendar = JSON.parse(calendar);
   let eventArray = JSONcalendar.eventList;
   const newEvent: type.FormData = {
+    id: Date.now(),
     title: modalTitleValue,
     initialDate: modalInitialDateValue,
     endDate: modalEndateValue,
