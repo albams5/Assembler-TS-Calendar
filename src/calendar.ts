@@ -1,6 +1,7 @@
 import { elements } from "./domElements.js";
 import * as type from "./interfaces/module.js";
 import { printEvents } from "./printingEvents.js";
+import { paintDomDay } from './modal.js';
 
 export function setPage(): void {
   const { languageSelect, btnPrev, btnNext, btnToday } = elements;
@@ -128,9 +129,7 @@ function printMonth(year: number, numberMonth: number): void {
     .map(
       (day, index) =>
         `<li ${index === 0 ? firstDayAttributes : dayAttributes}>
-                <button class="add invisible group-hover:visible border-solid border-2 border-violet-300 absolute left-0 px-1 bg-violet-100 text-violet-300" id="${day} ${
-          month.name
-        }" class="add">add</button>
+                <button class="add invisible group-hover:visible border-solid border-2 border-violet-300 absolute left-0 px-1 bg-violet-100 text-violet-300" date="${month.year}-${month.id}-${day}" class="add">add</button>
                 <span>${day}</span>
                 <ul class="text-xs text-left truncate" id="day-${
                   month.id + 1
@@ -143,17 +142,8 @@ function printMonth(year: number, numberMonth: number): void {
   const btnAddArray = document.querySelectorAll(".add");
 
   btnAddArray.forEach((btn) => {
-    btn.addEventListener("click", addEvent);
+    btn.addEventListener("click", paintDomDay);
   });
   setToday();
   printEvents();
-}
-
-function addEvent(e: Event): void {
-  const target = e.target as HTMLButtonElement;
-  const value = target?.id;
-  console.log(
-    "aquí se debería abrir la modal para añadir un evento en el día seleccionado: ",
-    value
-  );
 }
