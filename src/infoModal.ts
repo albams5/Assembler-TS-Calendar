@@ -1,10 +1,8 @@
 import { printMonth } from "./calendar.js";
-import { FormData } from "./interfaces/modalData.js";
 import { closeModal } from "./closemodal.js";
+import { FormData } from "./interfaces/modalData.js";
 
 export const showInfoModal = (id: string) => {
-  console.log("Clicked event with id:", id);
-
   // Retrieve JSON data from local storage
   const storedData = localStorage.getItem("calendar");
 
@@ -19,9 +17,6 @@ export const showInfoModal = (id: string) => {
 
       if (event) {
         // If the event is found, log its details
-        console.log("Title:", event.title);
-        console.log("Initial Date:", event.initialDate);
-
         // Call paintDom() or perform other actions as needed
         paintDom(
           event.title,
@@ -66,7 +61,6 @@ function deleteEventById(id: number) {
       // Save the updated JSON back to localStorage
       localStorage.setItem("calendar", JSON.stringify(calendarData));
       printMonth(currentMonth.year, currentMonth.id);
-      console.log(`Event with id ${id} deleted successfully.`);
     } else {
       console.log(`Event with id ${id} not found.`);
     }

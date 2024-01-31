@@ -8,7 +8,6 @@ export function closeModal() {
 }
 
 function clearModalContent() {
-    console.log('hola clean content')
     const modalTitle = document.getElementById("modalTitle") as HTMLInputElement;
     const modalInitialDate = document.getElementById(
     "modalInitialDate"
@@ -24,7 +23,6 @@ function clearModalContent() {
     const checkTime = document.getElementById("modalTimeCheck") as HTMLInputElement;
     const containerTime = document.getElementById("modalTimeLabel") as HTMLDivElement;
     
-    console.log("🚀 ~ clearModalContent ~ checkEndDate:", checkEndDate)
     modalTitle.value = "";
     modalInitialDate.value = "";
     modalEndate.value = "";
@@ -38,7 +36,6 @@ function clearModalContent() {
 }
 
 function clearErrorMessages () {
-    console.log('hola clean error')
     hideTitleError();
     hideTitleFillError();
     hideInitialDateError();

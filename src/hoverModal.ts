@@ -6,7 +6,6 @@ export const closeModalHover = () => {
 };
 
 export const showInfoModalHover = (id: string, eventE: MouseEvent) => {
-  console.log("Clicked event with id:", id);
 
   // Retrieve JSON data from local storage
   const storedData = localStorage.getItem("calendar");
@@ -22,8 +21,6 @@ export const showInfoModalHover = (id: string, eventE: MouseEvent) => {
 
       if (event) {
         // If the event is found, log its details
-        console.log("Title:", event.title);
-        console.log("Initial Date:", event.initialDate);
 
         // Call paintDom() or perform other actions as needed
         paintDom(
@@ -61,7 +58,6 @@ const paintDom = (
 ) => {
   const modal = document.getElementById("infoModalHover")!;
 
-  console.log(eventE);
   const posY = eventE?.pageY!;
   const posX = eventE?.pageX!;
   const screenWidth = window.screen.width / 2;
@@ -78,8 +74,6 @@ const paintDom = (
   }
 
   modal.classList.remove("hidden");
-
-  console.log(infoModalTimeValue);
 
   const infoModalTitle = document.getElementById("infoModalTitleHover")!;
   const infoModalInitialDate = document.getElementById(
