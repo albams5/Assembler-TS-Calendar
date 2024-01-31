@@ -1,9 +1,4 @@
 
-export const tailwind = {
-    colors: {
+// export const colors: {
         
-    },
-    components: {
-        btn: ['w-fit', 'px-2', 'py-1', 'bg-blue-300']
-    }
-}
+//     }

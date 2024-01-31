@@ -100,7 +100,7 @@ const paintDom = (
   infoModalTitle.textContent = infoModalTitleValue;
   infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime( new Date(infoInitialDateValue));
   infoModalEndDate.textContent = formatToReadableDate( new Date(infoModalEndDateValue)) + ' ' + formatToReadableTime( new Date(infoModalEndDateValue));
-  infoModalTime.textContent = infoModalTimeValue;
+  infoModalTime.textContent = infoModalTimeValue + ' min';
   infoModalDescription.textContent = infoModalDescriptionValue;
   infoModalEventType.textContent = infoModalEventTypeValue;
 

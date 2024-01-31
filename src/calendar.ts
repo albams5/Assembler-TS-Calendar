@@ -33,11 +33,11 @@ function setToday(): void {
     const today = days.find(
       (day) => day.children[1].textContent === actualDay.toString()
     );
-    today?.classList.add("border-2", "border-red-500", "border-solid");
+    today?.classList.add("border-2", "border-[#AB4F65]", "border-solid");
     today?.children[1].classList.add(
-      "text-white",
+      "text-[#F3EEE7]",
       "rounded-full",
-      "bg-red-500",
+      "bg-[#AB4F65]",
       "px-2"
     );
   }
