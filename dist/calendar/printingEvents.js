@@ -49,7 +49,7 @@ export const printEvents = () => {
             if (!ulHtml)
                 return;
             const newLi = document.createElement("li");
-            newLi.classList.add("px-1", "rounded-sm", "mb-1");
+            newLi.classList.add("px-1", "rounded-sm", "mb-1", "truncate");
             newLi.setAttribute("event-id", id.toString());
             const circleDiv = document.createElement("div");
             circleDiv.classList.add("rounded-full", "inline-block", "w-2", "h-2", "mr-1");
@@ -62,7 +62,7 @@ export const printEvents = () => {
             newLi.appendChild(circleDiv);
             newLi.appendChild(newSpan);
             if (new Date(initialDate).getTime() - Date.now() < 0)
-                newLi.classList.add("line-through", "text-gray-400", 'truncate');
+                newLi.classList.add("line-through", "text-gray-400", "truncate");
             newLi.addEventListener("click", () => {
                 const eventId = newLi.getAttribute("event-id");
                 showInfoModal(eventId);
@@ -83,7 +83,7 @@ export const printEvents = () => {
                 if (!ulHtml)
                     return;
                 const newLi = document.createElement("li");
-                newLi.classList.add("px-1", "rounded-sm", "mb-1");
+                newLi.classList.add("px-1", "rounded-sm", "mb-1", "truncate");
                 newLi.setAttribute("event-id", id.toString());
                 const circleDiv = document.createElement("div");
                 circleDiv.classList.add("rounded-full", "inline-block", "w-2", "h-2", "mr-1", circleColor);
@@ -98,7 +98,7 @@ export const printEvents = () => {
                 newLi.appendChild(circleDiv);
                 newLi.appendChild(newSpan);
                 if (new Date(endDate).getTime() - Date.now() < 0)
-                    newLi.classList.add("line-through", "text-gray-400", 'truncate');
+                    newLi.classList.add("line-through", "text-gray-400", "truncate");
                 newLi.addEventListener("click", () => {
                     const eventId = newLi.getAttribute("event-id");
                     showInfoModal(eventId);

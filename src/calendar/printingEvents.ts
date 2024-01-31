@@ -74,7 +74,7 @@ export const printEvents = (): void => {
       ) as HTMLElement;
       if (!ulHtml) return;
       const newLi = document.createElement("li");
-      newLi.classList.add("px-1", "rounded-sm", "mb-1");
+      newLi.classList.add("px-1", "rounded-sm", "mb-1", "truncate");
       newLi.setAttribute("event-id", id.toString());
       const circleDiv = document.createElement("div");
       circleDiv.classList.add(
@@ -93,7 +93,7 @@ export const printEvents = (): void => {
       newLi.appendChild(circleDiv);
       newLi.appendChild(newSpan);
       if (new Date(initialDate).getTime() - Date.now() < 0)
-        newLi.classList.add("line-through", "text-gray-400", 'truncate');
+        newLi.classList.add("line-through", "text-gray-400", "truncate");
 
       newLi.addEventListener("click", () => {
         const eventId = newLi.getAttribute("event-id")!;
@@ -124,7 +124,7 @@ export const printEvents = (): void => {
         const ulHtml = document.getElementById(`day-${day}`) as HTMLElement;
         if (!ulHtml) return;
         const newLi = document.createElement("li");
-        newLi.classList.add("px-1", "rounded-sm", "mb-1");
+        newLi.classList.add("px-1", "rounded-sm", "mb-1", "truncate");
         newLi.setAttribute("event-id", id.toString());
         const circleDiv = document.createElement("div");
         circleDiv.classList.add(
@@ -145,7 +145,7 @@ export const printEvents = (): void => {
         newLi.appendChild(circleDiv);
         newLi.appendChild(newSpan);
         if (new Date(endDate).getTime() - Date.now() < 0)
-        newLi.classList.add("line-through", "text-gray-400", 'truncate');
+        newLi.classList.add("line-through", "text-gray-400", "truncate");
 
         newLi.addEventListener("click", () => {
           const eventId = newLi.getAttribute("event-id")!;
