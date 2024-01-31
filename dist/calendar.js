@@ -88,8 +88,8 @@ function printMonth(year, numberMonth) {
     const days = Array.from({ length: month.days }, (_, index) => {
         return index + 1;
     });
-    const firstDayAttributes = `class='col-start-${month.start === 0 ? 7 : month.start} text-right relative bg-white px-2 border-solid border-2 rounded border-grey-400 group cursor-pointer fade-in-right hover:bg-red-50 overflow-auto w-full'`;
-    const dayAttributes = `class='text-right relative bg-white px-2 border-solid border-2 rounded border-grey-400 group cursor-pointer fade-in-right hover:bg-red-50 overflow-auto w-full'`;
+    const firstDayAttributes = `class='min-h-[5rem]  col-start-${month.start === 0 ? 7 : month.start} text-right relative bg-white px-2 border-solid border-2 rounded border-grey-400 group cursor-pointer fade-in-right hover:bg-red-50 w-full'`;
+    const dayAttributes = `class='min-h-[5rem]  text-right relative bg-white px-2 border-solid border-2 rounded border-grey-400 group cursor-pointer fade-in-right hover:bg-red-50 w-full'`;
     const htmlDays = days
         .map((day, index) => `<li ${index === 0 ? firstDayAttributes : dayAttributes}>
                 <button class="add absolute left-2 top-1 invisible group-hover:visible" date="${month.year}-${month.id}-${day}">
@@ -101,7 +101,7 @@ function printMonth(year, numberMonth) {
                     </svg>
                 </button>
                 <span>${day}</span>
-                <ul class="text-xs text-left" id="day-${month.id + 1}-${day}-${month.year}"></ul>
+                <ul class="overflow-auto max-h-[7.5rem] min-h-[5rem] text-xs text-left" id="day-${month.id + 1}-${day}-${month.year}"></ul>
             </li>`)
         .join("");
     weekDiv.innerHTML = `${htmlDaysName}`;

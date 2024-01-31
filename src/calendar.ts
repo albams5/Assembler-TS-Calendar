@@ -121,10 +121,10 @@ function printMonth(year: number, numberMonth: number): void {
   const days: number[] = Array.from({ length: month.days }, (_, index) => {
     return index + 1;
   });
-  const firstDayAttributes: string = `class='col-start-${
+  const firstDayAttributes: string = `class='min-h-[5rem]  col-start-${
     month.start === 0 ? 7 : month.start
-  } text-right relative bg-white px-2 border-solid border-2 rounded border-grey-400 group cursor-pointer fade-in-right hover:bg-red-50 overflow-auto w-full'`;
-  const dayAttributes = `class='text-right relative bg-white px-2 border-solid border-2 rounded border-grey-400 group cursor-pointer fade-in-right hover:bg-red-50 overflow-auto w-full'`;
+  } text-right relative bg-white px-2 border-solid border-2 rounded border-grey-400 group cursor-pointer fade-in-right hover:bg-red-50 w-full'`;
+  const dayAttributes = `class='min-h-[5rem]  text-right relative bg-white px-2 border-solid border-2 rounded border-grey-400 group cursor-pointer fade-in-right hover:bg-red-50 w-full'`;
   const htmlDays: string = days
     .map(
       (day, index) =>
@@ -138,7 +138,7 @@ function printMonth(year: number, numberMonth: number): void {
                     </svg>
                 </button>
                 <span>${day}</span>
-                <ul class="text-xs text-left" id="day-${
+                <ul class="overflow-auto max-h-[7.5rem] min-h-[5rem] text-xs text-left" id="day-${
                   month.id + 1
                 }-${day}-${month.year}"></ul>
             </li>`
