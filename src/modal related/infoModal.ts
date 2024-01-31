@@ -1,7 +1,7 @@
-import { printMonth } from "./calendar.js";
+import { printMonth } from "../calendar/calendar.js";
 import { closeModal } from "./closemodal.js";
-import { FormData } from "./interfaces/modalData.js";
-import { formatToReadableDate, formatToReadableTime } from './helper.js';
+import { FormData } from "../interfaces/modalData.js";
+import { formatToReadableDate, formatToReadableTime } from '../helpers/helper.js';
 
 export const showInfoModal = (id: string) => {
   // Retrieve JSON data from local storage

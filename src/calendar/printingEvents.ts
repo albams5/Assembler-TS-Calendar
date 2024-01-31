@@ -1,7 +1,7 @@
-import { showInfoModal } from "./infoModal.js";
-import { showInfoModalHover, closeModalHover } from "./hoverModal.js";
-import { FormData } from "./interfaces/modalData.js";
-import { formatToReadableDate, formatToReadableTime } from "./helper.js";
+import { showInfoModal } from "../modal related/infoModal.js";
+import { showInfoModalHover, closeModalHover } from "../modal related/hoverModal.js";
+import { FormData } from "../interfaces/modalData.js";
+import { formatToReadableDate, formatToReadableTime } from "../helpers/helper.js";
 
 export const getEventsFromLS = ():FormData[] => {
  

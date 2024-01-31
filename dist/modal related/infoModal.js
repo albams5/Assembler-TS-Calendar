@@ -1,5 +1,5 @@
-import { printMonth } from "./calendar.js";
-import { formatToReadableDate, formatToReadableTime } from './helper.js';
+import { printMonth } from "../calendar/calendar.js";
+import { formatToReadableDate, formatToReadableTime } from '../helpers/helper.js';
 export const showInfoModal = (id) => {
     // Retrieve JSON data from local storage
     const storedData = localStorage.getItem("calendar");

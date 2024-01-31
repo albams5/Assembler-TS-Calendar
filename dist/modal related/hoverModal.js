@@ -1,4 +1,4 @@
-import { formatToReadableDate, formatToReadableTime } from './helper.js';
+import { formatToReadableDate, formatToReadableTime } from '../helpers/helper.js';
 export const closeModalHover = () => {
     const modal = document.getElementById("infoModalHover");
     modal.classList.add("hidden");

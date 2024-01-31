@@ -1,8 +1,8 @@
-import { elements } from "./domElements.js";
-import * as type from "./interfaces/module.js";
+import { elements } from "../domElements.js";
+import * as type from "../interfaces/module.js";
 import { printEvents } from "./printingEvents.js";
-import {paintDomDay, paintDom} from './modal.js';
-import { checkEventReminder } from "./setInterval.js";
+import {paintDomDay, paintDom} from '../modal related/modal.js';
+import { checkEventReminder } from "../helpers/setInterval.js";
 
 export function setPage(): void {
   const { languageSelect, btnPrev, btnNext, btnToday, btnAddEvent } = elements;

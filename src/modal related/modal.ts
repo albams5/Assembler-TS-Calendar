@@ -1,6 +1,6 @@
-import * as type from "./interfaces/module.js";
+import * as type from "../interfaces/module.js";
 import { closeModal } from './closemodal.js';
-import { printMonth } from './calendar.js'
+import { printMonth } from '../calendar/calendar.js'
 
 export const paintDom = () => {
   const modal = document.getElementById("modal")!;

@@ -1,5 +1,5 @@
-import { FormData } from "./interfaces/modalData";
-import { formatToReadableDate, formatToReadableTime } from './helper.js';
+import { FormData } from "../interfaces/modalData";
+import { formatToReadableDate, formatToReadableTime } from '../helpers/helper.js';
 
 export const closeModalHover = () => {
   const modal = document.getElementById("infoModalHover")!;

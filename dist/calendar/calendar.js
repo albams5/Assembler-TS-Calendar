@@ -1,7 +1,7 @@
-import { elements } from "./domElements.js";
+import { elements } from "../domElements.js";
 import { printEvents } from "./printingEvents.js";
-import { paintDomDay, paintDom } from './modal.js';
-import { checkEventReminder } from "./setInterval.js";
+import { paintDomDay, paintDom } from '../modal related/modal.js';
+import { checkEventReminder } from "../helpers/setInterval.js";
 export function setPage() {
     const { languageSelect, btnPrev, btnNext, btnToday, btnAddEvent } = elements;
     languageSelect.addEventListener("change", changeLocale);

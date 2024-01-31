@@ -1,4 +1,4 @@
-import { getEventsFromLS } from './printingEvents.js'
+import { getEventsFromLS } from '../calendar/printingEvents.js'
 
 
 
