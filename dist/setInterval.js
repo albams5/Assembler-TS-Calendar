@@ -6,7 +6,6 @@ const events = [
 function checkEventReminder() {
     setInterval(() => {
         const now = new Date();
-        console.log(now);
         events.forEach((event) => {
             const expirationTime = new Date(event.reminderTime);
             const reminderTime = new Date(expirationTime.getTime() - event.reminderTime * 60000); //Convert minutes to milliseconds

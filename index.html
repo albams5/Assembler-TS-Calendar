@@ -72,9 +72,9 @@
         <input type="checkbox" name="endateCheck" id="modalEndateCheck" />
         <label for="endateCheck">End date</label>
       </div>
-      <div class="flex flex-row gap-4">
-        <label for="endate" class="hidden" id="modalEndateLabel">End date: </label>
-        <input type="datetime-local" name="endate" id="modalEndate" class="hidden"/>
+      <div id="endDateContainer" class="hidden flex flex-row gap-4">
+        <label for="endate" id="modalEndateLabel">End date: </label>
+        <input type="datetime-local" name="endate" id="modalEndate"/>
       </div>
       <!-- /////////////////////////////////////////////// -->
       <div>
@@ -82,8 +82,7 @@
         <label for="TimeCheck">Remind me when this event expires</label>
       </div>
       
-      <label for="emails" class="hidden" id="modalTimeLabel">Time:</label>
-      <!-- <input type="text" multiple class="border-2 border-black hidden" id="TimeInput" list="drawfemails" placeholder="Time:" /> -->
+      <label class="hidden" id="modalTimeLabel">Time:
       
       <select id="TimeInput" class="border-2 border-black hidden">
         <option value="5min">5min</option>
@@ -92,6 +91,7 @@
         <option value="30min">30min</option>
         <option value="1H">1H</option>
       </select>
+    </label>
 
       
         <label

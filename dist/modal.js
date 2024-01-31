@@ -29,21 +29,17 @@ export const hideTitleError = () => {
     modalTitleError.classList.add("hidden");
 };
 export const hideTitleFillError = () => {
-    console.log('hide title error 2');
     const modalTitleError = document.getElementById("modalTitleErrorFill");
     modalTitleError.classList.add("hidden");
 };
 const showRemoveEndate = () => {
     const modalEndateCheck = document.getElementById("modalEndateCheck");
-    const modalEndate = document.getElementById("modalEndate");
-    const modalEndateLabel = document.getElementById("modalEndateLabel");
+    const endDateContainer = document.getElementById("endDateContainer");
     if (modalEndateCheck.checked) {
-        modalEndate.classList.remove("hidden");
-        modalEndateLabel.classList.remove("hidden");
+        endDateContainer.classList.remove("hidden");
     }
     else {
-        modalEndate.classList.add("hidden");
-        modalEndateLabel.classList.add("hidden");
+        endDateContainer.classList.add("hidden");
     }
 };
 const showRemoveTime = () => {
@@ -64,12 +60,10 @@ const validateTitleFill = () => {
     const modalTitleErrorFill = document.getElementById("modalTitleErrorFill");
     if (modalTitle.value.trim() === "") {
         modalTitleErrorFill.classList.remove("hidden");
-        console.log('validateTitleFill if');
         return false; // Return false to indicate validation failure
     }
     else {
         modalTitleErrorFill.classList.add("hidden");
-        console.log('validateTitleFill else');
         return true; // Return true to indicate validation success
     }
 };
@@ -126,9 +120,16 @@ export function setModal() {
     //press key scape to close modal:
     document.addEventListener("keydown", function (event) {
         if (event.key === "Escape" || event.key === "Esc") {
-            modal.classList.add("hidden");
+            closeModal();
         }
     });
+    //press out modal to close it
+    function closeModalOut(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+    window.addEventListener('click', closeModalOut);
     const btnCancel = document.getElementById('cancelModalButton');
     btnCancel === null || btnCancel === void 0 ? void 0 : btnCancel.addEventListener("click", (event) => {
         event === null || event === void 0 ? void 0 : event.preventDefault();

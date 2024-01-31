@@ -13,12 +13,21 @@ function clearModalContent() {
     const comment = document.getElementById("comment");
     const modalTime = document.getElementById("TimeInput");
     const modalEvent = document.getElementById("modalEvent");
+    const checkEndDate = document.getElementById("modalEndateCheck");
+    const containerEndDate = document.getElementById("endDateContainer");
+    const checkTime = document.getElementById("modalTimeCheck");
+    const containerTime = document.getElementById("modalTimeLabel");
+    console.log("🚀 ~ clearModalContent ~ checkEndDate:", checkEndDate);
     modalTitle.value = "";
     modalInitialDate.value = "";
     modalEndate.value = "";
     comment.value = "";
-    modalTime.value = "";
+    modalTime.value = "5min";
     modalEvent.value = "Meeting";
+    checkEndDate.checked = false;
+    containerEndDate.classList.add("hidden");
+    checkTime.checked = false;
+    containerTime.classList.add("hidden");
 }
 function clearErrorMessages() {
     console.log('hola clean error');

@@ -19,12 +19,22 @@ function clearModalContent() {
     const comment = document.getElementById("comment") as HTMLTextAreaElement;
     const modalTime = document.getElementById("TimeInput") as HTMLInputElement;
     const modalEvent = document.getElementById("modalEvent") as HTMLInputElement;
+    const checkEndDate = document.getElementById("modalEndateCheck") as HTMLInputElement;
+    const containerEndDate = document.getElementById("endDateContainer") as HTMLDivElement;
+    const checkTime = document.getElementById("modalTimeCheck") as HTMLInputElement;
+    const containerTime = document.getElementById("modalTimeLabel") as HTMLDivElement;
+    
+    console.log("🚀 ~ clearModalContent ~ checkEndDate:", checkEndDate)
     modalTitle.value = "";
     modalInitialDate.value = "";
     modalEndate.value = "";
     comment.value = "";
-    modalTime.value = "";
+    modalTime.value = "5min";
     modalEvent.value = "Meeting";
+    checkEndDate.checked = false;
+    containerEndDate.classList.add("hidden");
+    checkTime.checked = false;
+    containerTime.classList.add("hidden");
 }
 
 function clearErrorMessages () {
