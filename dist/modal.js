@@ -91,13 +91,13 @@ const handleFormSub = (event) => {
     const JSONcalendar = JSON.parse(calendar);
     let eventArray = JSONcalendar.eventList;
     const newEvent = {
+        id: Date.now(),
         title: modalTitleValue,
         initialDate: modalInitialDateValue,
         endDate: modalEndateValue,
         time: modalTimeValue,
         description: commentValue,
         eventype: modalEventValue,
-        id: 0
     };
     eventArray.push(newEvent);
     localStorage.setItem("calendar", JSON.stringify(JSONcalendar));
