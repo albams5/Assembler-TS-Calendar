@@ -110,7 +110,7 @@ function getMonth(year: number, monthIndex: number): type.Month {
 
 function printMonth(year: number, numberMonth: number): void {
   const month: type.Month = getMonth(year, numberMonth);
-  const { monthTitle, monthDays } = elements;
+  const { monthTitle, monthDays, weekDiv } = elements;
 
   monthTitle.innerHTML = `${month.name.toUpperCase()} ${month.year}`;
 
@@ -144,7 +144,7 @@ function printMonth(year: number, numberMonth: number): void {
             </li>`
     )
     .join("");
-    monthDays.insertAdjacentHTML('beforebegin', `<div class="grid grid-cols-7 gap-2">${htmlDaysName}</div>`);
+  weekDiv.innerHTML = `${htmlDaysName}`;
   monthDays.innerHTML = `${htmlDays}`;
 
   const btnAddArray = document.querySelectorAll(".add");

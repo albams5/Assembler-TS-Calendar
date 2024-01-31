@@ -5,4 +5,5 @@ export const elements = {
     btnPrev: document.getElementById("btn-prev") as HTMLButtonElement,
     btnNext: document.getElementById("btn-next") as HTMLButtonElement,
     btnToday: document.getElementById("today-btn") as HTMLButtonElement,
+    weekDiv: document.getElementById("week") as HTMLDivElement
 };

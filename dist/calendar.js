@@ -80,7 +80,7 @@ function getMonth(year, monthIndex) {
 }
 function printMonth(year, numberMonth) {
     const month = getMonth(year, numberMonth);
-    const { monthTitle, monthDays } = elements;
+    const { monthTitle, monthDays, weekDiv } = elements;
     monthTitle.innerHTML = `${month.name.toUpperCase()} ${month.year}`;
     const htmlDaysName = getWeekDays()
         .map((dayName) => `<div class="text-center h-full"><p class='list-none h-6'>${dayName}</p></div>`)
@@ -104,7 +104,7 @@ function printMonth(year, numberMonth) {
                 <ul class="text-xs text-left" id="day-${month.id + 1}-${day}-${month.year}"></ul>
             </li>`)
         .join("");
-    monthDays.insertAdjacentHTML('beforebegin', `<div class="grid grid-cols-7 gap-2">${htmlDaysName}</div>`);
+    weekDiv.innerHTML = `${htmlDaysName}`;
     monthDays.innerHTML = `${htmlDays}`;
     const btnAddArray = document.querySelectorAll(".add");
     btnAddArray.forEach((btn) => {
