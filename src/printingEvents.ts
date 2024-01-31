@@ -1,7 +1,7 @@
 import { showInfoModal } from "./infoModal.js";
 import { showInfoModalHover, closeModalHover } from "./hoverModal.js";
 import { FormData } from "./interfaces/modalData.js";
-import { formatToReadableTime } from "./helper.js";
+import { formatToReadableDate, formatToReadableTime } from "./helper.js";
 
 export const getEventsFromLS = ():FormData[] => {
  
@@ -70,7 +70,7 @@ export const printEvents = (): void => {
   const events = getEventsFromLS()
 
   events.forEach((event) => {
-    const { initialDate, endDate, eventType, description, alertTime, title, id } =
+    const { initialDate, endDate, eventType, title, id } =
       event;
     const circleColor = getCircleColor(eventType);
 
@@ -131,7 +131,7 @@ export const printEvents = (): void => {
     if (initialDate !== endDate && endDate !== '') {
       const listOfDays = getListOfDaysBetweenTwoDates(initialDate, endDate);
 
-      listOfDays.forEach((day) => {
+      listOfDays.forEach((day, i) => {
         const ulHtml = document.getElementById(`day-${day}`) as HTMLElement;
         if (!ulHtml) return;
         const newLi = document.createElement("li");
@@ -147,9 +147,12 @@ export const printEvents = (): void => {
           circleColor
         );
         const newSpan = document.createElement("span");
-        const hour = (new Date(initialDate).getHours()).toString().length < 2? '0'+new Date(initialDate).getHours() : new Date(initialDate).getHours()
-        const minute = (new Date(initialDate).getMinutes()).toString().length < 2? '0'+new Date(initialDate).getMinutes() : new Date(initialDate).getMinutes()
-        newSpan.textContent = `${hour}:${minute} ${title}`;
+        if(formatToReadableDate(new Date(initialDate))!=formatToReadableDate(new Date(endDate)) && i != 0){
+          newSpan.textContent = `${title}`;
+        } else {
+          const hour = formatToReadableTime(new Date(initialDate));
+          newSpan.textContent = `${hour} ${title}`;
+        }
         newLi.appendChild(circleDiv);
         newLi.appendChild(newSpan);
         if (new Date(endDate).getTime() - Date.now() < 0)

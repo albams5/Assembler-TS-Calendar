@@ -1,4 +1,4 @@
-import { formatToReadableTime } from './helper.js';
+import { formatToReadableDate, formatToReadableTime } from './helper.js';
 export const closeModalHover = () => {
     const modal = document.getElementById("infoModalHover");
     modal.classList.add("hidden");
@@ -14,7 +14,7 @@ export const showInfoModalHover = (id, eventE) => {
             if (event) {
                 // If the event is found, log its details
                 // Call paintDom() or perform other actions as needed
-                paintDom(event.title, event.initialDate, eventE);
+                paintDom(event.title, event.initialDate, event.endDate, eventE);
             }
             else {
                 // If the event is not found, log an error or handle accordingly
@@ -30,7 +30,7 @@ export const showInfoModalHover = (id, eventE) => {
         console.error("No data found in local storage with key 'calendar'");
     }
 };
-const paintDom = (infoModalTitleValue, infoInitialDateValue, eventE) => {
+const paintDom = (infoModalTitleValue, infoInitialDateValue, infoEndDate, eventE) => {
     const modal = document.getElementById("infoModalHover");
     const posY = eventE === null || eventE === void 0 ? void 0 : eventE.pageY;
     const posX = eventE === null || eventE === void 0 ? void 0 : eventE.pageX;
@@ -48,5 +48,13 @@ const paintDom = (infoModalTitleValue, infoInitialDateValue, eventE) => {
     const infoModalTitle = document.getElementById("infoModalTitleHover");
     const infoModalInitialDate = document.getElementById("infoModalInitialDateHover");
     infoModalTitle.textContent = infoModalTitleValue;
-    infoModalInitialDate.textContent = formatToReadableTime(new Date(infoInitialDateValue));
+    if (!infoEndDate) {
+        infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue));
+    }
+    else if (formatToReadableDate(new Date(infoInitialDateValue)) === formatToReadableDate(new Date(infoEndDate))) {
+        infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue)) + ' - ' + formatToReadableTime(new Date(infoEndDate));
+    }
+    else {
+        infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue)) + ' - ' + formatToReadableDate(new Date(infoEndDate)) + ' ' + formatToReadableTime(new Date(infoEndDate));
+    }
 };

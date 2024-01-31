@@ -11,7 +11,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <title>Calendar App</title>
 </head>
-<body class="justify-items-center bg-gray-200 min-h-screen font-['Montserrat']">
+<body class="justify-items-center bg-[#F3EEE7] min-h-screen font-['Montserrat']">
   <main class="min-h-screen">  
   <header class="w-full border-double border-4 bg-[#4D3C3A] py-2 px-4 grid grid-cols-[1fr,3fr,1fr] grid-rows-1 items-center gap-2">
         <section>
@@ -49,13 +49,13 @@
    
     <form id="myForm">
       <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
-        <button class="absolute right-0 mr-5 mb-5 top-3 text-red-950" id="closeModalButton">
+        <button class="absolute right-0 mr-5 mb-5 top-3 text-[#AB4F65]" id="closeModalButton">
           <svg width="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path fill="currentColor" d="M18 3H6a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3m1 15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1Z"/>
             <path fill="currentColor" d="M14.71 9.29a1 1 0 0 0-1.42 0L12 10.59l-1.29-1.3a1 1 0 0 0-1.42 1.42l1.3 1.29l-1.3 1.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l1.29-1.3l1.29 1.3a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42L13.41 12l1.3-1.29a1 1 0 0 0 0-1.42"/>
           </svg>
         </button>
-        <h2 class="text-2xl text-center text-red-500">NEW EVENT</h2>
+        <h2 class="text-2xl text-center text-[#AB4F65]">NEW EVENT</h2>
         <div class="flex flex-row gap-4 relative mb-2">
           <label class="relative">
             Title:
@@ -127,10 +127,10 @@
     </select>
     </div>
     <div class="flex justify-center gap-6">
-        <button id="cancelModalButton" class="w-fit px-2 py-1 bg-gray-300 rounded">
+        <button id="cancelModalButton" class="w-fit px-2 py-1 bg-[#DACDC5] text-[#AB4F65] rounded">
           Cancel
         </button>
-        <button type="submit" class="w-fit px-2 py-1 bg-red-300 rounded">
+        <button type="submit" class="w-fit text-[#F3EEE7] px-2 py-1 bg-[#AB4F65] rounded">
           Accept
         </button>
       </div>
@@ -146,7 +146,12 @@
   class="modal hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center"
 >
   <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
-    <button class="absolute right-0 mr-5 mb-5 top-3" id="closeInfoModalButton">x</button>
+    <button class="absolute right-0 mr-5 mb-5 top-3 text-[#AB4F65]" id="closeInfoModalButton">    
+      <svg width="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M18 3H6a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3m1 15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1Z"/>
+        <path fill="currentColor" d="M14.71 9.29a1 1 0 0 0-1.42 0L12 10.59l-1.29-1.3a1 1 0 0 0-1.42 1.42l1.3 1.29l-1.3 1.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l1.29-1.3l1.29 1.3a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42L13.41 12l1.3-1.29a1 1 0 0 0 0-1.42"/>
+      </svg>
+    </button>
     <div>
       <p id="infoModalTitle" class="font-bold text-xl"></p>
     </div>

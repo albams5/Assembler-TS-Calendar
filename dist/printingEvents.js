@@ -1,6 +1,6 @@
 import { showInfoModal } from "./infoModal.js";
 import { showInfoModalHover, closeModalHover } from "./hoverModal.js";
-import { formatToReadableTime } from "./helper.js";
+import { formatToReadableDate, formatToReadableTime } from "./helper.js";
 export const getEventsFromLS = () => {
     const LSData = localStorage.getItem('calendar');
     const events = JSON.parse(LSData).eventList;
@@ -46,7 +46,7 @@ export const printEvents = () => {
     // scroll y scale en recuadro del mes (funcion printMonth)
     const events = getEventsFromLS();
     events.forEach((event) => {
-        const { initialDate, endDate, eventType, description, alertTime, title, id } = event;
+        const { initialDate, endDate, eventType, title, id } = event;
         const circleColor = getCircleColor(eventType);
         if (initialDate === endDate || endDate === '') {
             const initialDateString = `${new Date(initialDate).getMonth() + 1}-${new Date(initialDate).getDate()}-${new Date(initialDate).getFullYear()}`;
@@ -83,7 +83,7 @@ export const printEvents = () => {
         }
         if (initialDate !== endDate && endDate !== '') {
             const listOfDays = getListOfDaysBetweenTwoDates(initialDate, endDate);
-            listOfDays.forEach((day) => {
+            listOfDays.forEach((day, i) => {
                 const ulHtml = document.getElementById(`day-${day}`);
                 if (!ulHtml)
                     return;
@@ -93,9 +93,13 @@ export const printEvents = () => {
                 const circleDiv = document.createElement("div");
                 circleDiv.classList.add("rounded-full", "inline-block", "w-2", "h-2", "mr-1", circleColor);
                 const newSpan = document.createElement("span");
-                const hour = (new Date(initialDate).getHours()).toString().length < 2 ? '0' + new Date(initialDate).getHours() : new Date(initialDate).getHours();
-                const minute = (new Date(initialDate).getMinutes()).toString().length < 2 ? '0' + new Date(initialDate).getMinutes() : new Date(initialDate).getMinutes();
-                newSpan.textContent = `${hour}:${minute} ${title}`;
+                if (formatToReadableDate(new Date(initialDate)) != formatToReadableDate(new Date(endDate)) && i != 0) {
+                    newSpan.textContent = `${title}`;
+                }
+                else {
+                    const hour = formatToReadableTime(new Date(initialDate));
+                    newSpan.textContent = `${hour} ${title}`;
+                }
                 newLi.appendChild(circleDiv);
                 newLi.appendChild(newSpan);
                 if (new Date(endDate).getTime() - Date.now() < 0)

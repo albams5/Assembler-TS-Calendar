@@ -1,5 +1,5 @@
 import { FormData } from "./interfaces/modalData";
-import { formatToReadableTime } from './helper.js';
+import { formatToReadableDate, formatToReadableTime } from './helper.js';
 
 export const closeModalHover = () => {
   const modal = document.getElementById("infoModalHover")!;
@@ -27,6 +27,7 @@ export const showInfoModalHover = (id: string, eventE: MouseEvent) => {
         paintDom(
           event.title,
           event.initialDate,
+          event.endDate,
           eventE
         );
       } else {
@@ -45,6 +46,7 @@ export const showInfoModalHover = (id: string, eventE: MouseEvent) => {
 const paintDom = (
   infoModalTitleValue: string,
   infoInitialDateValue: string,
+  infoEndDate: string,
   eventE?: MouseEvent
 ) => {
   const modal = document.getElementById("infoModalHover")!;
@@ -72,5 +74,11 @@ const paintDom = (
   )!;
 
   infoModalTitle.textContent = infoModalTitleValue;
-  infoModalInitialDate.textContent = formatToReadableTime(new Date(infoInitialDateValue));
+  if(!infoEndDate) {
+    infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue));
+  } else if (formatToReadableDate(new Date(infoInitialDateValue)) === formatToReadableDate(new Date(infoEndDate))) {
+    infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue)) + ' - ' + formatToReadableTime(new Date(infoEndDate));
+  } else {
+    infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue)) + ' - ' + formatToReadableDate(new Date(infoEndDate)) + ' ' + formatToReadableTime(new Date(infoEndDate));
+  }
 };
