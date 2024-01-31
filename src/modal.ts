@@ -140,14 +140,18 @@ const handleFormSub = (event: Event) => {
   const JSONcalendar = JSON.parse(calendar);
   const currentMonth = JSONcalendar.currentMonth;
   let eventArray = JSONcalendar.eventList;
+  
+  let notificationStatus = modalTimeValue && new Date( modalInitialDateValue).getTime() > Date.now() ?false :true
+  
   const newEvent: type.FormData = {
     id: Date.now(),
     title: modalTitleValue,
     initialDate: modalInitialDateValue,
     endDate: modalEndateValue,
-    time: modalTimeValue,
+    alertTime: modalTimeValue,
     description: commentValue,
-    eventype: modalEventValue,
+    eventType: modalEventValue,
+    notificated: notificationStatus
   };
   eventArray.push(newEvent);
   localStorage.setItem("calendar", JSON.stringify(JSONcalendar));

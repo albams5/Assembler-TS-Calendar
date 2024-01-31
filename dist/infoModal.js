@@ -1,4 +1,5 @@
 import { printMonth } from "./calendar.js";
+import { formatToReadableDate, formatToReadableTime } from './helper.js';
 export const showInfoModal = (id) => {
     // Retrieve JSON data from local storage
     const storedData = localStorage.getItem("calendar");
@@ -10,7 +11,7 @@ export const showInfoModal = (id) => {
             if (event) {
                 // If the event is found, log its details
                 // Call paintDom() or perform other actions as needed
-                paintDom(event.title, event.initialDate, event.endDate, event.time, event.description, event.eventType, event.id);
+                paintDom(event.title, event.initialDate, event.endDate, event.alertTime, event.description, event.eventType, event.id);
             }
             else {
                 // If the event is not found, log an error or handle accordingly
@@ -52,6 +53,7 @@ function deleteEventById(id) {
 }
 // Example usage: deleteEventById(1706611594279);
 const paintDom = (infoModalTitleValue, infoInitialDateValue, infoModalEndDateValue, infoModalTimeValue, infoModalDescriptionValue, infoModalEventTypeValue, idValue) => {
+    var _a, _b, _c, _d, _e, _f;
     const modal = document.getElementById("infoModal");
     modal.classList.remove("hidden");
     modal.classList.add("flex");
@@ -61,9 +63,27 @@ const paintDom = (infoModalTitleValue, infoInitialDateValue, infoModalEndDateVal
     const infoModalTime = document.getElementById("infoModalTime");
     const infoModalDescription = document.getElementById("infoModalDescription");
     const infoModalEventType = document.getElementById("infoModalEventType");
+    if (!infoModalEndDateValue) {
+        (_a = infoModalEndDate.parentElement) === null || _a === void 0 ? void 0 : _a.classList.add('hidden');
+    }
+    else {
+        (_b = infoModalEndDate.parentElement) === null || _b === void 0 ? void 0 : _b.classList.remove('hidden');
+    }
+    if (!infoModalTimeValue) {
+        (_c = infoModalTime.parentElement) === null || _c === void 0 ? void 0 : _c.classList.add('hidden');
+    }
+    else {
+        (_d = infoModalTime.parentElement) === null || _d === void 0 ? void 0 : _d.classList.remove('hidden');
+    }
+    if (!infoModalDescriptionValue) {
+        (_e = infoModalDescription.parentElement) === null || _e === void 0 ? void 0 : _e.classList.add('hidden');
+    }
+    else {
+        (_f = infoModalDescription.parentElement) === null || _f === void 0 ? void 0 : _f.classList.remove('hidden');
+    }
     infoModalTitle.textContent = infoModalTitleValue;
-    infoModalInitialDate.textContent = infoInitialDateValue;
-    infoModalEndDate.textContent = infoModalEndDateValue;
+    infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue));
+    infoModalEndDate.textContent = formatToReadableDate(new Date(infoModalEndDateValue)) + ' ' + formatToReadableTime(new Date(infoModalEndDateValue));
     infoModalTime.textContent = infoModalTimeValue;
     infoModalDescription.textContent = infoModalDescriptionValue;
     infoModalEventType.textContent = infoModalEventTypeValue;

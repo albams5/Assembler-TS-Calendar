@@ -91,11 +91,11 @@
       <label class="hidden" id="modalTimeLabel">Time:
       
       <select id="TimeInput" class="border-2 border-black hidden">
-        <option value="5min">5min</option>
-        <option value="10min">10min</option>
-        <option value="15min">15min</option>
-        <option value="30min">30min</option>
-        <option value="1H">1H</option>
+        <option value="5">5min</option>
+        <option value="10">10min</option>
+        <option value="15">15min</option>
+        <option value="30">30min</option>
+        <option value="60">1H</option>
       </select>
     </label>
 
@@ -126,13 +126,14 @@
       </datalist>
     </select>
     </div>
-
-        <button id="cancelModalButton">
+    <div class="flex justify-center gap-6">
+        <button id="cancelModalButton" class="w-fit px-2 py-1 bg-gray-300 rounded">
           Cancel
         </button>
-        <button type="submit">
+        <button type="submit" class="w-fit px-2 py-1 bg-red-300 rounded">
           Accept
         </button>
+      </div>
       </div>
       </form>
 
@@ -144,41 +145,55 @@
   id="infoModal"
   class="modal hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center"
 >
-<form id="myForm">
   <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
     <button class="absolute right-0 mr-5 mb-5 top-3" id="closeInfoModalButton">x</button>
+    <div>
+      <p class="underline text-sm">Title: </p>
+      <p id="infoModalTitle" class="font-semibold"></p>
+    </div>
 
-    <p>Title: </p>
-    <p id="infoModalTitle"></p>
-    <p>Initial date: </p>
-    <p id="infoModalInitialDate"></p>
-    <p>End date: </p>
-    <p id="infoModalEndDate"></p>
-    <p>Time: </p>
-    <p id="infoModalTime"></p>
-    <p>Description: </p>
-    <p id="infoModalDescription"></p>
-    <p>Event type: </p>
-    <p id="infoModalEventType"></p>
+    <div>
+      <p class="underline text-sm">Initial date: </p>
+      <p id="infoModalInitialDate"  class="font-semibold"></p>
+    </div>
+
+    <div>
+      <p class="underline text-sm">End date: </p>
+      <p id="infoModalEndDate"  class="font-semibold"></p>
+    </div>
+
+    <div>
+      <p class="underline text-sm">Time: </p>
+      <p id="infoModalTime"  class="font-semibold"></p>
+    </div>
+
+    <div>
+      <p class="underline text-sm">Description: </p>
+      <p id="infoModalDescription"  class="font-semibold"></p>
+    </div>
+
+    <div>      
+      <p class="underline text-sm">Event type: </p>
+      <p id="infoModalEventType"  class="font-semibold"></p>
+    </div>
 
   <button id="deleteButton">Borrar</button>
 
   </div>
 
-  </form>
+  
   </div>
 
 
 <div
   id="infoModalHover"
-  class="modal hidden fixed bg-opacity-50 flex items-center justify-center"
+  class="modal hidden fixed bg-opacity-50 flex items-center justify-center shadow-lg"
 >
-<form id="myForm">
   <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
-    <p id="infoModalTitleHover"></p>
+    <p id="infoModalTitleHover" class="text-lg font-semibold"></p>
     <p id="infoModalInitialDateHover"></p>
   </div>
-  </form>
+ 
 </div>
 </main>
 

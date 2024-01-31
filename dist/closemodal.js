@@ -20,7 +20,7 @@ function clearModalContent() {
     modalInitialDate.value = "";
     modalEndate.value = "";
     comment.value = "";
-    modalTime.value = "5min";
+    modalTime.value = "5";
     modalEvent.value = "Meeting";
     checkEndDate.checked = false;
     containerEndDate.classList.add("hidden");

@@ -1,18 +1,25 @@
-"use strict";
-const events = [
-    { name: "Event 1", reminderTime: 60 },
-    { name: "Event 2", reminderTime: 30 },
-];
-function checkEventReminder() {
-    setInterval(() => {
-        const now = new Date();
-        events.forEach((event) => {
-            const expirationTime = new Date(event.reminderTime);
-            const reminderTime = new Date(expirationTime.getTime() - event.reminderTime * 60000); //Convert minutes to milliseconds
-            if (now >= reminderTime && now < expirationTime) {
-                alert(`${event.name} will expire in ${event.reminderTime} minutes.`);
-            }
-        });
-    }, 10000);
+import { getEventsFromLS } from './printingEvents.js';
+export function checkEventReminder() {
+    const events = getEventsFromLS();
+    const filterEvents = events.filter(event => !event.notificated);
+    const notFilteredEvents = events.filter(event => event.notificated);
+    const returnedEvents = [...notFilteredEvents];
+    filterEvents.forEach((event) => {
+        const startTime = new Date(event.initialDate);
+        const expirationTime = startTime.getTime();
+        const actualTime = Date.now();
+        const reminderTimeMilli = Number(event.alertTime) * 60 * 1000;
+        const timeLeft = expirationTime - actualTime;
+        const updatedEvent = Object.assign({}, event);
+        if (timeLeft <= reminderTimeMilli && !event.notificated) {
+            updatedEvent.notificated = true;
+            alert(`reminder: The event ${event.title} starts in less than ${event.alertTime} minutes!`);
+        }
+        returnedEvents.push(updatedEvent);
+    });
+    const LSData = localStorage.getItem('calendar');
+    const currentMonth = JSON.parse(LSData).currentMonth;
+    const newCalendar = JSON.stringify({ currentMonth, eventList: returnedEvents });
+    console.log(newCalendar);
+    localStorage.setItem('calendar', newCalendar);
 }
-checkEventReminder();

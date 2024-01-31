@@ -1,6 +1,7 @@
 import { printMonth } from "./calendar.js";
 import { closeModal } from "./closemodal.js";
 import { FormData } from "./interfaces/modalData.js";
+import { formatToReadableDate, formatToReadableTime } from './helper.js';
 
 export const showInfoModal = (id: string) => {
   // Retrieve JSON data from local storage
@@ -22,7 +23,7 @@ export const showInfoModal = (id: string) => {
           event.title,
           event.initialDate,
           event.endDate,
-          event.time,
+          event.alertTime,
           event.description,
           event.eventType,
           event.id
@@ -91,9 +92,14 @@ const paintDom = (
   const infoModalDescription = document.getElementById("infoModalDescription")!;
   const infoModalEventType = document.getElementById("infoModalEventType")!;
 
+  if( !infoModalEndDateValue ) {infoModalEndDate.parentElement?.classList.add('hidden')} else {infoModalEndDate.parentElement?.classList.remove('hidden')}
+  if( !infoModalTimeValue ) {infoModalTime.parentElement?.classList.add('hidden')} else{ infoModalTime.parentElement?.classList.remove('hidden')}
+  if( !infoModalDescriptionValue ) {infoModalDescription.parentElement?.classList.add('hidden')} else{infoModalDescription.parentElement?.classList.remove('hidden')}
+  
+
   infoModalTitle.textContent = infoModalTitleValue;
-  infoModalInitialDate.textContent = infoInitialDateValue;
-  infoModalEndDate.textContent = infoModalEndDateValue;
+  infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime( new Date(infoInitialDateValue));
+  infoModalEndDate.textContent = formatToReadableDate( new Date(infoModalEndDateValue)) + ' ' + formatToReadableTime( new Date(infoModalEndDateValue));
   infoModalTime.textContent = infoModalTimeValue;
   infoModalDescription.textContent = infoModalDescriptionValue;
   infoModalEventType.textContent = infoModalEventTypeValue;

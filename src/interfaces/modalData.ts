@@ -10,13 +10,15 @@ export interface FormData {
   title: string;
   initialDate: string;
   endDate: string | number;
-  time: number | string;
+  alertTime: number | string;
   description: string | null;
-  eventype: Category | string;
+  eventType: Category | string;
+  notificated: boolean;
 }
 
-enum Category {
+export enum Category {
   Meeting = "Meeting",
   Personal = "Personal",
   Study = "Study",
+  Other = "Other",
 }

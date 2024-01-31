@@ -1,6 +1,7 @@
 import { elements } from "./domElements.js";
 import { printEvents } from "./printingEvents.js";
 import { paintDomDay, paintDom } from './modal.js';
+import { checkEventReminder } from "./setInterval.js";
 export function setPage() {
     const { languageSelect, btnPrev, btnNext, btnToday, btnAddEvent } = elements;
     languageSelect.addEventListener("change", changeLocale);
@@ -9,6 +10,7 @@ export function setPage() {
     btnToday.addEventListener("click", showToday);
     btnAddEvent.addEventListener("click", paintDom);
     printToday();
+    setInterval(checkEventReminder, 10000);
 }
 function printToday() {
     const actualYear = new Date(Date.now()).getFullYear();

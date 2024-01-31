@@ -1,6 +1,7 @@
 import { showInfoModal } from "./infoModal.js";
 import { showInfoModalHover, closeModalHover } from "./hoverModal.js";
-const getEventsFromLS = () => {
+import { formatToReadableTime } from "./helper.js";
+export const getEventsFromLS = () => {
     const LSData = localStorage.getItem('calendar');
     const events = JSON.parse(LSData).eventList;
     return events;
@@ -45,8 +46,8 @@ export const printEvents = () => {
     // scroll y scale en recuadro del mes (funcion printMonth)
     const events = getEventsFromLS();
     events.forEach((event) => {
-        const { initialDate, endDate, eventype, description, time, title, id } = event;
-        const circleColor = getCircleColor(eventype);
+        const { initialDate, endDate, eventType, description, alertTime, title, id } = event;
+        const circleColor = getCircleColor(eventType);
         if (initialDate === endDate || endDate === '') {
             const initialDateString = `${new Date(initialDate).getMonth() + 1}-${new Date(initialDate).getDate()}-${new Date(initialDate).getFullYear()}`;
             const ulHtml = document.getElementById(`day-${initialDateString}`);
@@ -61,9 +62,8 @@ export const printEvents = () => {
                 circleDiv.classList.add(circleColor);
             }
             const newSpan = document.createElement("span");
-            const hour = (new Date(initialDate).getHours()).toString().length < 2 ? '0' + new Date(initialDate).getHours() : new Date(initialDate).getHours();
-            const minute = (new Date(initialDate).getMinutes()).toString().length < 2 ? '0' + new Date(initialDate).getMinutes() : new Date(initialDate).getMinutes();
-            newSpan.textContent = `${hour}:${minute} ${title}`;
+            const hour = formatToReadableTime(new Date(initialDate));
+            newSpan.textContent = `${hour} ${title}`;
             newLi.appendChild(circleDiv);
             newLi.appendChild(newSpan);
             if (new Date(initialDate).getTime() - Date.now() < 0)
@@ -98,7 +98,7 @@ export const printEvents = () => {
                 newSpan.textContent = `${hour}:${minute} ${title}`;
                 newLi.appendChild(circleDiv);
                 newLi.appendChild(newSpan);
-                if (new Date(initialDate).getTime() - Date.now() < 0)
+                if (new Date(endDate).getTime() - Date.now() < 0)
                     newLi.classList.add("line-through", "text-gray-400", 'truncate');
                 newLi.addEventListener("click", () => {
                     const eventId = newLi.getAttribute("event-id");

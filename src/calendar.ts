@@ -2,6 +2,7 @@ import { elements } from "./domElements.js";
 import * as type from "./interfaces/module.js";
 import { printEvents } from "./printingEvents.js";
 import {paintDomDay, paintDom} from './modal.js';
+import { checkEventReminder } from "./setInterval.js";
 
 export function setPage(): void {
   const { languageSelect, btnPrev, btnNext, btnToday, btnAddEvent } = elements;
@@ -11,6 +12,7 @@ export function setPage(): void {
   btnToday.addEventListener("click", showToday);
   btnAddEvent.addEventListener("click", paintDom);
   printToday();
+  setInterval( checkEventReminder, 10000);
 }
 
 function printToday(): void {

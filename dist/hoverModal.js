@@ -1,3 +1,4 @@
+import { formatToReadableTime } from './helper.js';
 export const closeModalHover = () => {
     const modal = document.getElementById("infoModalHover");
     modal.classList.add("hidden");
@@ -13,7 +14,7 @@ export const showInfoModalHover = (id, eventE) => {
             if (event) {
                 // If the event is found, log its details
                 // Call paintDom() or perform other actions as needed
-                paintDom(event.title, event.initialDate, event.endDate, event.time, event.description, event.eventType, event.id, eventE);
+                paintDom(event.title, event.initialDate, eventE);
             }
             else {
                 // If the event is not found, log an error or handle accordingly
@@ -29,7 +30,7 @@ export const showInfoModalHover = (id, eventE) => {
         console.error("No data found in local storage with key 'calendar'");
     }
 };
-const paintDom = (infoModalTitleValue, infoInitialDateValue, infoModalEndDateValue, infoModalTimeValue, infoModalDescriptionValue, infoModalEventTypeValue, idValue, eventE) => {
+const paintDom = (infoModalTitleValue, infoInitialDateValue, eventE) => {
     const modal = document.getElementById("infoModalHover");
     const posY = eventE === null || eventE === void 0 ? void 0 : eventE.pageY;
     const posX = eventE === null || eventE === void 0 ? void 0 : eventE.pageX;
@@ -47,5 +48,5 @@ const paintDom = (infoModalTitleValue, infoInitialDateValue, infoModalEndDateVal
     const infoModalTitle = document.getElementById("infoModalTitleHover");
     const infoModalInitialDate = document.getElementById("infoModalInitialDateHover");
     infoModalTitle.textContent = infoModalTitleValue;
-    infoModalInitialDate.textContent = infoInitialDateValue;
+    infoModalInitialDate.textContent = formatToReadableTime(new Date(infoInitialDateValue));
 };

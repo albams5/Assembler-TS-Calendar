@@ -1,28 +1,43 @@
-    interface Eventos {
-    name: string;
-    Time: number;
-    startTime:  Date;
-    notificated: boolean;
-    }
-
-    const events: Eventos[] = [
-    { name: "Event 1", Time: 60, startTime:  new Date('January 31, 18 00:00'), notificated: false},
-    { name: "Event 2", Time: 30, startTime:  new Date('January 31, 18 00:00'), notificated: false },
-    ];
+import { getEventsFromLS } from './printingEvents.js'
 
 
 
-function checkEventReminder() {
+
+export function checkEventReminder() {
+
+    const events = getEventsFromLS()
+
     const filterEvents =  events.filter(event => !event.notificated);
+
+    const notFilteredEvents = events.filter( event => event.notificated);
+
+    const returnedEvents = [...notFilteredEvents]
+
     filterEvents.forEach((event) => {
-        const expirationTime = event.startTime.getTime();
+        const startTime = new Date( event.initialDate )
+        const expirationTime = startTime.getTime();
         const actualTime = Date.now();
-        const reminderTimeMilli =  event.Time * 60 * 1000;
+        const reminderTimeMilli =  Number(event.alertTime) * 60 * 1000;
         const timeLeft = expirationTime - actualTime;
+        const updatedEvent = {...event}
         if (timeLeft <=  reminderTimeMilli && !event.notificated ) {
-            event.notificated =  true;
-            alert(`reminder: The event ${event.name} starts in less than ${event.Time} minutes!`);
+            updatedEvent.notificated = true            
+            alert(`reminder: The event ${event.title} starts in less than ${event.alertTime} minutes!`);
         }
+        returnedEvents.push(updatedEvent)
     });
+
+    const LSData:string = localStorage.getItem('calendar')!
+
+    const currentMonth = JSON.parse(LSData).currentMonth
+
+    const newCalendar = JSON.stringify( { currentMonth,  eventList: returnedEvents })
+
+    console.log(newCalendar)
+    
+
+    localStorage.setItem('calendar', newCalendar )
+
+    
+
 }
- setInterval( checkEventReminder, 10000);

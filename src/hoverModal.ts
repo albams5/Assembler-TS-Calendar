@@ -1,4 +1,5 @@
 import { FormData } from "./interfaces/modalData";
+import { formatToReadableTime } from './helper.js';
 
 export const closeModalHover = () => {
   const modal = document.getElementById("infoModalHover")!;
@@ -26,11 +27,6 @@ export const showInfoModalHover = (id: string, eventE: MouseEvent) => {
         paintDom(
           event.title,
           event.initialDate,
-          event.endDate,
-          event.time,
-          event.description,
-          event.eventType,
-          event.id,
           eventE
         );
       } else {
@@ -49,11 +45,6 @@ export const showInfoModalHover = (id: string, eventE: MouseEvent) => {
 const paintDom = (
   infoModalTitleValue: string,
   infoInitialDateValue: string,
-  infoModalEndDateValue: string,
-  infoModalTimeValue: string,
-  infoModalDescriptionValue: string,
-  infoModalEventTypeValue: string,
-  idValue: number,
   eventE?: MouseEvent
 ) => {
   const modal = document.getElementById("infoModalHover")!;
@@ -81,5 +72,5 @@ const paintDom = (
   )!;
 
   infoModalTitle.textContent = infoModalTitleValue;
-  infoModalInitialDate.textContent = infoInitialDateValue;
+  infoModalInitialDate.textContent = formatToReadableTime(new Date(infoInitialDateValue));
 };
