@@ -98,8 +98,8 @@ export const printEvents = () => {
                 newSpan.textContent = `${hour}:${minute} ${title}`;
                 newLi.appendChild(circleDiv);
                 newLi.appendChild(newSpan);
-                if (new Date(endDate).getTime() - Date.now() < 0)
-                newLi.classList.add("line-through", "text-gray-400", 'truncate');
+                if (new Date(initialDate).getTime() - Date.now() < 0)
+                    newLi.classList.add("line-through", "text-gray-400", 'truncate');
                 newLi.addEventListener("click", () => {
                     const eventId = newLi.getAttribute("event-id");
                     showInfoModal(eventId);

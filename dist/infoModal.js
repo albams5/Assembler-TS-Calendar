@@ -1,6 +1,5 @@
 import { printMonth } from "./calendar.js";
 export const showInfoModal = (id) => {
-    console.log("Clicked event with id:", id);
     // Retrieve JSON data from local storage
     const storedData = localStorage.getItem("calendar");
     if (storedData) {
@@ -10,8 +9,6 @@ export const showInfoModal = (id) => {
             const event = jsonData.eventList.find((event) => event.id.toString() === id);
             if (event) {
                 // If the event is found, log its details
-                console.log("Title:", event.title);
-                console.log("Initial Date:", event.initialDate);
                 // Call paintDom() or perform other actions as needed
                 paintDom(event.title, event.initialDate, event.endDate, event.time, event.description, event.eventType, event.id);
             }
@@ -44,7 +41,6 @@ function deleteEventById(id) {
             // Save the updated JSON back to localStorage
             localStorage.setItem("calendar", JSON.stringify(calendarData));
             printMonth(currentMonth.year, currentMonth.id);
-            console.log(`Event with id ${id} deleted successfully.`);
         }
         else {
             console.log(`Event with id ${id} not found.`);
