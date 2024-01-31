@@ -1,8 +1,8 @@
-import { FormData } from "./interfaces/modalData";
+import { printMonth } from "./calendar.js";
+import { closeModal } from "./closemodal.js";
+import { FormData } from "./interfaces/modalData.js";
 
 export const showInfoModal = (id: string) => {
-  console.log("Clicked event with id:", id);
-
   // Retrieve JSON data from local storage
   const storedData = localStorage.getItem("calendar");
 
@@ -17,9 +17,6 @@ export const showInfoModal = (id: string) => {
 
       if (event) {
         // If the event is found, log its details
-        console.log("Title:", event.title);
-        console.log("Initial Date:", event.initialDate);
-
         // Call paintDom() or perform other actions as needed
         paintDom(
           event.title,
@@ -50,6 +47,7 @@ function deleteEventById(id: number) {
   if (storedData) {
     // Parse the JSON
     const calendarData = JSON.parse(storedData);
+    const currentMonth = calendarData.currentMonth;
 
     // Find the index of the event with the given id
     const indexToDelete = calendarData.eventList.findIndex(
@@ -62,7 +60,7 @@ function deleteEventById(id: number) {
 
       // Save the updated JSON back to localStorage
       localStorage.setItem("calendar", JSON.stringify(calendarData));
-      console.log(`Event with id ${id} deleted successfully.`);
+      printMonth(currentMonth.year, currentMonth.id);
     } else {
       console.log(`Event with id ${id} not found.`);
     }
@@ -104,11 +102,6 @@ const paintDom = (
   deleteButton.addEventListener("click", function (event) {
     event.preventDefault();
 
-    const infoModalTitle = document.getElementById("infoModalTitle")!;
-
-    const idToDelete = infoModalTitle.textContent!;
-
-    console.log("idToDeleteNumber:", idValue);
     // Call the function to delete the element from local storage
     deleteEventById(idValue);
 
