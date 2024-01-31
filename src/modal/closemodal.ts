@@ -1,38 +1,27 @@
+import { elements } from '../globalElements.js';
 import { hideTitleError, hideTitleFillError, hideInitialDateError } from './modal.js';
 
 export function closeModal() {
-    const modal: HTMLElement | null = document.getElementById("modal");
+    const { modal } = elements;
+
     clearModalContent();
     clearErrorMessages();
     modal?.classList.add("hidden");
 }
 
 function clearModalContent() {
-    const modalTitle = document.getElementById("modalTitle") as HTMLInputElement;
-    const modalInitialDate = document.getElementById(
-    "modalInitialDate"
-    ) as HTMLInputElement;
-    const modalEndate = document.getElementById(
-    "modalEndate"
-    ) as HTMLInputElement;
-    const comment = document.getElementById("comment") as HTMLTextAreaElement;
-    const modalTime = document.getElementById("timeInput") as HTMLInputElement;
-    const modalEvent = document.getElementById("modalEvent") as HTMLInputElement;
-    const checkEndDate = document.getElementById("modalEndateCheck") as HTMLInputElement;
-    const containerEndDate = document.getElementById("endDateContainer") as HTMLDivElement;
-    const checkTime = document.getElementById("modalTimeCheck") as HTMLInputElement;
-    const containerTime = document.getElementById("modalTimeLabel") as HTMLDivElement;
-    
+    const { modalTitle, modalInitialDate, modalTimeLabel, modalTimeCheck, modalEndDateContainer, modalEndDateCheck, modalEndDateInput, modalComment, modalTimeSelect, modalEvent } = elements;
+
     modalTitle.value = "";
     modalInitialDate.value = "";
-    modalEndate.value = "";
-    comment.value = "";
-    modalTime.value = "5";
+    modalEndDateInput.value = "";
+    modalComment.value = "";
+    modalTimeSelect.value = "5";
     modalEvent.value = "Meeting";
-    checkEndDate.checked = false;
-    containerEndDate.classList.add("hidden");
-    checkTime.checked = false;
-    containerTime.classList.add("hidden");
+    modalEndDateCheck.checked = false;
+    modalEndDateContainer.classList.add("hidden");
+    modalTimeCheck.checked = false;
+    modalTimeLabel.classList.add("hidden");
 }
 
 function clearErrorMessages () {
