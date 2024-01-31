@@ -1,7 +1,8 @@
-import { closeModal } from './closemodal.js';
+import { clearErrorMessages, closeModal } from './closemodal.js';
 import { printMonth } from '../calendar/calendar.js';
 export const paintDom = () => {
     const modal = document.getElementById("modal");
+    clearErrorMessages();
     setModal();
     modal.classList.remove("hidden");
     modal.classList.add("flex");

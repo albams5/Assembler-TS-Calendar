@@ -27,7 +27,7 @@ function clearModalContent() {
     checkTime.checked = false;
     containerTime.classList.add("hidden");
 }
-function clearErrorMessages() {
+export function clearErrorMessages() {
     hideTitleError();
     hideTitleFillError();
     hideInitialDateError();
