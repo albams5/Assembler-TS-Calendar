@@ -1,7 +1,6 @@
-import { printMonth } from "./calendar.js";
-import { closeModal } from "./closemodal.js";
-import { FormData } from "./interfaces/modalData.js";
-import { formatToReadableDate, formatToReadableTime } from './helper.js';
+import * as type from '../interfaces/exportModule.js'
+import { printMonth } from "../calendar/calendar.js";
+import { formatToReadableDate, formatToReadableTime } from '../globalFunctions.js';
 
 export const showInfoModal = (id: string) => {
   // Retrieve JSON data from local storage
@@ -13,7 +12,7 @@ export const showInfoModal = (id: string) => {
 
       // Find the event with the provided id in the eventList
       const event = jsonData.eventList.find(
-        (event: FormData) => event.id.toString() === id
+        (event: type.Event) => event.id.toString() === id
       );
 
       if (event) {
@@ -52,7 +51,7 @@ function deleteEventById(id: number) {
 
     // Find the index of the event with the given id
     const indexToDelete = calendarData.eventList.findIndex(
-      (event: FormData) => event.id === id
+      (event: type.Event) => event.id === id
     );
 
     // If the event is found, remove it from the array

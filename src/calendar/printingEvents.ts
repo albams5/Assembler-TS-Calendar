@@ -1,17 +1,6 @@
-import { showInfoModal } from "./infoModal.js";
-import { showInfoModalHover, closeModalHover } from "./hoverModal.js";
-import { FormData } from "./interfaces/modalData.js";
-import { formatToReadableDate, formatToReadableTime } from "./helper.js";
-
-export const getEventsFromLS = ():FormData[] => {
- 
-
-  const LSData:string = localStorage.getItem('calendar')!
-  
-  const events:FormData[] = JSON.parse(LSData).eventList || [];
-
-  return events
-}
+import { showInfoModal } from "../modal/infoModal.js";
+import { showInfoModalHover, closeModalHover } from "../modal/hoverModal.js";
+import { getEventsFromLS, formatToReadableDate, formatToReadableTime } from "../globalFunctions.js";
 
 const getListOfDaysBetweenTwoDates = (
   startDate: string,

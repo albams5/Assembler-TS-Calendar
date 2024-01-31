@@ -1,2 +1,2 @@
-import { setPage } from './calendar.js';
+import { setPage } from './calendar/calendar.js';
 document.addEventListener('DOMContentLoaded', setPage);

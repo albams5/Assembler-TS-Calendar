@@ -1,5 +1,5 @@
-import { FormData } from "./interfaces/modalData";
-import { formatToReadableDate, formatToReadableTime } from './helper.js';
+import * as type from "../interfaces/exportModule.js";
+import { formatToReadableDate, formatToReadableTime } from '../globalFunctions.js';
 
 export const closeModalHover = () => {
   const modal = document.getElementById("infoModalHover")!;
@@ -17,7 +17,7 @@ export const showInfoModalHover = (id: string, eventE: MouseEvent) => {
 
       // Find the event with the provided id in the eventList
       const event = jsonData.eventList.find(
-        (event: FormData) => event.id.toString() === id
+        (event: type.Event) => event.id.toString() === id
       );
 
       if (event) {

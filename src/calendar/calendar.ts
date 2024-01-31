@@ -1,7 +1,7 @@
-import { elements } from "./domElements.js";
-import * as type from "./interfaces/module.js";
+import * as type from "../interfaces/exportModule.js";
+import { elements } from "../globalElements.js";
 import { printEvents } from "./printingEvents.js";
-import {paintDomDay, paintDom} from './modal.js';
+import {paintDomDay, paintDom} from '../modal/modal.js';
 import { checkEventReminder } from "./setInterval.js";
 
 export function setPage(): void {

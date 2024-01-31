@@ -1,11 +1,4 @@
-import { Month } from "./month.js";
-
-export interface Calendar {
-  eventList: FormData[];
-  currentMonth: Month;
-}
-
-export interface FormData {
+export interface Event {
   id: number;
   title: string;
   initialDate: string;

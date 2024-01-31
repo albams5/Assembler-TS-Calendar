@@ -1,7 +1,4 @@
-import { getEventsFromLS } from './printingEvents.js'
-
-
-
+import { getEventsFromLS } from '../globalFunctions.js'
 
 export function checkEventReminder() {
 
@@ -27,16 +24,11 @@ export function checkEventReminder() {
         returnedEvents.push(updatedEvent)
     });
 
-    const LSData:string = localStorage.getItem('calendar')!
+    const LSData:string = localStorage.getItem('calendar')!;
 
-    const currentMonth = JSON.parse(LSData).currentMonth
+    const currentMonth = JSON.parse(LSData).currentMonth;
 
-    const newCalendar = JSON.stringify( { currentMonth,  eventList: returnedEvents })
+    const newCalendar = JSON.stringify( { currentMonth,  eventList: returnedEvents });
 
- 
-
-    localStorage.setItem('calendar', newCalendar )
-
-    
-
+    localStorage.setItem('calendar', newCalendar );
 }

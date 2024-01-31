@@ -1,6 +1,6 @@
-import * as type from "./interfaces/module.js";
+import * as type from "../interfaces/exportModule.js";
 import { closeModal } from './closemodal.js';
-import { printMonth } from './calendar.js'
+import { printMonth } from '../calendar/calendar.js'
 
 export const paintDom = () => {
   const modal = document.getElementById("modal")!;
@@ -143,7 +143,7 @@ const handleFormSub = (event: Event) => {
   
   let notificationStatus = modalTimeValue && new Date( modalInitialDateValue).getTime() > Date.now() ?false :true
   
-  const newEvent: type.FormData = {
+  const newEvent: type.Event = {
     id: Date.now(),
     title: modalTitleValue,
     initialDate: modalInitialDateValue,
