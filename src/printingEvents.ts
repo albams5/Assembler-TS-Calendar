@@ -8,7 +8,7 @@ export const getEventsFromLS = ():FormData[] => {
 
   const LSData:string = localStorage.getItem('calendar')!
   
-  const events:FormData[] = JSON.parse(LSData).eventList
+  const events:FormData[] = JSON.parse(LSData).eventList || [];
 
   return events
 }
