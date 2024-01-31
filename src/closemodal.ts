@@ -4,21 +4,55 @@
 
 function closeModal() {
     const modal: HTMLElement | null = document.getElementById("modal");
-    if (modal) {
-        modal.style.display = "none";
-    }
+    modal?.classList.add("hidden");
     }
 
     function clearModalContent() {
-    const modalContent: HTMLElement | null = document.getElementById("modal");
-    if (modalContent) {
-        modalContent.innerHTML = "";
+        const modalTitle = document.getElementById("modalTitle") as HTMLInputElement;
+    const modalInitialDate = document.getElementById(
+    "modalInitialDate"
+    ) as HTMLInputElement;
+    const modalEndate = document.getElementById(
+    "modalEndate"
+    ) as HTMLInputElement;
+    const comment = document.getElementById("comment") as HTMLTextAreaElement;
+    const modalTime = document.getElementById("TimeInput") as HTMLInputElement;
+    const modalEvent = document.getElementById("modalEvent") as HTMLInputElement;
+    modalTitle.textContent = "";
+    modalInitialDate.textContent = "";
+    modalEndate.textContent = "";
+    comment.textContent = "";
+    modalTime.textContent = "";
+    modalEvent.textContent = "";
     }
-    }
-    const closeModalButton: HTMLElement | null = document.getElementById("closeModalButton");
-    if (closeModalButton) {
-    closeModalButton.addEventListener("click", () => {
-        clearModalContent();
-        closeModal();
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const closeModalButton = document.getElementById("closeModalButton")!;
+        closeModalButton.addEventListener("click", () => {
+            closeModal();
+            clearModalContent();
+        });
     });
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+    const modalTitle = document.getElementById("modalTitle") as HTMLInputElement;
+    const modalInitialDate = document.getElementById(
+    "modalInitialDate"
+    ) as HTMLInputElement;
+    const modalEndate = document.getElementById(
+    "modalEndate"
+    ) as HTMLInputElement;
+    const comment = document.getElementById("comment") as HTMLTextAreaElement;
+    const modalTime = document.getElementById("TimeInput") as HTMLInputElement;
+    const modalEvent = document.getElementById("modalEvent") as HTMLInputElement;
