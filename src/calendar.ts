@@ -115,7 +115,7 @@ function printMonth(year: number, numberMonth: number): void {
   monthTitle.innerHTML = `${month.name.toUpperCase()} ${month.year}`;
 
   const htmlDaysName = getWeekDays()
-    .map((dayName) => `<li class='list-none'>${dayName}</li>`)
+    .map((dayName) => `<div class="text-center h-full"><p class='list-none h-6'>${dayName}</p></div>`)
     .join("");
 
   const days: number[] = Array.from({ length: month.days }, (_, index) => {
@@ -123,8 +123,8 @@ function printMonth(year: number, numberMonth: number): void {
   });
   const firstDayAttributes: string = `class='col-start-${
     month.start === 0 ? 7 : month.start
-  } text-right relative bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group cursor-pointer fade-in-right hover:bg-red-50 overflow-auto'`;
-  const dayAttributes = `class='text-right relative bg-white px-2 border-solid border-2 rounded border-grey-400 h-[5.5rem] w-32 group cursor-pointer fade-in-right hover:bg-red-50 overflow-auto'`;
+  } text-right relative bg-white px-2 border-solid border-2 rounded border-grey-400 group cursor-pointer fade-in-right hover:bg-red-50 overflow-auto w-full'`;
+  const dayAttributes = `class='text-right relative bg-white px-2 border-solid border-2 rounded border-grey-400 group cursor-pointer fade-in-right hover:bg-red-50 overflow-auto w-full'`;
   const htmlDays: string = days
     .map(
       (day, index) =>
@@ -144,7 +144,8 @@ function printMonth(year: number, numberMonth: number): void {
             </li>`
     )
     .join("");
-  monthDays.innerHTML = `${htmlDaysName}${htmlDays}`;
+    monthDays.insertAdjacentHTML('beforebegin', `<div class="grid grid-cols-7 gap-2">${htmlDaysName}</div>`);
+  monthDays.innerHTML = `${htmlDays}`;
 
   const btnAddArray = document.querySelectorAll(".add");
 
