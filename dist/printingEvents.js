@@ -53,7 +53,6 @@ export const printEvents = () => {
         if (initialDate === endDate || endDate === '') {
             const initialDateString = `${new Date(initialDate).getMonth() + 1}-${new Date(initialDate).getDate()}-${new Date(initialDate).getFullYear()}`;
             const ulHtml = document.getElementById(`day-${initialDateString}`);
-            const ulFather = ulHtml.parentElement;
             if (!ulHtml)
                 return;
             const newLi = document.createElement("li");
