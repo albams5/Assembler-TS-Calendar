@@ -1,4 +1,5 @@
-import { FormData } from "./interfaces/modalData";
+import { printMonth } from "./calendar.js";
+import { FormData } from "./interfaces/modalData.js";
 
 export const showInfoModal = (id: string) => {
   console.log("Clicked event with id:", id);
@@ -50,6 +51,7 @@ function deleteEventById(id: number) {
   if (storedData) {
     // Parse the JSON
     const calendarData = JSON.parse(storedData);
+    const currentMonth = calendarData.currentMonth;
 
     // Find the index of the event with the given id
     const indexToDelete = calendarData.eventList.findIndex(
@@ -62,6 +64,7 @@ function deleteEventById(id: number) {
 
       // Save the updated JSON back to localStorage
       localStorage.setItem("calendar", JSON.stringify(calendarData));
+      printMonth(currentMonth.year, currentMonth.id);
       console.log(`Event with id ${id} deleted successfully.`);
     } else {
       console.log(`Event with id ${id} not found.`);

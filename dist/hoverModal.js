@@ -53,17 +53,4 @@ const paintDom = (infoModalTitleValue, infoInitialDateValue, infoModalEndDateVal
     const infoModalInitialDate = document.getElementById("infoModalInitialDateHover");
     infoModalTitle.textContent = infoModalTitleValue;
     infoModalInitialDate.textContent = infoInitialDateValue;
-    const deleteButton = document.getElementById("deleteButton");
-    deleteButton.addEventListener("click", function (event) {
-        event.preventDefault();
-        const infoModalTitle = document.getElementById("infoModalTitle");
-        const idToDelete = infoModalTitle.textContent;
-        console.log("idToDeleteNumber:", idValue);
-        // Call the function to delete the element from local storage
-        // Hide the modal or perform other actions as needed
-        const modal = document.getElementById("infoModal");
-        if (modal) {
-            modal.classList.add("hidden");
-        }
-    });
 };

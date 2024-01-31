@@ -1,3 +1,4 @@
+import { printMonth } from "./calendar.js";
 export const showInfoModal = (id) => {
     console.log("Clicked event with id:", id);
     // Retrieve JSON data from local storage
@@ -34,6 +35,7 @@ function deleteEventById(id) {
     if (storedData) {
         // Parse the JSON
         const calendarData = JSON.parse(storedData);
+        const currentMonth = calendarData.currentMonth;
         // Find the index of the event with the given id
         const indexToDelete = calendarData.eventList.findIndex((event) => event.id === id);
         // If the event is found, remove it from the array
@@ -41,6 +43,7 @@ function deleteEventById(id) {
             calendarData.eventList.splice(indexToDelete, 1);
             // Save the updated JSON back to localStorage
             localStorage.setItem("calendar", JSON.stringify(calendarData));
+            printMonth(currentMonth.year, currentMonth.id);
             console.log(`Event with id ${id} deleted successfully.`);
         }
         else {
