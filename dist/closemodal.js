@@ -1,35 +1,28 @@
-"use strict";
-//close modal with x button:
-// const closeModalButton = document.getElementById("closeModalButton")!;
-// closeModalButton.addEventListener("click", () => closeModal());
-function closeModal() {
+import { hideTitleError, hideTitleFillError, hideInitialDateError } from './modal.js';
+export function closeModal() {
     const modal = document.getElementById("modal");
+    clearModalContent();
+    clearErrorMessages();
     modal === null || modal === void 0 ? void 0 : modal.classList.add("hidden");
 }
 function clearModalContent() {
+    console.log('hola clean content');
     const modalTitle = document.getElementById("modalTitle");
     const modalInitialDate = document.getElementById("modalInitialDate");
     const modalEndate = document.getElementById("modalEndate");
     const comment = document.getElementById("comment");
     const modalTime = document.getElementById("TimeInput");
     const modalEvent = document.getElementById("modalEvent");
-    modalTitle.textContent = "";
-    modalInitialDate.textContent = "";
-    modalEndate.textContent = "";
-    comment.textContent = "";
-    modalTime.textContent = "";
-    modalEvent.textContent = "";
+    modalTitle.value = "";
+    modalInitialDate.value = "";
+    modalEndate.value = "";
+    comment.value = "";
+    modalTime.value = "";
+    modalEvent.value = "Meeting";
 }
-document.addEventListener("DOMContentLoaded", () => {
-    const closeModalButton = document.getElementById("closeModalButton");
-    closeModalButton.addEventListener("click", () => {
-        closeModal();
-        clearModalContent();
-    });
-});
-const modalTitle = document.getElementById("modalTitle");
-const modalInitialDate = document.getElementById("modalInitialDate");
-const modalEndate = document.getElementById("modalEndate");
-const comment = document.getElementById("comment");
-const modalTime = document.getElementById("TimeInput");
-const modalEvent = document.getElementById("modalEvent");
+function clearErrorMessages() {
+    console.log('hola clean error');
+    hideTitleError();
+    hideTitleFillError();
+    hideInitialDateError();
+}

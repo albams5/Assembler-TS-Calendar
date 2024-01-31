@@ -31,7 +31,7 @@
             <button id="btn-next" class="absolute right-0 bg-red-400 hover:bg-white hover:text-red-500 text-white font-bold border-solid border-2 border-red-900 px-4 rounded"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg></button>
         </section>
         <section class="flex justify-center gap-2">
-            <button id="domButton" class="flex-initial rounded text-white bg-red-950 px-3 border-2 border-white hover:text-red-950 hover:bg-white hover:border-red-950">Add Event</button>
+            <button id="add-event-btn" class="flex-initial rounded text-white bg-red-950 px-3 border-2 border-white hover:text-red-950 hover:bg-white hover:border-red-950">Add Event</button>
             <button id="today-btn" class="flex-initial rounded text-white bg-red-950 px-3 border-2 border-white hover:text-red-950 hover:bg-white hover:border-red-950">Today</button>
         </section>
     </header>
@@ -41,98 +41,95 @@
     </section>
   </main>
 
-  <div>
-    <div
-      id="modal"
-      class="modal hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center"
-    >
-   
-    <form id="myForm">
-      <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
-        <button class="absolute right-0 mr-5 mb-5 top-3" id="closeModalButton">x</button>
-        <h2 class="text-2xl text-center text-blue-500">NEW EVENT</h2>
-        <div class="flex flex-row gap-4 relative mb-2">
-          <label class="relative">
-            Title:
-            <input type="text" name="title" id="modalTitle" class="border p-1" />
-            <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalTitleError">The title is too long</small>
-            <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalTitleErrorFill">The title is not filled</small>
-
-          </label>
-        </div>
-        
-        <div class="flex flex-row gap-4">
-          <label class="relative">initial date:
-            <input type="datetime-local" name="initialdate" id="modalInitialDate" />
-            <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalInitialDateError">
-              Initial date has to be filled</small>
-          </label>
-        </div>
-        <!-- //////////////////////////////////////////////// -->
-        <div class="flex flex-row gap-4">
-          <input type="checkbox" name="endateCheck" id="modalEndateCheck" />
-          <label for="endateCheck">End date</label>
-        </div>
-        <div class="flex flex-row gap-4">
-          <label for="endate" class="hidden" id="modalEndateLabel">End date: </label>
-          <input type="datetime-local" name="endate" id="modalEndate" class="hidden"/>
-        </div>
-        <!-- /////////////////////////////////////////////// -->
-        <div>
-          <input type="checkbox" name="TimeCheck" id="modalTimeCheck"/>
-          <label for="TimeCheck">Remind me when this event expires</label>
-        </div>
-        
-        <label for="emails" class="hidden" id="modalTimeLabel">Time:</label>
-        <!-- <input type="text" multiple class="border-2 border-black hidden" id="TimeInput" list="drawfemails" placeholder="Time:" /> -->
-        
-        <select id="TimeInput" class="border-2 border-black hidden">
-          <option value="5min">5min</option>
-          <option value="10min">10min</option>
-          <option value="15min">15min</option>
-          <option value="30min">30min</option>
-          <option value="1H">1H</option>
-        </select>
-
-        
-          <label
-            for="comment"
-            class="block text-sm font-medium text-gray-600 mb-1"
-            >Description:</label
-          >
-          <textarea
-            id="comment"
-            name="Description"
-            rows="4"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-            placeholder=""
-          ></textarea>
-        
-      <div>
-        <label for="emails">Event type:</label>
-        <select type="text" id="modalEvent" class="border-2 border-black" list="drawfemailss" placeholder="Event:">
-        <small class=" hidden inset-x-0 top-full text-red-500" id="modalEventError">Event has to be filled</small>
-        <datalist id="drawfemailss">
-          <option value="Meeting">Meeting</option>
-          <option value="Personal">Personal</option>
-          <option value="Study">Study</option>
-          <option value="Other">Other</option>
-        </datalist>
-      </select>
-      </div>
-
-        <button id="closeModalButton">
-          Cancel
-        </button>
-        <button type="submit">
-          Accept
-        </button>
-
-      </form>
-
-    </div>   
+  <div
+    id="modal"
+    class="modal hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center"
+  >
   
-  </div>
+  <form id="myForm">
+    <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
+      <button class="absolute right-0 mr-5 mb-5 top-3" id="closeModalButton">x</button>
+      <h2 class="text-2xl text-center text-blue-500">NEW EVENT</h2>
+      <div class="flex flex-row gap-4 relative mb-2">
+        <label class="relative">
+          Title:
+          <input type="text" name="title" id="modalTitle" class="border p-1" />
+          <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalTitleError">The title is too long</small>
+          <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalTitleErrorFill">The title is not filled</small>
+
+        </label>
+      </div>
+      
+      <div class="flex flex-row gap-4">
+        <label class="relative">initial date:
+          <input type="datetime-local" name="initialdate" id="modalInitialDate" />
+          <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalInitialDateError">
+            Initial date has to be filled</small>
+        </label>
+      </div>
+      <!-- //////////////////////////////////////////////// -->
+      <div class="flex flex-row gap-4">
+        <input type="checkbox" name="endateCheck" id="modalEndateCheck" />
+        <label for="endateCheck">End date</label>
+      </div>
+      <div class="flex flex-row gap-4">
+        <label for="endate" class="hidden" id="modalEndateLabel">End date: </label>
+        <input type="datetime-local" name="endate" id="modalEndate" class="hidden"/>
+      </div>
+      <!-- /////////////////////////////////////////////// -->
+      <div>
+        <input type="checkbox" name="TimeCheck" id="modalTimeCheck"/>
+        <label for="TimeCheck">Remind me when this event expires</label>
+      </div>
+      
+      <label for="emails" class="hidden" id="modalTimeLabel">Time:</label>
+      <!-- <input type="text" multiple class="border-2 border-black hidden" id="TimeInput" list="drawfemails" placeholder="Time:" /> -->
+      
+      <select id="TimeInput" class="border-2 border-black hidden">
+        <option value="5min">5min</option>
+        <option value="10min">10min</option>
+        <option value="15min">15min</option>
+        <option value="30min">30min</option>
+        <option value="1H">1H</option>
+      </select>
+
+      
+        <label
+          for="comment"
+          class="block text-sm font-medium text-gray-600 mb-1"
+          >Description:</label
+        >
+        <textarea
+          id="comment"
+          name="Description"
+          rows="4"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+          placeholder=""
+        ></textarea>
+      
+    <div>
+      <label for="emails">Event type:</label>
+      <select type="text" id="modalEvent" class="border-2 border-black" list="drawfemailss" placeholder="Event:">
+      <small class=" hidden inset-x-0 top-full text-red-500" id="modalEventError">Event has to be filled</small>
+      <datalist id="drawfemailss">
+        <option value="Meeting">Meeting</option>
+        <option value="Personal">Personal</option>
+        <option value="Study">Study</option>
+        <option value="Other">Other</option>
+      </datalist>
+    </select>
+    </div>
+
+      <button id="cancelModalButton">
+        Cancel
+      </button>
+      <button type="submit">
+        Accept
+      </button>
+
+    </form>
+
+  </div>   
 
   <div
   id="infoModal"

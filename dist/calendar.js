@@ -1,12 +1,13 @@
 import { elements } from "./domElements.js";
 import { printEvents } from "./printingEvents.js";
-import { paintDom } from './modal.js';
+import { paintDomDay, paintDom } from './modal.js';
 export function setPage() {
-    const { languageSelect, btnPrev, btnNext, btnToday } = elements;
+    const { languageSelect, btnPrev, btnNext, btnToday, btnAddEvent } = elements;
     languageSelect.addEventListener("change", changeLocale);
     btnPrev.addEventListener("click", showPrevMonth);
     btnNext.addEventListener("click", showNextMonth);
     btnToday.addEventListener("click", showToday);
+    btnAddEvent.addEventListener("click", paintDom);
     printToday();
 }
 function printToday() {
@@ -78,7 +79,7 @@ function getMonth(year, monthIndex) {
     localStorage.setItem("calendar", JSON.stringify(JSONcalendar));
     return month;
 }
-function printMonth(year, numberMonth) {
+export function printMonth(year, numberMonth) {
     const month = getMonth(year, numberMonth);
     const { monthTitle, monthDays } = elements;
     monthTitle.innerHTML = `${month.name.toUpperCase()} ${month.year}`;
@@ -100,7 +101,7 @@ function printMonth(year, numberMonth) {
     monthDays.innerHTML = `${htmlDaysName}${htmlDays}`;
     const btnAddArray = document.querySelectorAll(".add");
     btnAddArray.forEach((btn) => {
-        btn.addEventListener("click", paintDom);
+        btn.addEventListener("click", paintDomDay);
     });
     setToday();
     printEvents();

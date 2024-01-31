@@ -1,7 +1,29 @@
 import * as type from "./interfaces/module.js";
+import { closeModal } from './closemodal.js';
+import { printMonth } from './calendar.js'
 
 export const paintDom = () => {
   const modal = document.getElementById("modal")!;
+
+  setModal();
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex")
+};
+
+export const paintDomDay = (e: Event) => {
+  const target = e.target as HTMLButtonElement;
+  const btnDate = target.getAttribute("date") || "";
+  const date = new Date(Date.UTC(parseInt(btnDate.split('-')[0]), parseInt(btnDate.split('-')[1]), parseInt(btnDate.split('-')[2])));
+  const dateString = date.toJSON().split('.')[0]; 
+
+  const modal = document.getElementById("modal")!;
+  const modalInitialDate = document.getElementById(
+    "modalInitialDate"
+  ) as HTMLInputElement;
+  modalInitialDate.value = dateString;
+
+  setModal();
 
   modal.classList.remove("hidden");
   modal.classList.add("flex")
@@ -10,17 +32,17 @@ export const paintDom = () => {
 const showTitleError = (valueLength: number) => {
   const modalTitleError = document.getElementById("modalTitleError")!;
   if (valueLength > 60) {
-    console.log("modal title to long");
     modalTitleError.classList.remove("hidden");
   }
 };
 
-const hideTitleError = () => {
+export const hideTitleError = () => {
   const modalTitleError = document.getElementById("modalTitleError")!;
   modalTitleError.classList.add("hidden");
 };
 
-const hideTitleFillError = () => {
+export const hideTitleFillError = () => {
+  console.log('hide title error 2')
   const modalTitleError = document.getElementById("modalTitleErrorFill")!;
   modalTitleError.classList.add("hidden");
 };
@@ -49,7 +71,6 @@ const showRemoveTime = () => {
   const modalTimeCheck = document.getElementById(
     "modalTimeCheck"
   ) as HTMLInputElement;
-  console.log("modalTimeCheck", modalTimeCheck.checked);
   if (modalTimeCheck.checked) {
     timeInput.classList.remove("hidden");
     modalTimeLabel.classList.remove("hidden");
@@ -67,9 +88,11 @@ const validateTitleFill = () => {
 
   if (modalTitle.value.trim() === "") {
     modalTitleErrorFill.classList.remove("hidden");
+    console.log('validateTitleFill if')
     return false; // Return false to indicate validation failure
   } else {
     modalTitleErrorFill.classList.add("hidden");
+    console.log('validateTitleFill else')
     return true; // Return true to indicate validation success
   }
 };
@@ -91,7 +114,7 @@ const validateInitialDateFill = () => {
   }
 };
 
-const hideInitialDateError = () => {
+export const hideInitialDateError = () => {
   const modalInitialDateError = document.getElementById(
     "modalInitialDateError"
   )!;
@@ -121,6 +144,7 @@ const handleFormSub = (event: Event) => {
   
   const calendar = localStorage.getItem("calendar") || "{'eventList':[], 'currentMonth':{}}";
   const JSONcalendar = JSON.parse(calendar);
+  const currentMonth = JSONcalendar.currentMonth;
   let eventArray = JSONcalendar.eventList;
   const newEvent: type.FormData = {
     id: Date.now(),
@@ -133,30 +157,24 @@ const handleFormSub = (event: Event) => {
   };
   eventArray.push(newEvent);
   localStorage.setItem("calendar", JSON.stringify(JSONcalendar));
+  printMonth(currentMonth.year, currentMonth.id);
   closeModal();
 };
 
 export function setModal() {
-  const test = document.createElement("p")!;
-
-  const formDataJSON = localStorage.getItem("formData");
-  if (formDataJSON) {
-    const formData = JSON.parse(formDataJSON);
-    console.log("localStorage content on page load:", formData);
-    test.textContent = `VIEJO: titulo: ${formData.title}, Initial date: ${formData.initialDate}, Endate: ${formData.endate} `;
-  }
-
   const modal = document.getElementById("modal")!;
-
-  //show modal with header button
-  const modalButton = document.getElementById("domButton")!;
-  modalButton.addEventListener("click", paintDom);
 
   //press key scape to close modal:
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape" || event.key === "Esc") {
       modal.classList.add("hidden");
     }
+  });
+
+  const btnCancel = document.getElementById('cancelModalButton');
+  btnCancel?.addEventListener("click", (event) =>{
+    event?.preventDefault();
+    closeModal();
   });
 
   //modal title error control:
@@ -179,8 +197,11 @@ export function setModal() {
   ) as HTMLInputElement;
   showRemoveTimee.addEventListener("change", () => showRemoveTime());
 
-
-
+  //clear initial date errors when input is been written:
+  const modalInitialDate = document.getElementById(
+    "modalInitialDate"
+  ) as HTMLInputElement;
+  modalInitialDate.addEventListener("input", () => hideInitialDateError());
 
   //validate the form is filled:
   const form = document.getElementById("myForm")!;
@@ -192,9 +213,10 @@ export function setModal() {
     }
   });
 
-  //clear initial date errors when input is been written:
-  const modalInitialDate = document.getElementById(
-    "modalInitialDate"
-  ) as HTMLInputElement;
-  modalInitialDate.addEventListener("input", () => hideInitialDateError());
+  const closeModalButton = document.getElementById("closeModalButton")!;
+    closeModalButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        closeModal();
+    });
+
 }

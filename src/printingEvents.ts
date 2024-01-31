@@ -2,16 +2,14 @@ import { showInfoModal } from "./infoModal.js";
 import { showInfoModalHover, closeModalHover } from "./hoverModal.js";
 import { FormData } from "./interfaces/modalData.js";
 
-
-
 const getEventsFromLS = ():FormData[] => {
  
 
-    const LSData:string = localStorage.getItem('calendar')!
-    
-    const events:FormData[] = JSON.parse(LSData).eventList
+  const LSData:string = localStorage.getItem('calendar')!
+  
+  const events:FormData[] = JSON.parse(LSData).eventList
 
-    return events
+  return events
 }
 
 
@@ -20,15 +18,11 @@ const getListOfDaysBetweenTwoDates = (
   endDate: string | number
 ): string[] => {
   const firstDate = new Date(startDate);
-  console.log(firstDate)
 
   const secondDate = new Date(endDate);
-  console.log(secondDate)
 
   const listOfDays = [];
 
-  
-  
   for ( let date = firstDate; date <= secondDate; date.setDate(date.getDate() + 1) ) {
     // Añadir la fecha al array de días (clonando para evitar referencia)
     listOfDays.push(
@@ -36,10 +30,8 @@ const getListOfDaysBetweenTwoDates = (
         date
       ).getFullYear()}`
     );
-    
   }
 
-  
   return listOfDays;
 };
 
@@ -75,9 +67,7 @@ export const printEvents = (): void => {
   // cambiar color bolita segun tipo evento, cambiar color gris si el evento esta pasado.
   // scroll y scale en recuadro del mes (funcion printMonth)
 
-    const events = getEventsFromLS()
-
-    console.log(events)
+  const events = getEventsFromLS()
 
   events.forEach((event) => {
     const { initialDate, endDate, eventype, description, time, title, id } =
@@ -103,15 +93,17 @@ export const printEvents = (): void => {
         "inline-block",
         "w-2",
         "h-2",
-        "mr-1",
-        circleColor
+        "mr-1"
       );
+      if(circleColor){
+        circleDiv.classList.add(circleColor);
+      }
       const newSpan = document.createElement("span");
       newSpan.textContent = title;
       newLi.appendChild(circleDiv);
       newLi.appendChild(newSpan);
       if (new Date(initialDate).getTime() - Date.now() < 0)
-        newLi.classList.add("bg-gray-400");
+        newLi.classList.add("line-through", "text-gray-400", 'truncate');
 
       newLi.addEventListener("click", () => {
         const eventId = newLi.getAttribute("event-id")!;
@@ -128,7 +120,6 @@ export const printEvents = (): void => {
       newLi.addEventListener(
         "mouseleave",
         debounce(() => {
-          const eventId = newLi.getAttribute("event-id")!;
           closeModalHover();
         }, 200)
       ); // Adjust the delay as needed
@@ -159,7 +150,7 @@ export const printEvents = (): void => {
         newLi.appendChild(circleDiv);
         newLi.appendChild(newSpan);
         if (new Date(initialDate).getTime() - Date.now() < 0)
-          newLi.classList.add("bg-gray-400");
+          newLi.classList.add("line-through", "text-gray-400", 'truncate');
 
         newLi.addEventListener("click", () => {
           const eventId = newLi.getAttribute("event-id")!;
@@ -176,7 +167,6 @@ export const printEvents = (): void => {
         newLi.addEventListener(
           "mouseleave",
           debounce(() => {
-            const eventId = newLi.getAttribute("event-id")!;
             closeModalHover();
           }, 200)
         ); // Adjust the delay as needed

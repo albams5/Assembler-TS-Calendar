@@ -1,14 +1,15 @@
 import { elements } from "./domElements.js";
 import * as type from "./interfaces/module.js";
 import { printEvents } from "./printingEvents.js";
-import {paintDom} from './modal.js';
+import {paintDomDay, paintDom} from './modal.js';
 
 export function setPage(): void {
-  const { languageSelect, btnPrev, btnNext, btnToday } = elements;
+  const { languageSelect, btnPrev, btnNext, btnToday, btnAddEvent } = elements;
   languageSelect.addEventListener("change", changeLocale);
   btnPrev.addEventListener("click", showPrevMonth);
   btnNext.addEventListener("click", showNextMonth);
   btnToday.addEventListener("click", showToday);
+  btnAddEvent.addEventListener("click", paintDom);
   printToday();
 }
 
@@ -108,7 +109,7 @@ function getMonth(year: number, monthIndex: number): type.Month {
   return month;
 }
 
-function printMonth(year: number, numberMonth: number): void {
+export function printMonth(year: number, numberMonth: number): void {
   const month: type.Month = getMonth(year, numberMonth);
   const { monthTitle, monthDays } = elements;
 
@@ -142,8 +143,9 @@ function printMonth(year: number, numberMonth: number): void {
   const btnAddArray = document.querySelectorAll(".add");
 
   btnAddArray.forEach((btn) => {
-    btn.addEventListener("click", paintDom);
+    btn.addEventListener("click", paintDomDay);
   });
+  
   setToday();
   printEvents();
 }
