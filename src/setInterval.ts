@@ -12,17 +12,17 @@
 
 
 
-    function checkEventReminder() {
+function checkEventReminder() {
     const filterEvents =  events.filter(event => !event.notificated);
     filterEvents.forEach((event) => {
-    const expirationTime = event.startTime.getTime();
-    const actualTime = Date.now();
-    const reminderTimeMilli =  event.Time * 60 * 1000;
-    const timeLeft = expirationTime - actualTime;
-    if (timeLeft <=  reminderTimeMilli && !event.notificated ) {
-        event.notificated =  true;
-        alert(`reminder: The event ${event.name} starts in less than ${event.Time} minutes!`);
-    }
+        const expirationTime = event.startTime.getTime();
+        const actualTime = Date.now();
+        const reminderTimeMilli =  event.Time * 60 * 1000;
+        const timeLeft = expirationTime - actualTime;
+        if (timeLeft <=  reminderTimeMilli && !event.notificated ) {
+            event.notificated =  true;
+            alert(`reminder: The event ${event.name} starts in less than ${event.Time} minutes!`);
+        }
     });
-    }
+}
  setInterval( checkEventReminder, 10000);
