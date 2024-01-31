@@ -20,6 +20,5 @@ export function checkEventReminder() {
     const LSData = localStorage.getItem('calendar');
     const currentMonth = JSON.parse(LSData).currentMonth;
     const newCalendar = JSON.stringify({ currentMonth, eventList: returnedEvents });
-    console.log(newCalendar);
     localStorage.setItem('calendar', newCalendar);
 }

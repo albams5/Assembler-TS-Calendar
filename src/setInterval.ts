@@ -33,8 +33,7 @@ export function checkEventReminder() {
 
     const newCalendar = JSON.stringify( { currentMonth,  eventList: returnedEvents })
 
-    console.log(newCalendar)
-    
+ 
 
     localStorage.setItem('calendar', newCalendar )
 
