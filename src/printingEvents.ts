@@ -93,7 +93,6 @@ export const printEvents = (): void => {
       const ulHtml = document.getElementById(
         `day-${initialDateString}`
       ) as HTMLElement;
-      const ulFather = ulHtml.parentElement!;
       if (!ulHtml) return;
       const newLi = document.createElement("li");
       newLi.classList.add("px-1", "rounded-sm", "mb-1");
