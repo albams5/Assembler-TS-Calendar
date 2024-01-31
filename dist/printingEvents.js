@@ -61,7 +61,9 @@ export const printEvents = () => {
                 circleDiv.classList.add(circleColor);
             }
             const newSpan = document.createElement("span");
-            newSpan.textContent = title;
+            const hour = (new Date(initialDate).getHours()).toString().length < 2 ? '0' + new Date(initialDate).getHours() : new Date(initialDate).getHours();
+            const minute = (new Date(initialDate).getMinutes()).toString().length < 2 ? '0' + new Date(initialDate).getMinutes() : new Date(initialDate).getMinutes();
+            newSpan.textContent = `${hour}:${minute} ${title}`;
             newLi.appendChild(circleDiv);
             newLi.appendChild(newSpan);
             if (new Date(initialDate).getTime() - Date.now() < 0)
@@ -91,10 +93,12 @@ export const printEvents = () => {
                 const circleDiv = document.createElement("div");
                 circleDiv.classList.add("rounded-full", "inline-block", "w-2", "h-2", "mr-1", circleColor);
                 const newSpan = document.createElement("span");
-                newSpan.textContent = title;
+                const hour = (new Date(initialDate).getHours()).toString().length < 2 ? '0' + new Date(initialDate).getHours() : new Date(initialDate).getHours();
+                const minute = (new Date(initialDate).getMinutes()).toString().length < 2 ? '0' + new Date(initialDate).getMinutes() : new Date(initialDate).getMinutes();
+                newSpan.textContent = `${hour}:${minute} ${title}`;
                 newLi.appendChild(circleDiv);
                 newLi.appendChild(newSpan);
-                if (new Date(initialDate).getTime() - Date.now() < 0)
+                if (new Date(endDate).getTime() - Date.now() < 0)
                     newLi.classList.add("line-through", "text-gray-400", 'truncate');
                 newLi.addEventListener("click", () => {
                     const eventId = newLi.getAttribute("event-id");

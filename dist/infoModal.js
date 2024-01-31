@@ -58,6 +58,7 @@ function deleteEventById(id) {
 const paintDom = (infoModalTitleValue, infoInitialDateValue, infoModalEndDateValue, infoModalTimeValue, infoModalDescriptionValue, infoModalEventTypeValue, idValue) => {
     const modal = document.getElementById("infoModal");
     modal.classList.remove("hidden");
+    modal.classList.add("flex");
     const infoModalTitle = document.getElementById("infoModalTitle");
     const infoModalInitialDate = document.getElementById("infoModalInitialDate");
     const infoModalEndDate = document.getElementById("infoModalEndDate");
@@ -73,9 +74,6 @@ const paintDom = (infoModalTitleValue, infoInitialDateValue, infoModalEndDateVal
     const deleteButton = document.getElementById("deleteButton");
     deleteButton.addEventListener("click", function (event) {
         event.preventDefault();
-        const infoModalTitle = document.getElementById("infoModalTitle");
-        const idToDelete = infoModalTitle.textContent;
-        console.log("idToDeleteNumber:", idValue);
         // Call the function to delete the element from local storage
         deleteEventById(idValue);
         // Hide the modal or perform other actions as needed
@@ -83,5 +81,28 @@ const paintDom = (infoModalTitleValue, infoInitialDateValue, infoModalEndDateVal
         if (modal) {
             modal.classList.add("hidden");
         }
+    });
+    //press key scape to close modal:
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" || event.key === "Esc") {
+            modal.classList.add("hidden");
+        }
+    });
+    //press out modal to close it
+    function closeModalOut(event) {
+        if (event.target == modal) {
+            modal.classList.add("hidden");
+        }
+    }
+    window.addEventListener('click', closeModalOut);
+    const btnCancel = document.getElementById('cancelModalButton');
+    btnCancel === null || btnCancel === void 0 ? void 0 : btnCancel.addEventListener("click", (event) => {
+        event === null || event === void 0 ? void 0 : event.preventDefault();
+        modal.classList.add("hidden");
+    });
+    const closeInfoModalButton = document.getElementById("closeInfoModalButton");
+    closeInfoModalButton === null || closeInfoModalButton === void 0 ? void 0 : closeInfoModalButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        modal.classList.add("hidden");
     });
 };

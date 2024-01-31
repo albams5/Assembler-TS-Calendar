@@ -1,5 +1,6 @@
 import { printMonth } from "./calendar.js";
 import { FormData } from "./interfaces/modalData.js";
+import { closeModal } from "./closemodal.js";
 
 export const showInfoModal = (id: string) => {
   console.log("Clicked event with id:", id);
@@ -87,6 +88,7 @@ const paintDom = (
 ) => {
   const modal = document.getElementById("infoModal")!;
   modal.classList.remove("hidden");
+  modal.classList.add("flex");
 
   const infoModalTitle = document.getElementById("infoModalTitle")!;
   const infoModalInitialDate = document.getElementById("infoModalInitialDate")!;
@@ -103,15 +105,9 @@ const paintDom = (
   infoModalEventType.textContent = infoModalEventTypeValue;
 
   const deleteButton = document.getElementById("deleteButton")!;
-
   deleteButton.addEventListener("click", function (event) {
     event.preventDefault();
 
-    const infoModalTitle = document.getElementById("infoModalTitle")!;
-
-    const idToDelete = infoModalTitle.textContent!;
-
-    console.log("idToDeleteNumber:", idValue);
     // Call the function to delete the element from local storage
     deleteEventById(idValue);
 
@@ -120,5 +116,30 @@ const paintDom = (
     if (modal) {
       modal.classList.add("hidden");
     }
+  });
+
+  //press key scape to close modal:
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" || event.key === "Esc") {
+      modal.classList.add("hidden");
+    }
+  });
+  //press out modal to close it
+  function closeModalOut(event: MouseEvent) {
+      if (event.target == modal) {
+      modal.classList.add("hidden");
+      }
+  }
+  window.addEventListener('click', closeModalOut);
+  const btnCancel = document.getElementById('cancelModalButton');
+  btnCancel === null || btnCancel === void 0 ? void 0 : btnCancel.addEventListener("click", (event) => {
+      event === null || event === void 0 ? void 0 : event.preventDefault();
+      modal.classList.add("hidden");
+  });
+
+  const closeInfoModalButton = document.getElementById("closeInfoModalButton");
+  closeInfoModalButton?.addEventListener("click", (event: MouseEvent) => {
+      event.preventDefault();
+      modal.classList.add("hidden");
   });
 };
