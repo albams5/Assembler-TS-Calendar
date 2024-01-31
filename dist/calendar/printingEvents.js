@@ -1,30 +1,33 @@
 import { showInfoModal } from "../modal/infoModal.js";
 import { showInfoModalHover, closeModalHover } from "../modal/hoverModal.js";
 import { getEventsFromLS, formatToReadableDate, formatToReadableTime } from "../globalFunctions.js";
-const getListOfDaysBetweenTwoDates = (startDate, endDate) => {
+function getListOfDaysBetweenTwoDates(startDate, endDate) {
     const firstDate = new Date(startDate);
     const secondDate = new Date(endDate);
     const listOfDays = [];
     for (let date = firstDate; date <= secondDate; date.setDate(date.getDate() + 1)) {
-        // Añadir la fecha al array de días (clonando para evitar referencia)
         listOfDays.push(`${new Date(date).getMonth() + 1}-${new Date(date).getDate()}-${new Date(date).getFullYear()}`);
     }
     return listOfDays;
-};
-const getCircleColor = (eventType) => {
-    if (eventType === "Meeting")
+}
+function getCircleColor(eventType) {
+    if (eventType === "Meeting") {
         return "bg-lime-300";
-    else if (eventType === "Personal")
+    }
+    else if (eventType === "Personal") {
         return "bg-red-300";
-    else if (eventType === "Study")
+    }
+    else if (eventType === "Study") {
         return "bg-blue-300";
-    else if (eventType === "Other")
+    }
+    else if (eventType === "Other") {
         return "bg-yellow-300";
+    }
     else {
         return "";
     }
-};
-const debounce = (func, delay) => {
+}
+function debounce(func, delay) {
     let timer;
     return function (...args) {
         clearTimeout(timer);
@@ -32,13 +35,9 @@ const debounce = (func, delay) => {
             func.apply(this, args);
         }, delay);
     };
-};
-export const printEvents = () => {
-    //pendiente:
-    //gestionar bien formato fechas,
-    //crear div para contener cada evento con su texto y bolita,
-    // cambiar color bolita segun tipo evento, cambiar color gris si el evento esta pasado.
-    // scroll y scale en recuadro del mes (funcion printMonth)
+}
+;
+export function printEvents() {
     const events = getEventsFromLS();
     events.forEach((event) => {
         const { initialDate, endDate, eventType, title, id } = event;
@@ -46,8 +45,9 @@ export const printEvents = () => {
         if (initialDate === endDate || endDate === '') {
             const initialDateString = `${new Date(initialDate).getMonth() + 1}-${new Date(initialDate).getDate()}-${new Date(initialDate).getFullYear()}`;
             const ulHtml = document.getElementById(`day-${initialDateString}`);
-            if (!ulHtml)
+            if (!ulHtml) {
                 return;
+            }
             const newLi = document.createElement("li");
             newLi.classList.add("px-1", "rounded-sm", "mb-1", "truncate");
             newLi.setAttribute("event-id", id.toString());
@@ -61,8 +61,9 @@ export const printEvents = () => {
             newSpan.textContent = `${hour} ${title}`;
             newLi.appendChild(circleDiv);
             newLi.appendChild(newSpan);
-            if (new Date(initialDate).getTime() - Date.now() < 0)
+            if (new Date(initialDate).getTime() - Date.now() < 0) {
                 newLi.classList.add("line-through", "text-gray-400", "truncate");
+            }
             newLi.addEventListener("click", () => {
                 const eventId = newLi.getAttribute("event-id");
                 showInfoModal(eventId);
@@ -114,4 +115,5 @@ export const printEvents = () => {
             });
         }
     });
-};
+}
+;
