@@ -1,86 +1,75 @@
 import * as type from "../interfaces/exportModule.js";
-import { closeModal } from './closemodal.js';
-import { printMonth } from '../calendar/calendar.js'
+import { elements } from "../globalElements.js"
+import { closeModal } from "./closemodal.js";
+import { printMonth } from "../calendar/calendar.js";
 
-export const paintDom = () => {
-  const modal = document.getElementById("modal")!;
+export function paintDom(): void {
+  const { modal } = elements;
 
   setModal();
-
   modal.classList.remove("hidden");
-  modal.classList.add("flex")
-};
+  modal.classList.add("flex");
+}
 
-export const paintDomDay = (e: Event) => {
+export function paintDomDay(e: Event): void {
   const target = e.target as HTMLButtonElement;
   const btnDate = target.getAttribute("date") || "";
   const date = new Date(Date.UTC(parseInt(btnDate.split('-')[0]), parseInt(btnDate.split('-')[1]), parseInt(btnDate.split('-')[2])));
-  const dateString = date.toJSON().split('.')[0]; 
-
-  const modal = document.getElementById("modal")!;
-  const modalInitialDate = document.getElementById(
-    "modalInitialDate"
-  ) as HTMLInputElement;
+  const dateString = date.toJSON().split('.')[0];
+  const { modal, modalInitialDate } = elements;
+  
   modalInitialDate.value = dateString;
 
   setModal();
 
   modal.classList.remove("hidden");
-  modal.classList.add("flex")
-};
+  modal.classList.add("flex");
+}
 
-const showTitleError = (valueLength: number) => {
-  const modalTitleError = document.getElementById("modalTitleError")!;
+function showTitleError(valueLength: number): void {
+  const { modalTitleError } = elements;
+
   if (valueLength > 60) {
     modalTitleError.classList.remove("hidden");
   }
-};
+}
 
-export const hideTitleError = () => {
-  const modalTitleError = document.getElementById("modalTitleError")!;
+export function hideTitleError(): void {
+  const { modalTitleError } = elements;
+
   modalTitleError.classList.add("hidden");
-};
+}
 
-export const hideTitleFillError = () => {
-  const modalTitleError = document.getElementById("modalTitleErrorFill")!;
-  modalTitleError.classList.add("hidden");
-};
+export function hideTitleFillError(): void {
+  const { modalTitleErrorFill } = elements;
 
-const showRemoveEndate = () => {
-  const modalEndateCheck = document.getElementById(
-    "modalEndateCheck"
-  ) as HTMLInputElement;
-  const endDateContainer = document.getElementById("endDateContainer")!;
+  modalTitleErrorFill.classList.add("hidden");
+}
 
-  if (modalEndateCheck.checked) {
-    endDateContainer.classList.remove("hidden");
+function showRemoveEndate(): void {
+  const { modalEndDateCheck, modalEndDateContainer } = elements;
+
+  if (modalEndDateCheck.checked) {
+    modalEndDateContainer.classList.remove("hidden");
   } else {
-    endDateContainer.classList.add("hidden");
+    modalEndDateContainer.classList.add("hidden");
   }
-};
+}
 
-const showRemoveTime = () => {
-  const timeInput = document.getElementById("TimeInput") as HTMLInputElement;
-  const modalTimeLabel = document.getElementById(
-    "modalTimeLabel"
-  ) as HTMLLabelElement;
-  const modalTimeCheck = document.getElementById(
-    "modalTimeCheck"
-  ) as HTMLInputElement;
+function showRemoveTime(): void {
+  const { modalTimeCheck, modalTimeLabel, modalTimeSelect } = elements;
+
   if (modalTimeCheck.checked) {
-    timeInput.classList.remove("hidden");
+    modalTimeSelect.classList.remove("hidden");
     modalTimeLabel.classList.remove("hidden");
   } else {
-    timeInput.classList.add("hidden");
+    modalTimeSelect.classList.add("hidden");
     modalTimeLabel.classList.add("hidden");
   }
-};
+}
 
-const validateTitleFill = () => {
-  const modalTitle = document.getElementById("modalTitle") as HTMLInputElement;
-  const modalTitleErrorFill = document.getElementById(
-    "modalTitleErrorFill"
-  ) as HTMLInputElement;
+function validateTitleFill(): boolean {
+  const { modalTitle, modalTitleErrorFill } = elements;
 
   if (modalTitle.value.trim() === "") {
     modalTitleErrorFill.classList.remove("hidden");
@@ -89,15 +78,10 @@ const validateTitleFill = () => {
     modalTitleErrorFill.classList.add("hidden");
     return true; // Return true to indicate validation success
   }
-};
+}
 
-const validateInitialDateFill = () => {
-  const modalInitialDate = document.getElementById(
-    "modalInitialDate"
-  ) as HTMLInputElement;
-  const modalInitialDateError = document.getElementById(
-    "modalInitialDateError"
-  ) as HTMLInputElement;
+function validateInitialDateFill(): boolean {
+  const { modalInitialDate, modalInitialDateError } = elements;
 
   if (modalInitialDate.value.trim() === "") {
     modalInitialDateError.classList.remove("hidden");
@@ -106,41 +90,28 @@ const validateInitialDateFill = () => {
     modalInitialDateError.classList.add("hidden");
     return true;
   }
-};
+}
 
-export const hideInitialDateError = () => {
-  const modalInitialDateError = document.getElementById(
-    "modalInitialDateError"
-  )!;
+export function hideInitialDateError(): void {
+  const { modalInitialDateError } = elements;
+
   modalInitialDateError.classList.add("hidden");
-};
+}
 
-const handleFormSub = (event: Event) => {
-  event.preventDefault();
-
-  const modalTitle = document.getElementById("modalTitle") as HTMLInputElement;
-  const modalInitialDate = document.getElementById(
-    "modalInitialDate"
-  ) as HTMLInputElement;
-  const modalEndate = document.getElementById(
-    "modalEndate"
-  ) as HTMLInputElement;
-  const comment = document.getElementById("comment") as HTMLTextAreaElement;
-  const modalTime = document.getElementById("TimeInput") as HTMLInputElement;
-  const modalEvent = document.getElementById("modalEvent") as HTMLInputElement;
+function handleFormSub(): void {
+  const { modalTitle, modalInitialDate, modalEndDateInput, modalComment, modalTimeSelect, modalEvent } = elements;
+  
   const modalTitleValue = modalTitle.value;
   const modalInitialDateValue = modalInitialDate.value;
-  const modalEndateValue = modalEndate.value;
-  const modalTimeValue = modalTime.value;
-  const commentValue = comment.value;
+  const modalEndateValue = modalEndDateInput.value;
+  const modalTimeValue = modalTimeSelect.value;
+  const commentValue = modalComment.value;
   const modalEventValue = modalEvent.value;
-
   
   const calendar = localStorage.getItem("calendar") || "{'eventList':[], 'currentMonth':{}}";
   const JSONcalendar = JSON.parse(calendar);
   const currentMonth = JSONcalendar.currentMonth;
   let eventArray = JSONcalendar.eventList;
-  
   let notificationStatus = modalTimeValue && new Date( modalInitialDateValue).getTime() > Date.now() ?false :true
   
   const newEvent: type.Event = {
@@ -153,77 +124,67 @@ const handleFormSub = (event: Event) => {
     eventType: modalEventValue,
     notificated: notificationStatus
   };
+  
   eventArray.push(newEvent);
   localStorage.setItem("calendar", JSON.stringify(JSONcalendar));
   printMonth(currentMonth.year, currentMonth.id);
   closeModal();
-};
+}
 
 export function setModal() {
-  const modal = document.getElementById("modal")!;
+  const { modal, modalForm, modalBtnCancel, modalBtnClose, modalTitle, modalEndDateCheck, modalTimeCheck, modalInitialDate } = elements;
 
-  //press key scape to close modal:
-  document.addEventListener("keydown", function (event) {
+  //press key scape to close modal
+  document.addEventListener("keydown", function (event: KeyboardEvent) {
     if (event.key === "Escape" || event.key === "Esc") {
       closeModal();
     }
   });
 
   //press out modal to close it
+  window.addEventListener('click', closeModalOut);
   function closeModalOut(event: MouseEvent) {
     if (event.target == modal) {
       closeModal();
     }
   }
   
-  window.addEventListener('click', closeModalOut);
-
-  const btnCancel = document.getElementById('cancelModalButton');
-  btnCancel?.addEventListener("click", (event) =>{
+  //press cancel to close modal
+  modalBtnCancel.addEventListener("click", (event: MouseEvent) =>{
     event?.preventDefault();
     closeModal();
   });
 
   //modal title error control:
-  const modalTitle = document.getElementById("modalTitle") as HTMLInputElement;
   modalTitle.addEventListener("blur", () =>
     showTitleError(modalTitle.value.length)
   );
+
   //clear title errors when input is been written:
   modalTitle.addEventListener("input", () => hideTitleError());
   modalTitle.addEventListener("input", () => hideTitleFillError());
 
   //modal endate show/hide with checkbox:
-  const modalEndateCheck = document.getElementById(
-    "modalEndateCheck"
-  ) as HTMLInputElement;
-  modalEndateCheck.addEventListener("change", () => showRemoveEndate());
+  modalEndDateCheck.addEventListener("change", () => showRemoveEndate());
 
-  const showRemoveTimee = document.getElementById(
-    "modalTimeCheck"
-  ) as HTMLInputElement;
-  showRemoveTimee.addEventListener("change", () => showRemoveTime());
+  modalTimeCheck.addEventListener("change", () => showRemoveTime());
 
   //clear initial date errors when input is been written:
-  const modalInitialDate = document.getElementById(
-    "modalInitialDate"
-  ) as HTMLInputElement;
   modalInitialDate.addEventListener("input", () => hideInitialDateError());
 
   //validate the form is filled:
-  const form = document.getElementById("myForm")!;
-  form.addEventListener("submit", function (event) {
+  modalForm.addEventListener("submit", function (event) {
     if (!validateTitleFill() || !validateInitialDateFill()) {
-      event.preventDefault(); // Prevent the form from being submitted if validation fails
+      event.preventDefault();
     } else {
-      handleFormSub(event);
+      event.preventDefault();
+      handleFormSub();
     }
   });
 
-  const closeModalButton = document.getElementById("closeModalButton")!;
-    closeModalButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        closeModal();
-    });
+  modalBtnClose.addEventListener("click", (event) => {
+      event.preventDefault();
+      closeModal();
+  });
 
 }

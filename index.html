@@ -73,8 +73,9 @@
             End date</label>
 
             <div id="endDateContainer" class="hidden flex flex-row gap-4">
-              <label for="endate" id="modalEndateLabel">End date: </label>
-              <input type="datetime-local" name="endate" id="modalEndate"/>
+              <label id="modalEndateLabel">End date:
+                <input type="datetime-local" id="modalEndate"/>
+              </label>
             </div>
 
             <div>
@@ -83,7 +84,7 @@
             </div>
             
             <label class="hidden" id="modalTimeLabel">Time:
-              <select id="TimeInput" class="border-2 border-black hidden">
+              <select id="timeInput" class="border-2 border-black hidden">
                 <option value="5">5min</option>
                 <option value="10">10min</option>
                 <option value="15">15min</option>

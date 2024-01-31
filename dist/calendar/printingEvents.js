@@ -71,18 +71,19 @@ export function printEvents() {
             newLi.addEventListener("mouseenter", debounce((event) => {
                 const eventId = newLi.getAttribute("event-id");
                 showInfoModalHover(eventId, event);
-            }, 200)); // Adjust the delay as needed
+            }, 200));
             newLi.addEventListener("mouseleave", debounce(() => {
                 closeModalHover();
-            }, 200)); // Adjust the delay as needed
+            }, 200));
             ulHtml.appendChild(newLi);
         }
         if (initialDate !== endDate && endDate !== '') {
             const listOfDays = getListOfDaysBetweenTwoDates(initialDate, endDate);
             listOfDays.forEach((day, i) => {
                 const ulHtml = document.getElementById(`day-${day}`);
-                if (!ulHtml)
+                if (!ulHtml) {
                     return;
+                }
                 const newLi = document.createElement("li");
                 newLi.classList.add("px-1", "rounded-sm", "mb-1", "truncate");
                 newLi.setAttribute("event-id", id.toString());
@@ -98,8 +99,9 @@ export function printEvents() {
                 }
                 newLi.appendChild(circleDiv);
                 newLi.appendChild(newSpan);
-                if (new Date(endDate).getTime() - Date.now() < 0)
+                if (new Date(endDate).getTime() - Date.now() < 0) {
                     newLi.classList.add("line-through", "text-gray-400", "truncate");
+                }
                 newLi.addEventListener("click", () => {
                     const eventId = newLi.getAttribute("event-id");
                     showInfoModal(eventId);
@@ -107,10 +109,10 @@ export function printEvents() {
                 newLi.addEventListener("mouseenter", debounce((event) => {
                     const eventId = newLi.getAttribute("event-id");
                     showInfoModalHover(eventId, event);
-                }, 200)); // Adjust the delay as needed
+                }, 200));
                 newLi.addEventListener("mouseleave", debounce(() => {
                     closeModalHover();
-                }, 200)); // Adjust the delay as needed
+                }, 200));
                 ulHtml.appendChild(newLi);
             });
         }

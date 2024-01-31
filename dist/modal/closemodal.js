@@ -10,7 +10,7 @@ function clearModalContent() {
     const modalInitialDate = document.getElementById("modalInitialDate");
     const modalEndate = document.getElementById("modalEndate");
     const comment = document.getElementById("comment");
-    const modalTime = document.getElementById("TimeInput");
+    const modalTime = document.getElementById("timeInput");
     const modalEvent = document.getElementById("modalEvent");
     const checkEndDate = document.getElementById("modalEndateCheck");
     const containerEndDate = document.getElementById("endDateContainer");

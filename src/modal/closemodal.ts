@@ -16,7 +16,7 @@ function clearModalContent() {
     "modalEndate"
     ) as HTMLInputElement;
     const comment = document.getElementById("comment") as HTMLTextAreaElement;
-    const modalTime = document.getElementById("TimeInput") as HTMLInputElement;
+    const modalTime = document.getElementById("timeInput") as HTMLInputElement;
     const modalEvent = document.getElementById("modalEvent") as HTMLInputElement;
     const checkEndDate = document.getElementById("modalEndateCheck") as HTMLInputElement;
     const containerEndDate = document.getElementById("endDateContainer") as HTMLDivElement;
