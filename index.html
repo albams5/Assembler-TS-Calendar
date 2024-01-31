@@ -15,9 +15,10 @@
     <title>Calendar App</title>
   </head>
   <body class="justify-items-center bg-[#F3EEE7] min-h-screen font-['Montserrat']">
+    
     <main class="min-h-screen">  
-    <header class="w-full h-28 border-double border-4 bg-[#4D3C3A] py-2 px-4 grid grid-cols-[1fr,3fr,1fr] grid-rows-1 items-center gap-2">
-          <section>
+      <header class="w-full h-28 border-double border-4 bg-[#4D3C3A] py-2 px-4 grid grid-cols-[1fr,3fr,1fr] grid-rows-1 items-center gap-2">
+            <section>
               <h1 class="font-bold text-3xl text-left text-[#F3EEE7]">JS Calendar</h1>
               <label class="text-[#F3EEE7]">
               Choose a language:
@@ -26,183 +27,149 @@
                   <option value="es" selected>Spanish</option>
                   <option value="ca">Catalan</option>
               </select>
-          </label>
-          </section>
-          <section class="flex flex-row justify-center relative items-center">
-              <button id="btn-prev" class="absolute left-0 bg-[#DACDC5]  hover:text-[#AB4F65] text-[#4D3C3A] font-bold border-solid border-2 border-[#4D3C3A] hover:border-[#AB4F65] px-4 rounded"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M5 12l4 4" /><path d="M5 12l4 -4" /></svg></button>
-              <h2 id="month-title" class ="font-bold text-[#F3EEE7] text-3xl font-custom"></h2>
-              <button id="btn-next" class="absolute right-0 bg-[#DACDC5]  hover:text-[#AB4F65] text-[#4D3C3A] font-bold border-solid border-2 border-[#4D3C3A] hover:border-[#AB4F65] px-4 rounded"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg></button>
-          </section>
-          <section class="flex justify-center gap-2">
-              <button id="add-event-btn" class="rounded text-[#AB4F65] font-semibold bg-[#DACDC5] px-3 border-2 border-[#AB4F65] hover:text-[#4D3C3A] hover:border-[#4D3C3A]">Add Event</button>
-              <button id="today-btn" class="rounded text-[#AB4F65] font-semibold bg-[#DACDC5] px-3 border-2 border-[#AB4F65] hover:text-[#4D3C3A] hover:border-[#4D3C3A]">Today</button>
-          </section>
+            </label>
+            </section>
+            <section class="flex flex-row justify-center relative items-center">
+                <button id="btn-prev" class="absolute left-0 bg-[#DACDC5]  hover:text-[#AB4F65] text-[#4D3C3A] font-bold border-solid border-2 border-[#4D3C3A] hover:border-[#AB4F65] px-4 rounded"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M5 12l4 4" /><path d="M5 12l4 -4" /></svg></button>
+                <h2 id="month-title" class ="font-bold text-[#F3EEE7] text-3xl font-custom"></h2>
+                <button id="btn-next" class="absolute right-0 bg-[#DACDC5]  hover:text-[#AB4F65] text-[#4D3C3A] font-bold border-solid border-2 border-[#4D3C3A] hover:border-[#AB4F65] px-4 rounded"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg></button>
+            </section>
+            <section class="flex justify-center gap-2">
+                <button id="add-event-btn" class="rounded text-[#AB4F65] font-semibold bg-[#DACDC5] px-3 border-2 border-[#AB4F65] hover:text-[#4D3C3A] hover:border-[#4D3C3A]">Add Event</button>
+                <button id="today-btn" class="rounded text-[#AB4F65] font-semibold bg-[#DACDC5] px-3 border-2 border-[#AB4F65] hover:text-[#4D3C3A] hover:border-[#4D3C3A]">Today</button>
+            </section>
       </header>
       
       <section class="relative px-4 pt-4">
-        <div id="week" class="grid grid-cols-7 gap-2 h-6"></div>
-          <ol id="month-days" class="transition-transform list-none grid grid-cols-7 gap-2 text-center h-[calc(100vh-13rem)]"></ol>
+        <div id="week" class="grid grid-cols-7 gap-2"></div>
+        <ol id="month-days" class="transition-transform list-none grid grid-cols-7 gap-2 text-center h-[calc(100vh-13rem)]"></ol>
       </section>
 
-    <div>
-      <div
-        id="modal"
-        class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-      >
-    
-      <form id="myForm">
-        <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
-          <button class="absolute right-0 mr-5 mb-5 top-3 text-[#AB4F65]" id="closeModalButton">
-            <svg width="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path fill="currentColor" d="M18 3H6a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3m1 15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1Z"/>
-              <path fill="currentColor" d="M14.71 9.29a1 1 0 0 0-1.42 0L12 10.59l-1.29-1.3a1 1 0 0 0-1.42 1.42l1.3 1.29l-1.3 1.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l1.29-1.3l1.29 1.3a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42L13.41 12l1.3-1.29a1 1 0 0 0 0-1.42"/>
-            </svg>
-          </button>
-          <h2 class="text-2xl text-center text-[#AB4F65]">NEW EVENT</h2>
-          <div class="flex flex-row gap-4 relative mb-2">
-            <label class="relative">
+      <section id="modal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <form id="myForm">
+          <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
+            <button class="absolute right-0 mr-5 mb-5 top-3 text-[#AB4F65]" id="closeModalButton">
+              <svg width="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M18 3H6a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3m1 15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1Z"/>
+                <path fill="currentColor" d="M14.71 9.29a1 1 0 0 0-1.42 0L12 10.59l-1.29-1.3a1 1 0 0 0-1.42 1.42l1.3 1.29l-1.3 1.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l1.29-1.3l1.29 1.3a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42L13.41 12l1.3-1.29a1 1 0 0 0 0-1.42"/>
+              </svg>
+            </button>
+            <h2 class="text-2xl text-center text-[#AB4F65]">NEW EVENT</h2>
+            <label class="flex flex-row gap-4 relative mb-2">
               Title:
               <input type="text" name="title" id="modalTitle" class="border p-1" />
               <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalTitleError">The title is too long</small>
               <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalTitleErrorFill">The title is not filled</small>
+            </label>
 
-          </label>
-        </div>
-        
-        <div class="flex flex-row gap-4">
-          <label class="relative">initial date:
-            <input type="datetime-local" name="initialdate" id="modalInitialDate" />
-            <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalInitialDateError">
-              Initial date has to be filled</small>
-          </label>
-        </div>
-        <!-- //////////////////////////////////////////////// -->
-        <div class="flex flex-row gap-4">
-          <input type="checkbox" name="endateCheck" id="modalEndateCheck" />
-          <label for="endateCheck">End date</label>
-        </div>
-        <div id="endDateContainer" class="hidden flex flex-row gap-4">
-          <label for="endate" id="modalEndateLabel">End date: </label>
-          <input type="datetime-local" name="endate" id="modalEndate"/>
-        </div>
-        <!-- /////////////////////////////////////////////// -->
-        <div>
-          <input type="checkbox" name="TimeCheck" id="modalTimeCheck"/>
-          <label for="TimeCheck">Remind me when this event expires</label>
-        </div>
-        
-        <label class="hidden" id="modalTimeLabel">Time:
-        
-        <select id="TimeInput" class="border-2 border-black hidden">
-          <option value="5">5min</option>
-          <option value="10">10min</option>
-          <option value="15">15min</option>
-          <option value="30">30min</option>
-          <option value="60">1H</option>
-        </select>
-      </label>
+            <label class="flex flex-row gap-4 relative">initial date:
+              <input type="datetime-local" name="initialdate" id="modalInitialDate" />
+              <small class="hidden absolute inset-x-0 top-full text-red-500" id="modalInitialDateError">
+                Initial date has to be filled</small>
+            </label>
 
-        
-          <label
-            for="comment"
-            class="block text-sm font-medium text-gray-600 mb-1"
-            >Description:</label
-          >
-          <textarea
-            id="comment"
-            name="Description"
-            rows="4"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-            placeholder=""
-            maxlength="500"
-          ></textarea>
-        
-      <div>
-        <label for="emails">Event type:</label>
-        <select type="text" id="modalEvent" class="border-2 border-black" list="drawfemailss" placeholder="Event:">
-        <small class=" hidden inset-x-0 top-full text-red-500" id="modalEventError">Event has to be filled</small>
-        <datalist id="drawfemailss">
-          <option value="Meeting">Meeting</option>
-          <option value="Personal">Personal</option>
-          <option value="Study">Study</option>
-          <option value="Other">Other</option>
-        </datalist>
-      </select>
-      </div>
-      <div class="flex justify-center gap-6">
-          <button id="cancelModalButton" class="w-fit px-2 py-1 bg-[#DACDC5] text-[#AB4F65] rounded">
-            Cancel
-          </button>
-          <button type="submit" class="w-fit text-[#F3EEE7] px-2 py-1 bg-[#AB4F65] rounded">
-            Accept
-          </button>
-        </div>
-        </div>
+            <label class="flex flex-row gap-4">
+              <input type="checkbox" name="endateCheck" id="modalEndateCheck" />
+            End date</label>
+
+            <div id="endDateContainer" class="hidden flex flex-row gap-4">
+              <label for="endate" id="modalEndateLabel">End date: </label>
+              <input type="datetime-local" name="endate" id="modalEndate"/>
+            </div>
+
+            <div>
+              <input type="checkbox" name="TimeCheck" id="modalTimeCheck"/>
+              <label for="TimeCheck">Remind me when this event expires</label>
+            </div>
+            
+            <label class="hidden" id="modalTimeLabel">Time:
+              <select id="TimeInput" class="border-2 border-black hidden">
+                <option value="5">5min</option>
+                <option value="10">10min</option>
+                <option value="15">15min</option>
+                <option value="30">30min</option>
+                <option value="60">1H</option>
+              </select>
+            </label>
+            
+            <label class="block text-sm font-medium text-gray-600 mb-1">Description:
+              <textarea
+                id="comment"
+                name="Description"
+                rows="4"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+                placeholder=""
+                maxlength="500"
+              ></textarea>
+            </label>
+            
+            <label>Event type:
+              <select type="text" id="modalEvent" class="border-2 border-black" list="drawfemailss" placeholder="Event:">
+              <small class=" hidden inset-x-0 top-full text-red-500" id="modalEventError">Event has to be filled</small>
+                <datalist id="drawfemailss">
+                  <option value="Meeting">Meeting</option>
+                  <option value="Personal">Personal</option>
+                  <option value="Study">Study</option>
+                  <option value="Other">Other</option>
+                </datalist>
+              </select>
+            </label>
+
+            <div class="flex justify-center gap-6">
+              <button id="cancelModalButton" class="w-fit px-2 py-1 bg-[#DACDC5] text-[#AB4F65] rounded">
+                Cancel
+              </button>
+              <button type="submit" class="w-fit text-[#F3EEE7] px-2 py-1 bg-[#AB4F65] rounded">
+                Accept
+              </button>
+            </div>
+          </div>
         </form>
+      </section>
 
-      </div>   
-    
-    </div>
-
-    <div
-    id="infoModal"
-    class="modal hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center"
-  >
-    <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
-      <button class="absolute right-0 mr-5 mb-5 top-3 text-[#AB4F65]" id="closeInfoModalButton">    
-        <svg width="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path fill="currentColor" d="M18 3H6a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3m1 15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1Z"/>
-          <path fill="currentColor" d="M14.71 9.29a1 1 0 0 0-1.42 0L12 10.59l-1.29-1.3a1 1 0 0 0-1.42 1.42l1.3 1.29l-1.3 1.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l1.29-1.3l1.29 1.3a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42L13.41 12l1.3-1.29a1 1 0 0 0 0-1.42"/>
-        </svg>
-      </button>
-      <div>
+      <section id="infoModal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center">
+      <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
+        <button class="absolute right-0 mr-5 mb-5 top-3 text-[#AB4F65]" id="closeInfoModalButton">    
+          <svg width="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill="currentColor" d="M18 3H6a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3m1 15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1Z"/>
+            <path fill="currentColor" d="M14.71 9.29a1 1 0 0 0-1.42 0L12 10.59l-1.29-1.3a1 1 0 0 0-1.42 1.42l1.3 1.29l-1.3 1.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l1.29-1.3l1.29 1.3a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42L13.41 12l1.3-1.29a1 1 0 0 0 0-1.42"/>
+          </svg>
+        </button>
         <p id="infoModalTitle" class="font-bold text-xl"></p>
-      </div>
-
-      <div>
         <p class="underline text-sm">Initial date: </p>
         <p id="infoModalInitialDate"  class="font-semibold"></p>
-      </div>
 
-      <div>
-        <p class="underline text-sm">End date: </p>
-        <p id="infoModalEndDate"  class="font-semibold"></p>
-      </div>
+        <section>
+          <p class="underline text-sm">End date: </p>
+          <p id="infoModalEndDate"  class="font-semibold"></p>
+        </section>
 
-      <div>
-        <p class="underline text-sm">Time: </p>
-        <p id="infoModalTime"  class="font-semibold"></p>
-      </div>
+        <section>
+          <p class="underline text-sm">Time: </p>
+          <p id="infoModalTime"  class="font-semibold"></p>
+        </section>
 
-      <div>
-        <p class="underline text-sm">Description: </p>
-        <p id="infoModalDescription"  class="font-semibold"></p>
-      </div>
+        <section>
+          <p class="underline text-sm">Description: </p>
+          <p id="infoModalDescription"  class="font-semibold"></p>
+        </section>
 
-      <div>      
         <p class="underline text-sm">Event type: </p>
         <p id="infoModalEventType"  class="font-semibold"></p>
+
+      <button class="max-w-8 self-center" id="deleteButton"><svg class="pointer-event-none max-w-8 min-w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(171,79,101,1)"><path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM13.4142 13.9997L15.182 15.7675L13.7678 17.1817L12 15.4139L10.2322 17.1817L8.81802 15.7675L10.5858 13.9997L8.81802 12.232L10.2322 10.8178L12 12.5855L13.7678 10.8178L15.182 12.232L13.4142 13.9997ZM9 4V6H15V4H9Z"></path></svg></button>
+
       </div>
-
-    <button class="max-w-8 self-center" id="deleteButton"><svg class="pointer-event-none max-w-8 min-w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(171,79,101,1)"><path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM13.4142 13.9997L15.182 15.7675L13.7678 17.1817L12 15.4139L10.2322 17.1817L8.81802 15.7675L10.5858 13.9997L8.81802 12.232L10.2322 10.8178L12 12.5855L13.7678 10.8178L15.182 12.232L13.4142 13.9997ZM9 4V6H15V4H9Z"></path></svg></button>
-
-    </div>
-
-    
-    </div>
+      </section>
 
 
-  <div
-    id="infoModalHover"
-    class="modal hidden fixed bg-opacity-50 flex items-center justify-center shadow-[0_35px_60px_0px_rgba(77,60,58,0.5)]"
-  >
-    <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
-      <p id="infoModalTitleHover" class="text-lg font-semibold"></p>
-      <p id="infoModalInitialDateHover"></p>
-    </div>
-  
-  </div>
-  </main>
+      <section id="infoModalHover" class="modal hidden fixed bg-opacity-50 flex items-center justify-center shadow-[0_35px_60px_0px_rgba(77,60,58,0.5)]">
+        <div class="relative modal-content bg-white p-8 rounded flex flex-col gap-4">
+          <p id="infoModalTitleHover" class="text-lg font-semibold"></p>
+          <p id="infoModalInitialDateHover"></p>
+        </div>
+      </section>
+    </main>
 
     <script type="module" src="./dist/app.js"></script>
       
