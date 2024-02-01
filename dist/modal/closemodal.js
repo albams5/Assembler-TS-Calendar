@@ -1,5 +1,5 @@
-import { elements } from '../globalElements.js';
-import { hideTitleError, hideTitleFillError, hideInitialDateError } from './modal.js';
+import { elements } from "../globalElements.js";
+import { hideTitleError, hideTitleFillError, hideInitialDateError } from "./modal.js";
 export function closeModal() {
     const { modal } = elements;
     clearModalContent();
@@ -19,7 +19,7 @@ function clearModalContent() {
     modalTimeCheck.checked = false;
     modalTimeLabel.classList.add("hidden");
 }
-function clearErrorMessages() {
+export function clearErrorMessages() {
     hideTitleError();
     hideTitleFillError();
     hideInitialDateError();

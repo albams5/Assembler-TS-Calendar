@@ -1,8 +1,9 @@
 import { elements } from "../globalElements.js";
-import { closeModal } from "./closeModal.js";
+import { clearErrorMessages, closeModal } from "./closeModal.js";
 import { printMonth } from "../calendar/calendar.js";
 export function paintDom() {
     const { modal } = elements;
+    clearErrorMessages();
     setModal();
     modal.classList.remove("hidden");
     modal.classList.add("flex");
@@ -14,6 +15,7 @@ export function paintDomDay(e) {
     const dateString = date.toJSON().split('.')[0];
     const { modal, modalInitialDate } = elements;
     modalInitialDate.value = dateString;
+    clearErrorMessages();
     setModal();
     modal.classList.remove("hidden");
     modal.classList.add("flex");

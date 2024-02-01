@@ -1,11 +1,12 @@
 import * as type from "../interfaces/exportModule.js";
 import { elements } from "../globalElements.js"
-import { closeModal } from "./closeModal.js";
+import { clearErrorMessages, closeModal } from "./closeModal.js";
 import { printMonth } from "../calendar/calendar.js";
 
 export function paintDom(): void {
   const { modal } = elements;
 
+  clearErrorMessages();
   setModal();
   modal.classList.remove("hidden");
   modal.classList.add("flex");
@@ -20,6 +21,7 @@ export function paintDomDay(e: Event): void {
   
   modalInitialDate.value = dateString;
 
+  clearErrorMessages();
   setModal();
 
   modal.classList.remove("hidden");

@@ -1,7 +1,7 @@
-import { elements } from '../globalElements.js';
-import { hideTitleError, hideTitleFillError, hideInitialDateError } from './modal.js';
+import { elements } from "../globalElements.js";
+import { hideTitleError, hideTitleFillError, hideInitialDateError } from "./modal.js";
 
-export function closeModal() {
+export function closeModal(): void {
     const { modal } = elements;
 
     clearModalContent();
@@ -9,7 +9,7 @@ export function closeModal() {
     modal?.classList.add("hidden");
 }
 
-function clearModalContent() {
+function clearModalContent():void {
     const { modalTitle, modalInitialDate, modalTimeLabel, modalTimeCheck, modalEndDateContainer, modalEndDateCheck, modalEndDateInput, modalComment, modalTimeSelect, modalEvent } = elements;
 
     modalTitle.value = "";
@@ -24,7 +24,7 @@ function clearModalContent() {
     modalTimeLabel.classList.add("hidden");
 }
 
-function clearErrorMessages () {
+export function clearErrorMessages(): void {
     hideTitleError();
     hideTitleFillError();
     hideInitialDateError();
