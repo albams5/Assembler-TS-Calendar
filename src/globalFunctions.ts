@@ -1,4 +1,4 @@
-import * as type from './interfaces/exportModule.js'
+import * as type from "./interfaces/exportModule.js";
 
 export function formatToReadableTime(date:Date):string {
 

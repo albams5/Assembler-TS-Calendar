@@ -25,5 +25,16 @@ export const elements = {
     modalComment: document.getElementById("comment") as HTMLTextAreaElement,
     modalEvent: document.getElementById("modalEvent") as HTMLInputElement,
     modalBtnCancel: document.getElementById('cancelModalButton') as HTMLButtonElement,
-    modalBtnClose: document.getElementById("closeModalButton") as HTMLButtonElement
+    modalBtnClose: document.getElementById("closeModalButton") as HTMLButtonElement,
+
+    //info modal elements
+    modalInfo: document.getElementById("infoModal") as HTMLDivElement,
+    modalInfoTitle: document.getElementById("infoModalTitle") as HTMLParagraphElement,
+    modalInfoInitialDate: document.getElementById("infoModalInitialDate") as HTMLParagraphElement,
+    modalInfoEndDate: document.getElementById("infoModalEndDate") as HTMLParagraphElement,
+    modalInfoTime: document.getElementById("infoModalTime") as HTMLParagraphElement,
+    modalInfoDescription: document.getElementById("infoModalDescription") as HTMLParagraphElement,
+    modalInfoEvent: document.getElementById("infoModalEventType") as HTMLParagraphElement,
+    modalInfoBtnDelete: document.getElementById("deleteButton") as HTMLButtonElement,
+    modalInfoBtnClose: document.getElementById("closeInfoModalButton") as HTMLButtonElement
 };

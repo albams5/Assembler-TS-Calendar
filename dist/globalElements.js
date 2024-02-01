@@ -24,5 +24,15 @@ export const elements = {
     modalComment: document.getElementById("comment"),
     modalEvent: document.getElementById("modalEvent"),
     modalBtnCancel: document.getElementById('cancelModalButton'),
-    modalBtnClose: document.getElementById("closeModalButton")
+    modalBtnClose: document.getElementById("closeModalButton"),
+    //info modal elements
+    modalInfo: document.getElementById("infoModal"),
+    modalInfoTitle: document.getElementById("infoModalTitle"),
+    modalInfoInitialDate: document.getElementById("infoModalInitialDate"),
+    modalInfoEndDate: document.getElementById("infoModalEndDate"),
+    modalInfoTime: document.getElementById("infoModalTime"),
+    modalInfoDescription: document.getElementById("infoModalDescription"),
+    modalInfoEvent: document.getElementById("infoModalEventType"),
+    modalInfoBtnDelete: document.getElementById("deleteButton"),
+    modalInfoBtnClose: document.getElementById("closeInfoModalButton")
 };

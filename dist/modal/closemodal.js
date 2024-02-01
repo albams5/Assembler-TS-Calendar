@@ -1,31 +1,23 @@
+import { elements } from '../globalElements.js';
 import { hideTitleError, hideTitleFillError, hideInitialDateError } from './modal.js';
 export function closeModal() {
-    const modal = document.getElementById("modal");
+    const { modal } = elements;
     clearModalContent();
     clearErrorMessages();
     modal === null || modal === void 0 ? void 0 : modal.classList.add("hidden");
 }
 function clearModalContent() {
-    const modalTitle = document.getElementById("modalTitle");
-    const modalInitialDate = document.getElementById("modalInitialDate");
-    const modalEndate = document.getElementById("modalEndate");
-    const comment = document.getElementById("comment");
-    const modalTime = document.getElementById("timeInput");
-    const modalEvent = document.getElementById("modalEvent");
-    const checkEndDate = document.getElementById("modalEndateCheck");
-    const containerEndDate = document.getElementById("endDateContainer");
-    const checkTime = document.getElementById("modalTimeCheck");
-    const containerTime = document.getElementById("modalTimeLabel");
+    const { modalTitle, modalInitialDate, modalTimeLabel, modalTimeCheck, modalEndDateContainer, modalEndDateCheck, modalEndDateInput, modalComment, modalTimeSelect, modalEvent } = elements;
     modalTitle.value = "";
     modalInitialDate.value = "";
-    modalEndate.value = "";
-    comment.value = "";
-    modalTime.value = "5";
+    modalEndDateInput.value = "";
+    modalComment.value = "";
+    modalTimeSelect.value = "5";
     modalEvent.value = "Meeting";
-    checkEndDate.checked = false;
-    containerEndDate.classList.add("hidden");
-    checkTime.checked = false;
-    containerTime.classList.add("hidden");
+    modalEndDateCheck.checked = false;
+    modalEndDateContainer.classList.add("hidden");
+    modalTimeCheck.checked = false;
+    modalTimeLabel.classList.add("hidden");
 }
 function clearErrorMessages() {
     hideTitleError();

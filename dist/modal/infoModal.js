@@ -1,6 +1,7 @@
 import { printMonth } from "../calendar/calendar.js";
-import { formatToReadableDate, formatToReadableTime } from '../globalFunctions.js';
-export const showInfoModal = (id) => {
+import { formatToReadableDate, formatToReadableTime } from "../globalFunctions.js";
+import { elements } from "../globalElements.js";
+export function showInfoModal(id) {
     // Retrieve JSON data from local storage
     const storedData = localStorage.getItem("calendar");
     if (storedData) {
@@ -26,7 +27,8 @@ export const showInfoModal = (id) => {
         // If no data is found in local storage, log an error or handle accordingly
         console.error("No data found in local storage with key 'calendar'");
     }
-};
+}
+;
 function deleteEventById(id) {
     // Retrieve JSON from localStorage
     const storedData = localStorage.getItem("calendar");
@@ -52,73 +54,60 @@ function deleteEventById(id) {
     }
 }
 // Example usage: deleteEventById(1706611594279);
-const paintDom = (infoModalTitleValue, infoInitialDateValue, infoModalEndDateValue, infoModalTimeValue, infoModalDescriptionValue, infoModalEventTypeValue, idValue) => {
+function paintDom(infoModalTitleValue, infoInitialDateValue, infoModalEndDateValue, infoModalTimeValue, infoModalDescriptionValue, infoModalEventTypeValue, idValue) {
     var _a, _b, _c, _d, _e, _f;
-    const modal = document.getElementById("infoModal");
-    modal.classList.remove("hidden");
-    modal.classList.add("flex");
-    const infoModalTitle = document.getElementById("infoModalTitle");
-    const infoModalInitialDate = document.getElementById("infoModalInitialDate");
-    const infoModalEndDate = document.getElementById("infoModalEndDate");
-    const infoModalTime = document.getElementById("infoModalTime");
-    const infoModalDescription = document.getElementById("infoModalDescription");
-    const infoModalEventType = document.getElementById("infoModalEventType");
+    const { modalInfo, modalInfoTitle, modalInfoInitialDate, modalInfoEndDate, modalInfoTime, modalInfoDescription, modalInfoEvent, modalInfoBtnDelete, modalInfoBtnClose } = elements;
+    modalInfo.classList.remove("hidden");
+    modalInfo.classList.add("flex");
     if (!infoModalEndDateValue) {
-        (_a = infoModalEndDate.parentElement) === null || _a === void 0 ? void 0 : _a.classList.add('hidden');
+        (_a = modalInfoEndDate.parentElement) === null || _a === void 0 ? void 0 : _a.classList.add('hidden');
     }
     else {
-        (_b = infoModalEndDate.parentElement) === null || _b === void 0 ? void 0 : _b.classList.remove('hidden');
+        (_b = modalInfoEndDate.parentElement) === null || _b === void 0 ? void 0 : _b.classList.remove('hidden');
     }
     if (!infoModalTimeValue) {
-        (_c = infoModalTime.parentElement) === null || _c === void 0 ? void 0 : _c.classList.add('hidden');
+        (_c = modalInfoTime.parentElement) === null || _c === void 0 ? void 0 : _c.classList.add('hidden');
     }
     else {
-        (_d = infoModalTime.parentElement) === null || _d === void 0 ? void 0 : _d.classList.remove('hidden');
+        (_d = modalInfoTime.parentElement) === null || _d === void 0 ? void 0 : _d.classList.remove('hidden');
     }
     if (!infoModalDescriptionValue) {
-        (_e = infoModalDescription.parentElement) === null || _e === void 0 ? void 0 : _e.classList.add('hidden');
+        (_e = modalInfoDescription.parentElement) === null || _e === void 0 ? void 0 : _e.classList.add('hidden');
     }
     else {
-        (_f = infoModalDescription.parentElement) === null || _f === void 0 ? void 0 : _f.classList.remove('hidden');
+        (_f = modalInfoDescription.parentElement) === null || _f === void 0 ? void 0 : _f.classList.remove('hidden');
     }
-    infoModalTitle.textContent = infoModalTitleValue;
-    infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue));
-    infoModalEndDate.textContent = formatToReadableDate(new Date(infoModalEndDateValue)) + ' ' + formatToReadableTime(new Date(infoModalEndDateValue));
-    infoModalTime.textContent = infoModalTimeValue + ' min';
-    infoModalDescription.textContent = infoModalDescriptionValue;
-    infoModalEventType.textContent = infoModalEventTypeValue;
-    const deleteButton = document.getElementById("deleteButton");
-    deleteButton.addEventListener("click", function (event) {
+    modalInfoTitle.textContent = infoModalTitleValue;
+    modalInfoInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue));
+    modalInfoEndDate.textContent = formatToReadableDate(new Date(infoModalEndDateValue)) + ' ' + formatToReadableTime(new Date(infoModalEndDateValue));
+    modalInfoTime.textContent = infoModalTimeValue + ' min';
+    modalInfoDescription.textContent = infoModalDescriptionValue;
+    modalInfoEvent.textContent = infoModalEventTypeValue;
+    modalInfoBtnDelete.addEventListener("click", function (event) {
         event.preventDefault();
         // Call the function to delete the element from local storage
         deleteEventById(idValue);
         // Hide the modal or perform other actions as needed
-        const modal = document.getElementById("infoModal");
-        if (modal) {
-            modal.classList.add("hidden");
+        if (modalInfo) {
+            modalInfo.classList.add("hidden");
         }
     });
     //press key scape to close modal:
     document.addEventListener("keydown", function (event) {
         if (event.key === "Escape" || event.key === "Esc") {
-            modal.classList.add("hidden");
+            modalInfo.classList.add("hidden");
         }
     });
     //press out modal to close it
     function closeModalOut(event) {
-        if (event.target == modal) {
-            modal.classList.add("hidden");
+        if (event.target == modalInfo) {
+            modalInfo.classList.add("hidden");
         }
     }
     window.addEventListener('click', closeModalOut);
-    const btnCancel = document.getElementById('cancelModalButton');
-    btnCancel === null || btnCancel === void 0 ? void 0 : btnCancel.addEventListener("click", (event) => {
-        event === null || event === void 0 ? void 0 : event.preventDefault();
-        modal.classList.add("hidden");
-    });
-    const closeInfoModalButton = document.getElementById("closeInfoModalButton");
-    closeInfoModalButton === null || closeInfoModalButton === void 0 ? void 0 : closeInfoModalButton.addEventListener("click", (event) => {
+    modalInfoBtnClose.addEventListener("click", (event) => {
         event.preventDefault();
-        modal.classList.add("hidden");
+        modalInfo.classList.add("hidden");
     });
-};
+}
+;
