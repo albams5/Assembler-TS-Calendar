@@ -1,5 +1,5 @@
 import { elements } from "../globalElements.js";
-import { closeModal } from "./closemodal.js";
+import { closeModal } from "./closeModal.js";
 import { printMonth } from "../calendar/calendar.js";
 export function paintDom() {
     const { modal } = elements;
