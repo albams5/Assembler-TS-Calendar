@@ -7,7 +7,7 @@ export const elements = {
     btnToday: document.getElementById("today-btn"),
     weekDiv: document.getElementById("week"),
     monthDays: document.getElementById("month-days"),
-    //modal Elements
+    //modal elements
     modal: document.getElementById("modal"),
     modalForm: document.getElementById("myForm"),
     modalTitle: document.getElementById("modalTitle"),
@@ -34,5 +34,9 @@ export const elements = {
     modalInfoDescription: document.getElementById("infoModalDescription"),
     modalInfoEvent: document.getElementById("infoModalEventType"),
     modalInfoBtnDelete: document.getElementById("deleteButton"),
-    modalInfoBtnClose: document.getElementById("closeInfoModalButton")
+    modalInfoBtnClose: document.getElementById("closeInfoModalButton"),
+    //hover modal elements
+    hoverModal: document.getElementById("infoModalHover"),
+    hoverModalTitle: document.getElementById("infoModalTitleHover"),
+    hoverModalInitialDate: document.getElementById("infoModalInitialDateHover")
 };

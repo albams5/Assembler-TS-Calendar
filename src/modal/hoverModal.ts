@@ -1,13 +1,14 @@
 import * as type from "../interfaces/exportModule.js";
-import { formatToReadableDate, formatToReadableTime } from '../globalFunctions.js';
+import { elements } from "../globalElements.js";
+import { formatToReadableDate, formatToReadableTime } from "../globalFunctions.js";
 
-export const closeModalHover = () => {
-  const modal = document.getElementById("infoModalHover")!;
-  modal.classList.add("hidden");
+export function closeModalHover(): void {
+  const { hoverModal } = elements;
+
+  hoverModal.classList.add("hidden");
 };
 
-export const showInfoModalHover = (id: string, eventE: MouseEvent) => {
-
+export function showInfoModalHover(id: string, eventE: MouseEvent): void {
   // Retrieve JSON data from local storage
   const storedData = localStorage.getItem("calendar");
 
@@ -24,7 +25,7 @@ export const showInfoModalHover = (id: string, eventE: MouseEvent) => {
         // If the event is found, log its details
 
         // Call paintDom() or perform other actions as needed
-        paintDom(
+        paintHoverModal(
           event.title,
           event.initialDate,
           event.endDate,
@@ -43,42 +44,32 @@ export const showInfoModalHover = (id: string, eventE: MouseEvent) => {
   }
 };
 
-const paintDom = (
-  infoModalTitleValue: string,
-  infoInitialDateValue: string,
-  infoEndDate: string,
-  eventE?: MouseEvent
-) => {
-  const modal = document.getElementById("infoModalHover")!;
-
+function paintHoverModal(infoModalTitleValue: string, infoInitialDateValue: string, infoEndDate: string, eventE?: MouseEvent): void {
+  const { hoverModal, hoverModalTitle, hoverModalInitialDate } = elements;
   const posY = eventE?.pageY!;
   const posX = eventE?.pageX!;
   const screenWidth = window.screen.width / 2;
   const screenHeight = window.screen.height / 2;
-  modal.style.left = `${posX}px`;
-  modal.style.top = `${posY}px`;
+
+  hoverModal.style.left = `${posX}px`;
+  hoverModal.style.top = `${posY}px`;
 
   if (posY > screenHeight) {
-    modal.style.transform = `translateY(-100%)`;
+    hoverModal.style.transform = `translateY(-100%)`;
   }
 
   if (posX > screenWidth) {
-    modal.style.transform = `translateX(-100%)`;
+    hoverModal.style.transform = `translateX(-100%)`;
   }
 
-  modal.classList.remove("hidden");
+  hoverModal.classList.remove("hidden");
+  hoverModalTitle.textContent = infoModalTitleValue;
 
-  const infoModalTitle = document.getElementById("infoModalTitleHover")!;
-  const infoModalInitialDate = document.getElementById(
-    "infoModalInitialDateHover"
-  )!;
-
-  infoModalTitle.textContent = infoModalTitleValue;
   if(!infoEndDate) {
-    infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue));
+    hoverModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue));
   } else if (formatToReadableDate(new Date(infoInitialDateValue)) === formatToReadableDate(new Date(infoEndDate))) {
-    infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue)) + ' - ' + formatToReadableTime(new Date(infoEndDate));
+    hoverModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue)) + ' - ' + formatToReadableTime(new Date(infoEndDate));
   } else {
-    infoModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue)) + ' - ' + formatToReadableDate(new Date(infoEndDate)) + ' ' + formatToReadableTime(new Date(infoEndDate));
+    hoverModalInitialDate.textContent = formatToReadableDate(new Date(infoInitialDateValue)) + ' ' + formatToReadableTime(new Date(infoInitialDateValue)) + ' - ' + formatToReadableDate(new Date(infoEndDate)) + ' ' + formatToReadableTime(new Date(infoEndDate));
   }
 };

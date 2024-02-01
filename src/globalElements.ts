@@ -8,7 +8,7 @@ export const elements = {
     weekDiv: document.getElementById("week") as HTMLDivElement,
     monthDays: document.getElementById("month-days") as HTMLOListElement,
 
-    //modal Elements
+    //modal elements
     modal: document.getElementById("modal") as HTMLDivElement,
     modalForm: document.getElementById("myForm") as HTMLFormElement,
     modalTitle: document.getElementById("modalTitle") as HTMLInputElement,
@@ -36,5 +36,10 @@ export const elements = {
     modalInfoDescription: document.getElementById("infoModalDescription") as HTMLParagraphElement,
     modalInfoEvent: document.getElementById("infoModalEventType") as HTMLParagraphElement,
     modalInfoBtnDelete: document.getElementById("deleteButton") as HTMLButtonElement,
-    modalInfoBtnClose: document.getElementById("closeInfoModalButton") as HTMLButtonElement
+    modalInfoBtnClose: document.getElementById("closeInfoModalButton") as HTMLButtonElement,
+
+    //hover modal elements
+    hoverModal: document.getElementById("infoModalHover") as HTMLDivElement,
+    hoverModalTitle: document.getElementById("infoModalTitleHover") as HTMLParagraphElement,
+    hoverModalInitialDate: document.getElementById("infoModalInitialDateHover") as HTMLParagraphElement
 };
