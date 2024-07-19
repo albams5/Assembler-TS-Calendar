@@ -59,4 +59,4 @@ index.html -> Run with live server
 
 ## 🚀Deployment
 
-This project is already deployed in Vercel:
+This project is already deployed in Netlify: https://comfy-melba-4556a9.netlify.app/
